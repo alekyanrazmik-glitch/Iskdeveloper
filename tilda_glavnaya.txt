@@ -1,0 +1,870 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Unbounded:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#00b956;--green-d:#00a04b;--blue:#3b5bff;--lime:#c4f000;
+  --ink:#000000;--ink-2:#222222;--gray:#6b7280;--line:#e7e9ee;
+  --bg:#ffffff;--bg-soft:#f4f5f7;--bg-dark:#15171c;
+  --radius:18px;--shadow:0 10px 40px -18px rgba(15,17,21,.25);--max:1280px;
+  --h:'Montserrat',sans-serif;--b:'Inter',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{color-scheme:light only;-webkit-text-size-adjust:100%;forced-color-adjust:none}
+:root{color-scheme:light}
+@media (prefers-color-scheme:dark){
+  :root{color-scheme:light}
+  html,body{background:#fff!important;color:#000!important}
+}
+.logo,.nav-links a,.nav-phone{color:#000!important}
+.btn-green,.btn-blue,.btn-dark{color:#fff!important}
+.btn-light{color:#000!important}
+.foot-col a,.foot-col p{color:#c2c6cf!important}
+.foot-col a:hover{color:#00b956!important}
+.proj-foot .pf-link{color:#3b5bff!important}
+.calc-head .ch-tabs button.active,.price-tabs button.active{color:#000!important}
+.chip,.opt,.tabs button.active,.cp-label b{color:#000!important}
+a:link,a:visited{color:inherit}
+a.btn-light,a.btn-light:link,a.btn-light:visited{color:#000!important}
+a.btn-green,a.btn-green:link,a.btn-green:visited,a.btn-blue:link,a.btn-dark:link{color:#fff!important}
+html{scroll-behavior:smooth}
+body{font-family:var(--b);color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--ink);text-decoration:none}img{display:block;max-width:100%}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+h1,h2,h3,h4{font-family:var(--h);line-height:1.05;font-weight:800;letter-spacing:-.02em}
+.h-sec{font-size:clamp(30px,4.2vw,52px);font-weight:900;margin-bottom:10px}
+.sub-sec{color:var(--gray);font-size:17px;max-width:640px;margin-bottom:40px}
+section{padding:80px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--b);font-weight:700;font-size:15px;cursor:pointer;border:none;padding:16px 30px;border-radius:10px;transition:.2s;white-space:nowrap}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:var(--green-d)}
+.btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{filter:brightness(1.08)}
+.btn-dark{background:var(--ink);color:#fff}.btn-dark:hover{background:var(--ink-2)}
+.btn-light{background:#fff;color:var(--ink);border:1px solid var(--line)}.btn-light:hover{border-color:var(--ink)}
+.btn-green,.btn-blue,.btn-dark{color:#fff}
+.btn-lg{padding:18px 38px;font-size:16px}
+.badge{display:inline-flex;align-items:center;font-size:13px;font-weight:700;padding:6px 13px;border-radius:7px}
+.bg-blue{background:var(--blue);color:#fff}.bg-green{background:var(--green);color:#fff}.bg-dark{background:var(--ink);color:#fff}
+header{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:34px;height:78px}
+.logo{font-family:'Unbounded',sans-serif;font-weight:900;font-size:30px;letter-spacing:-.04em;line-height:1;color:var(--ink)}
+.logo b{color:var(--green)}
+.logo small{display:block;font-family:var(--b);font-size:11px;font-weight:600;color:var(--gray);margin-top:5px;letter-spacing:0}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{font-size:15px;font-weight:600;color:var(--ink);transition:.15s;position:relative}
+.nav-links a:hover{color:var(--green)}
+.nav-links a.nav-soon::after{content:"скоро";position:absolute;top:-9px;right:-30px;font-size:9px;font-weight:700;color:#fff;background:var(--blue);padding:1px 5px;border-radius:6px;letter-spacing:.02em}
+.nav-links a.dot::after{content:"";position:absolute;top:-2px;right:-8px;width:5px;height:5px;border-radius:50%;background:var(--blue)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:22px}
+.nav-phone{font-family:var(--h);font-weight:800;font-size:18px;white-space:nowrap;color:var(--ink)}
+.nav-phone small{display:block;font-family:var(--b);font-size:11px;font-weight:500;color:var(--gray)}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer}
+.burger span{width:26px;height:2px;background:var(--ink)}
+.hero{padding:24px 0 0}
+.hero-lead{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:18px}
+.hero-lead h1{font-size:clamp(24px,3vw,38px);font-weight:900;letter-spacing:-.02em;line-height:1.05;margin:0}
+.hero-lead h1 b{color:var(--green)}
+.hero-lead .hl-badge{display:inline-flex;align-items:center;gap:8px;background:var(--bg-soft);border-radius:30px;padding:9px 18px;font-size:14px;font-weight:600;color:var(--ink)}
+.hero-lead .hl-badge::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green)}
+@media(max-width:680px){.hero-lead h1{font-size:24px}}
+.hero-grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
+.slider{position:relative;border-radius:var(--radius);overflow:hidden;min-height:540px;background:var(--ink)}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .6s;display:flex}
+.slide.active{opacity:1;position:relative}
+.slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slide::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(15,17,21,.82),rgba(15,17,21,.45) 45%,rgba(15,17,21,.1) 70%)}
+.slide-body{position:relative;z-index:2;padding:52px;display:flex;flex-direction:column;justify-content:center;color:#fff;max-width:620px}
+.slide-body h2{font-size:clamp(30px,4vw,50px);font-weight:900;text-transform:uppercase;line-height:1;margin-bottom:24px;text-shadow:0 2px 20px rgba(0,0,0,.3)}
+.slide-pill{display:inline-block;background:var(--green);color:#fff;font-family:var(--h);font-weight:800;font-size:22px;padding:12px 22px;border-radius:10px;margin-bottom:26px;width:fit-content}
+.slide-pill.lime{background:var(--lime);color:var(--ink)}
+.slide-tag{position:absolute;top:40px;right:44px;z-index:3;text-align:right}
+.slide-tag .st-mark{font-family:var(--h);font-weight:900;color:#fff;font-size:26px;line-height:.9}
+.slide-tag .st-sub{color:rgba(255,255,255,.8);font-size:13px}
+.slide-strip{position:relative;z-index:2;margin-top:auto;display:flex;border-radius:12px;overflow:hidden}
+.slide-strip.green{background:var(--green-d)}.slide-strip.lime{background:var(--lime)}
+.strip-cell{padding:18px 24px;color:#fff}
+.slide-strip.lime .strip-cell{color:var(--ink)}
+.strip-cell .sc-lbl{font-size:12px;text-transform:uppercase;opacity:.85;margin-bottom:4px}
+.strip-cell .sc-val{font-family:var(--h);font-weight:800;font-size:22px}
+.strip-cell.box{background:#fff;color:var(--ink)}
+.strip-cell .old{text-decoration:line-through;opacity:.5;font-size:14px;font-family:var(--b);font-weight:600}
+.slide-actions{position:relative;z-index:2;margin:26px 0}
+.slider-nav{position:absolute;bottom:24px;left:52px;z-index:5;display:flex;gap:8px}
+.slider-nav button{width:46px;height:46px;border-radius:8px;background:#fff;border:none;cursor:pointer;font-size:20px;display:grid;place-items:center;transition:.15s}
+.slider-nav button:hover{background:var(--bg-soft)}
+.hero-side{display:flex;flex-direction:column;gap:18px}
+.side-card{border-radius:var(--radius);padding:30px;position:relative;overflow:hidden;flex:1;display:flex;flex-direction:column}
+.side-green{background:var(--green);color:#fff}
+.side-green .icn{font-size:30px;margin-bottom:14px}
+.side-green h3{font-size:24px;font-weight:800;margin-bottom:6px;line-height:1.1}
+.side-green p{font-size:14px;opacity:.9;margin-bottom:18px}
+.timer{display:flex;gap:14px;margin-bottom:22px}
+.timer div{text-align:center}
+.timer b{font-family:var(--h);font-size:30px;font-weight:800;display:block;line-height:1}
+.timer span{font-size:11px;opacity:.8}
+.side-green .btn{margin-top:auto;width:100%}
+.side-photo{border-radius:var(--radius);overflow:hidden;position:relative;flex:1;min-height:200px}
+.side-photo img{width:100%;height:100%;object-fit:cover}
+.side-photo .sp-body{position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,17,21,.85),transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:24px;color:#fff}
+.side-photo h3{font-size:20px;font-weight:800;margin-bottom:14px}
+.side-photo .btn{width:100%}
+.search{background:var(--bg-dark);border-radius:var(--radius);padding:38px 40px;margin-top:18px;color:#fff}
+.search h3{color:#fff;font-size:28px;font-weight:800;margin-bottom:26px;display:flex;align-items:center;gap:10px}
+.search h3 .chev{color:var(--gray);font-weight:400}
+.search-row{display:grid;grid-template-columns:1fr 1fr 1fr 1.4fr auto;gap:22px;align-items:end}
+.s-field label{display:block;font-size:13px;color:#9aa0aa;margin-bottom:9px}
+.rooms{display:flex;background:#23262d;border-radius:9px;padding:5px}
+.rooms button{flex:1;background:none;border:none;color:#fff;padding:11px 0;border-radius:6px;font-weight:600;cursor:pointer;font-family:var(--b);font-size:14px;transition:.15s}
+.rooms button.active{background:#3a3e47}
+.sel{width:100%;background:#23262d;border:none;color:#fff;padding:14px 16px;border-radius:9px;font-family:var(--b);font-size:14px;cursor:pointer}
+.price-tabs{display:flex;background:#23262d;border-radius:8px;padding:4px;margin-bottom:10px;width:fit-content}
+.price-tabs button{background:none;border:none;color:#9aa0aa;padding:8px 16px;border-radius:6px;font-family:var(--b);font-size:13px;font-weight:600;cursor:pointer}
+.price-tabs button.active{background:var(--green);color:#fff}
+.price-vals{display:flex;align-items:center;gap:12px;font-family:var(--h);font-weight:700;font-size:16px}
+.price-vals .pv-from{color:#9aa0aa;font-family:var(--b);font-weight:400;font-size:13px}
+.search .btn{height:54px;padding:0 30px}
+.chips{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.search-help{display:flex;gap:26px;flex-wrap:wrap;margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1)}
+.search-help span{display:flex;align-items:center;gap:9px;color:#cdd3dc;font-size:14.5px;font-weight:500}
+.search-help span b{color:var(--green);font-weight:700;font-size:16px}
+.chip{background:#fff;color:var(--ink);border:none;padding:11px 20px;border-radius:30px;font-weight:600;font-size:14px;cursor:pointer;transition:.15s}
+.chip:hover{background:var(--bg-soft)}
+.adv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.adv{background:var(--bg-soft);border-radius:var(--radius);padding:32px;transition:.2s}
+.adv:hover{background:#fff;box-shadow:var(--shadow)}
+.adv .ai{width:52px;height:52px;border-radius:13px;background:#fff;display:grid;place-items:center;font-size:26px;margin-bottom:18px}
+.adv:hover .ai{background:var(--bg-soft)}
+.adv h3{font-size:20px;font-weight:800;margin-bottom:8px}
+.adv p{color:var(--gray);font-size:15px}
+.tabs{display:flex;gap:28px;align-items:center;border-bottom:1px solid var(--line);margin-bottom:36px;flex-wrap:wrap}
+.tabs button{background:none;border:none;font-family:var(--h);font-weight:700;font-size:18px;color:var(--gray);padding:0 0 16px;cursor:pointer;position:relative;transition:.15s}
+.tabs button.active{color:var(--ink)}
+.tabs button.active::after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:3px;background:var(--blue)}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 26px}
+/* публичные сметы */
+.est-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:10px}
+.est{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:.2s}
+.est:hover{box-shadow:var(--shadow);transform:translateY(-5px)}
+.est-top{padding:28px 28px 22px;border-bottom:1px solid var(--line)}
+.est-top .et-cls{display:inline-block;font-size:12px;font-weight:700;padding:5px 12px;border-radius:7px;margin-bottom:14px}
+.est-top h3{font-size:24px;font-weight:800;margin-bottom:4px}
+.est-top .et-meta{color:var(--gray);font-size:14px}
+.est-rows{padding:22px 28px;flex:1}
+.est-row{display:flex;justify-content:space-between;gap:14px;padding:9px 0;font-size:14px;border-bottom:1px dashed var(--line)}
+.est-row:last-child{border-bottom:none}
+.est-row span{color:var(--gray)}
+.est-row b{font-weight:600;white-space:nowrap}
+.est-total{padding:22px 28px;background:var(--bg-soft);display:flex;justify-content:space-between;align-items:center}
+.est-total .et-lbl{font-size:13px;color:var(--gray)}
+.est-total .et-sum{font-family:var(--h);font-weight:900;font-size:26px}
+.est-foot{padding:0 28px 26px;background:var(--bg-soft)}
+.est-foot .btn{width:100%}
+/* КАТАЛОГ ОБЪЕКТОВ */
+.obj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.obj{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:.2s}
+.obj:hover{box-shadow:var(--shadow);transform:translateY(-5px)}
+.obj-img{position:relative;aspect-ratio:16/11;overflow:hidden;cursor:pointer}
+.obj-img img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.obj:hover .obj-img img{transform:scale(1.05)}
+.obj-cat{position:absolute;left:14px;top:14px;background:var(--green);color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:7px}
+.obj-zoom{position:absolute;right:14px;bottom:14px;background:rgba(15,17,21,.7);color:#fff;font-size:12px;padding:6px 11px;border-radius:7px;backdrop-filter:blur(6px)}
+.obj-body{padding:24px;flex:1;display:flex;flex-direction:column}
+.obj-body h3{font-size:20px;font-weight:800;margin-bottom:6px}
+.obj-body .ob-area{color:var(--gray);font-size:15px;margin-bottom:14px}
+.obj-body .btn{margin-top:auto;width:100%}
+/* ЛАЙТБОКС */
+.lb{position:fixed;inset:0;z-index:3000;background:rgba(8,11,16,.94);display:none;flex-direction:column;align-items:center;justify-content:center;padding:30px}
+.lb.open{display:flex}
+.lb img{max-width:90vw;max-height:78vh;border-radius:12px;object-fit:contain}
+.lb-cap{color:#fff;margin-top:18px;font-family:var(--h);font-weight:700;font-size:18px;text-align:center}
+.lb-cap span{display:block;color:#9aa0aa;font-size:14px;font-weight:400;font-family:var(--b);margin-top:4px}
+.lb-close{position:absolute;top:24px;right:28px;background:rgba(255,255,255,.12);border:none;color:#fff;width:46px;height:46px;border-radius:11px;font-size:26px;cursor:pointer}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:none;color:#fff;width:54px;height:54px;border-radius:50%;font-size:28px;cursor:pointer;display:grid;place-items:center}
+.lb-prev{left:28px}.lb-next{right:28px}
+.lb-thumbs{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;justify-content:center;max-width:90vw}
+.lb-thumbs img{width:64px;height:48px;object-fit:cover;border-radius:7px;cursor:pointer;opacity:.5;transition:.2s}
+.lb-thumbs img.active,.lb-thumbs img:hover{opacity:1}
+.proj{cursor:pointer;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;transition:.2s}
+.proj:hover{box-shadow:var(--shadow);transform:translateY(-5px)}
+.proj-img{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:16/11;margin-bottom:16px}
+.proj-img img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.proj:hover .proj-img img{transform:scale(1.05)}
+.proj-badges{position:absolute;left:14px;bottom:14px;display:flex;gap:8px}
+.proj-term{color:var(--gray);font-size:13px;margin-bottom:6px}
+.proj-type{color:var(--gray);font-size:12px;text-transform:uppercase;letter-spacing:.05em;font-weight:600;margin-bottom:4px}
+.proj h3{font-size:24px;font-weight:800;margin-bottom:12px}
+.proj-rooms{color:var(--gray);font-size:14px;margin-bottom:16px}
+.proj-est{background:var(--bg-soft);border-radius:12px;padding:16px 18px;margin-bottom:16px}
+.proj-est .pe-row{display:flex;justify-content:space-between;gap:12px;padding:6px 0;font-size:14px}
+.proj-est .pe-row span{color:var(--gray)}
+.proj-est .pe-row b{font-weight:700;white-space:nowrap}
+.proj-loc{display:flex;gap:7px;color:var(--gray);font-size:14px;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.proj-foot{display:flex;justify-content:space-between;align-items:center}
+.proj-foot .pf-link{color:var(--blue);font-weight:700;font-size:15px}
+.proj-foot .pf-price{font-family:var(--h);font-weight:800;font-size:19px}
+.proj-pills{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.proj-pill{background:var(--bg-soft);color:var(--gray);font-size:12px;font-weight:600;padding:6px 12px;border-radius:20px}
+.calc{background:var(--bg-soft);border-radius:24px;overflow:hidden}
+.calc-head{background:var(--green);color:#fff;padding:46px 50px}
+.calc-head h2{font-size:clamp(28px,3.5vw,46px);font-weight:900;color:#fff;margin-bottom:12px}
+.calc-head p{opacity:.92;font-size:17px;max-width:600px}
+.calc-head .ch-tabs{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+.calc-head .ch-tabs button{background:rgba(255,255,255,.15);border:none;color:#fff;padding:14px 26px;border-radius:10px;font-family:var(--h);font-weight:700;font-size:16px;cursor:pointer;transition:.15s}
+.calc-head .ch-tabs button.active{background:#fff;color:var(--ink)}
+.calc-body{display:grid;grid-template-columns:380px 1fr}
+.calc-params{padding:42px 44px;border-right:1px solid var(--line)}
+.calc-params h3{font-size:24px;font-weight:800;margin-bottom:26px}
+.cp{margin-bottom:24px}
+.cp-label{display:flex;justify-content:space-between;font-size:14px;color:var(--gray);margin-bottom:10px}
+.cp-label b{color:var(--ink);font-family:var(--h)}
+.opt-row{display:flex;gap:8px;flex-wrap:wrap}
+.opt{flex:1;min-width:78px;text-align:center;background:#fff;border:1px solid var(--line);border-radius:9px;padding:11px 6px;font-size:13px;font-weight:600;cursor:pointer;transition:.15s}
+.opt:hover{border-color:var(--green)}
+.opt.active{background:var(--green);border-color:var(--green);color:#fff}
+input[type=range]{-webkit-appearance:none;width:100%;height:5px;border-radius:6px;background:#dfe2e8;outline:none;margin-top:6px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--green);cursor:pointer;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border:3px solid #fff;border-radius:50%;background:var(--green);cursor:pointer}
+.calc-sum{margin-top:30px;padding-top:24px;border-top:1px solid var(--line)}
+.calc-sum .cs-lbl{font-size:14px;color:var(--gray)}
+.calc-sum .cs-val{font-family:var(--h);font-weight:900;font-size:40px;line-height:1.1}
+.calc-params .btn{width:100%;margin-top:22px}
+.calc-table{padding:42px 44px}
+.calc-table h3{font-size:24px;font-weight:800;margin-bottom:24px}
+.bank-row{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr;gap:16px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line);font-size:15px}
+.bank-row.head{font-size:12px;text-transform:uppercase;color:var(--gray);font-weight:600;padding-top:0}
+.bank-name{display:flex;align-items:center;gap:12px;font-weight:600}
+.bank-ico{width:38px;height:38px;border-radius:9px;display:grid;place-items:center;font-family:var(--h);font-weight:800;color:#fff;font-size:15px;flex-shrink:0}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.fcard{border-radius:24px;padding:48px}
+.fcard h3{font-size:30px;font-weight:900;margin-bottom:14px}
+.fcard p{font-size:16px;margin-bottom:24px}
+.f-green{background:var(--green);color:#fff}.f-dark{background:var(--ink);color:#fff}
+.fcard ul{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.fcard li{display:flex;gap:11px;align-items:flex-start;font-size:15px;font-weight:500}
+.fcard li .ck{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;font-size:12px;flex-shrink:0;margin-top:1px}
+.f-timer{font-family:var(--h);font-weight:900;font-size:64px;line-height:1;margin-bottom:8px}
+.stages{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.stage{padding:6px}
+.stage .sn{font-family:var(--h);font-weight:900;font-size:46px;color:var(--green);line-height:1;margin-bottom:14px}
+.stage h3{font-size:18px;font-weight:800;margin-bottom:8px}
+.stage p{color:var(--gray);font-size:14px}
+.mosaic{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:230px;gap:14px}
+.m-item{border-radius:14px;overflow:hidden;position:relative}
+.m-item img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.m-item:hover img{transform:scale(1.06)}
+.m-item .m-cap{position:absolute;left:20px;bottom:18px;color:#fff;font-family:var(--h);font-weight:800;font-size:22px;text-shadow:0 2px 12px rgba(0,0,0,.5);z-index:2}
+.m-item::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,17,21,.55),transparent 55%)}
+.m-tall{grid-row:span 2}.m-wide{grid-column:span 2}
+.promo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.promo{border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
+.promo-top{padding:32px;color:#fff;min-height:200px}
+.promo-top.dark{background:var(--ink)}.promo-top.green{background:var(--green)}
+.promo-top .pt-mark{font-family:var(--h);font-weight:800;font-size:15px;letter-spacing:.06em;text-transform:uppercase;opacity:.7;margin-bottom:18px}
+.promo-top h3{font-size:30px;font-weight:900;margin-bottom:14px}
+.promo-top .pt-note{font-size:18px;opacity:.95}
+.promo-img{position:relative;flex:1;min-height:200px}
+.promo-img img{width:100%;height:100%;object-fit:cover}
+.promo-img .pi-date{position:absolute;left:16px;bottom:16px;background:rgba(15,17,21,.75);color:#fff;font-size:13px;padding:7px 13px;border-radius:7px}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.rev{background:var(--bg-soft);border-radius:var(--radius);padding:32px}
+.rev .stars{color:var(--green);font-size:16px;letter-spacing:2px;margin-bottom:16px}
+.rev p{font-size:15px;color:var(--ink-2);margin-bottom:22px}
+.rev-who{display:flex;align-items:center;gap:13px}
+.rev-ava{width:46px;height:46px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-family:var(--h);font-weight:800}
+.rev-who b{display:block;font-size:15px}
+.rev-who span{font-size:13px;color:var(--gray)}
+.cert-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.cert{border:1px solid var(--line);border-radius:var(--radius);padding:30px;text-align:center;transition:.2s}
+.cert:hover{box-shadow:var(--shadow)}
+.cert .ci{width:64px;height:64px;border-radius:15px;background:var(--bg-soft);display:grid;place-items:center;font-size:28px;margin:0 auto 16px}
+.cert b{display:block;font-size:16px;margin-bottom:6px}
+.cert span{font-size:13px;color:var(--gray)}
+.faq{max-width:880px}
+.fi{border-bottom:1px solid var(--line)}
+.fq{padding:24px 0;display:flex;justify-content:space-between;gap:20px;cursor:pointer;font-family:var(--h);font-weight:700;font-size:18px}
+.fq .pl{color:var(--green);font-size:24px;transition:.2s;flex-shrink:0}
+.fi.open .pl{transform:rotate(45deg)}
+.fa{max-height:0;overflow:hidden;transition:max-height .3s}
+.fa p{padding:0 0 24px;color:var(--gray);font-size:15px;max-width:760px}
+.lead{background:var(--bg-dark);border-radius:24px;padding:54px;color:#fff;display:grid;grid-template-columns:1fr 440px;gap:50px;align-items:center}
+.lead h2{color:#fff;font-size:clamp(28px,3.5vw,42px);font-weight:900;margin-bottom:16px}
+.lead p{color:#a9aeb8;font-size:17px;margin-bottom:26px}
+.lead ul{list-style:none;display:flex;flex-direction:column;gap:13px}
+.lead li{display:flex;gap:11px;align-items:center;font-size:15px}
+.lead li .ck{width:24px;height:24px;border-radius:50%;background:var(--green);display:grid;place-items:center;font-size:12px;flex-shrink:0}
+.form{background:#fff;border-radius:var(--radius);padding:34px}
+.form h3{color:var(--ink);font-size:22px;font-weight:800;margin-bottom:20px}
+.fld{margin-bottom:15px}
+.fld input,.fld select{width:100%;padding:15px 16px;border:1px solid var(--line);border-radius:10px;font-family:var(--b);font-size:15px;color:var(--ink)}
+.fld input:focus,.fld select:focus{outline:none;border-color:var(--green)}
+.form .btn{width:100%;margin-top:6px}
+.form .note{font-size:12px;color:var(--gray);text-align:center;margin-top:14px;min-height:14px}
+.lf-agree{display:flex;align-items:flex-start;gap:9px;margin:4px 0 16px;cursor:pointer}
+.lf-agree input{width:18px;height:18px;flex:0 0 auto;margin-top:2px;accent-color:var(--green)}
+.lf-agree span{font-size:12.5px;color:var(--gray);line-height:1.4}
+.form-ok{display:none;text-align:center;padding:20px 0}
+.form-ok .oi{width:64px;height:64px;border-radius:50%;background:var(--green);color:#fff;font-size:32px;display:grid;place-items:center;margin:0 auto 16px}
+.form-ok h3{font-size:22px;margin-bottom:8px}.form-ok p{color:var(--gray)}
+/* POPUP */
+#lead{position:fixed;inset:0;z-index:2000;background:rgba(10,14,20,.7);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .25s}
+#lead.open{opacity:1;visibility:visible}
+#lead .wrap{max-width:920px;width:100%;padding:0}
+#lead .lead{position:relative;max-height:92vh;overflow-y:auto;transform:translateY(16px) scale(.98);transition:transform .25s}
+#lead.open .lead{transform:none}
+.lead-close{position:absolute;top:18px;right:18px;width:40px;height:40px;border-radius:11px;border:none;cursor:pointer;background:rgba(255,255,255,.1);color:#fff;font-size:24px;line-height:1;z-index:5;transition:.2s}
+.lead-close:hover{background:rgba(255,255,255,.2)}
+footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
+.foot-phones{display:flex;gap:50px;flex-wrap:wrap;margin-bottom:44px}
+.foot-phones .fp b{font-family:var(--h);font-weight:800;font-size:26px;display:block}
+.foot-phones .fp b a,.foot-phones .fp b a:link,.foot-phones .fp b a:visited{color:#fff!important}
+.foot-phones .fp span{color:#9aa0aa;font-size:14px}
+.foot-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;padding-bottom:44px;border-bottom:1px solid #2a2d34}
+.foot-col a,.foot-col p{display:block;color:#c2c6cf;font-size:15px;margin-bottom:13px;transition:.15s}
+.foot-col h4{font-family:var(--h);font-weight:800;font-size:16px;margin-bottom:20px}
+.foot-col a:hover{color:var(--green)}
+.foot-cta{display:flex;flex-direction:column;gap:12px}
+.req{color:#7e838d;font-size:13px;line-height:1.7;margin-top:30px}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:24px;flex-wrap:wrap;gap:14px}
+.foot-bottom .lg{font-family:'Unbounded',sans-serif;font-weight:900;font-size:26px;letter-spacing:-.03em}.foot-bottom .lg b{color:var(--green)}
+@media(max-width:1080px){
+  .hero-grid{grid-template-columns:1fr}.hero-side{flex-direction:row}
+  .calc-body{grid-template-columns:1fr}.calc-params{border-right:none;border-bottom:1px solid var(--line)}
+  .adv-grid,.proj-grid,.rev-grid,.promo-grid{grid-template-columns:repeat(2,1fr)}
+  .est-grid{grid-template-columns:1fr}
+  .obj-grid{grid-template-columns:repeat(2,1fr)}
+  .stages,.cert-grid,.mosaic{grid-template-columns:repeat(2,1fr)}
+  .lead,.split{grid-template-columns:1fr}.search-row{grid-template-columns:1fr 1fr}
+}
+@media(max-width:680px){
+  section{padding:54px 0}.nav-links,.nav-phone small{display:none}.burger{display:flex}.nav{gap:16px;height:64px}
+  .adv-grid,.proj-grid,.rev-grid,.promo-grid,.stages,.cert-grid,.search-row{grid-template-columns:1fr}
+  .obj-grid{grid-template-columns:1fr}
+  .mosaic{grid-template-columns:1fr;grid-auto-rows:200px}.m-tall,.m-wide{grid-column:span 1;grid-row:span 1}
+  .hero-side{flex-direction:column}
+  .slide-body,.calc-head,.calc-params,.calc-table,.lead,.fcard{padding:28px}
+  .foot-cols{grid-template-columns:1fr 1fr}
+  .bank-row{grid-template-columns:1.4fr 1fr 1fr;font-size:13px}.bank-row .hide-m{display:none}
+}
+</style>
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-lead">
+      <h1>Строительство домов под ключ · <b>Краснодарский край</b></h1>
+      <span class="hl-badge">15+ лет · 300+ построенных домов</span>
+    </div>
+    <div class="hero-grid">
+      <div class="slider" id="slider">
+        <div class="slide active">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop" alt="Газобетонный дом под ключ">
+          <div class="slide-tag"><div class="st-mark">ДОМ «СЕМЬЯ»</div><div class="st-sub">газобетон · комфорт</div></div>
+          <div class="slide-body">
+            <h2>Дом под ключ<br>со скидкой</h2>
+            <div class="slide-pill">газобетон · комфорт · 145 м²</div>
+            <div class="slide-actions"><a href="#projects" class="btn btn-light btn-lg">Подробнее</a></div>
+            <div class="slide-strip green">
+              <div class="strip-cell"><div class="sc-lbl">Цена</div><div class="sc-val"><span class="old">6 480 000 ₽</span><br>6 100 000 ₽</div></div>
+              <div class="strip-cell box"><div class="sc-lbl">Размер скидки</div><div class="sc-val">380 000 ₽</div></div>
+              <div class="strip-cell"><div class="sc-lbl">Срок стройки</div><div class="sc-val">5 мес.</div></div>
+              <div class="strip-cell"><div class="sc-lbl">Гарантия</div><div class="sc-val">10 лет</div></div>
+            </div>
+          </div>
+          <div class="slider-nav"><button data-dir="-1">‹</button><button data-dir="1">›</button></div>
+        </div>
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=1600&auto=format&fit=crop" alt="Кирпичный дом с участком">
+          <div class="slide-tag"><div class="st-mark">ДОМ «УЮТ»</div><div class="st-sub">кирпич · комфорт</div></div>
+          <div class="slide-body">
+            <h2>Проект дома<br>бесплатно</h2>
+            <div class="slide-pill lime">кирпич · комфорт · 110 м²</div>
+            <div class="slide-actions"><a href="#projects" class="btn btn-light btn-lg">Подробнее</a></div>
+            <div class="slide-strip lime">
+              <div class="strip-cell"><div class="sc-lbl">Цена</div><div class="sc-val">4 600 000 ₽</div></div>
+              <div class="strip-cell box"><div class="sc-lbl">Оплата</div><div class="sc-val">по этапам</div></div>
+              <div class="strip-cell"><div class="sc-lbl">Проект</div><div class="sc-val">бесплатно</div></div>
+            </div>
+          </div>
+          <div class="slider-nav"><button data-dir="-1">‹</button><button data-dir="1">›</button></div>
+        </div>
+      </div>
+      <div class="hero-side">
+        <div class="side-card side-green">
+          <div class="icn">⏱️</div>
+          <h3>Смета<br>за 15 минут</h3>
+          <p>Точный расчёт стоимости вашего дома</p>
+          <div class="timer">
+            <div><b id="t-d">02</b><span>дня</span></div><div><b id="t-h">11</b><span>часов</span></div>
+            <div><b id="t-m">45</b><span>мин</span></div><div><b id="t-s">12</b><span>сек</span></div>
+          </div>
+          <a href="#lead" class="btn btn-light">Получить смету</a>
+        </div>
+        <div class="side-photo">
+          <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=900&auto=format&fit=crop" alt="Монолитный дом">
+          <div class="sp-body"><h3>Поэтапная оплата по факту выполненных работ</h3><a href="#promos" class="btn btn-green">Подробнее</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="search">
+      <h3>Построим дом <span class="chev" id="cityLabel">в вашем городе ▾</span></h3>
+      <div class="search-row">
+        <div class="s-field"><label>Город / район</label>
+          <select class="sel" id="citySel">
+            <option>Весь Краснодарский край</option>
+            <option>Краснодар</option>
+            <option>Геленджик</option>
+            <option>Новороссийск</option>
+            <option>Анапа</option>
+            <option>Сочи</option>
+            <option>Туапсе</option>
+            <option>Ейск</option>
+            <option>Армавир</option>
+            <option>Кропоткин</option>
+            <option>Славянск-на-Кубани</option>
+            <option>Тихорецк</option>
+            <option>Крымск</option>
+            <option>Темрюк</option>
+            <option>Абинск</option>
+            <option>Динская</option>
+            <option>Северская</option>
+          </select>
+        </div>
+        <div class="s-field"><label>Материал стен</label>
+          <select class="sel"><option>Любой</option><option>Газобетон</option><option>Керамзитоблок</option><option>Бетонный блок</option><option>Кирпич</option><option>Монолит</option></select>
+        </div>
+        <div class="s-field"><label>Фасад</label>
+          <select class="sel"><option>Любой</option><option>Декоративная отделка</option><option>Кирпич</option><option>Гибкая керамика</option></select>
+        </div>
+        <div class="s-field"><label>Тип дома</label>
+          <div class="price-tabs"><button class="active">Одноэтажный</button><button>Двухэтажный</button><button>С мансардой</button></div>
+          <div class="price-vals"><span class="pv-from">площадь от</span> 60 <span class="pv-from">до</span> 250 м²</div>
+        </div>
+        <a href="#projects" class="btn btn-green">Подобрать проект</a>
+      </div>
+      <div class="chips">
+        <button class="chip">Эконом до 3 млн</button><button class="chip">Одноэтажные</button><button class="chip">Двухэтажные</button>
+        <button class="chip">С гаражом</button><button class="chip">Для большой семьи</button><button class="chip">У моря</button>
+      </div>
+      <div class="search-help">
+        <span><b>✓</b> Поможем подобрать участок</span>
+        <span><b>✓</b> Оформим документы и разрешения</span>
+        <span><b>✓</b> Разработаем проект под вас</span>
+        <span><b>✓</b> Строим под ключ по всему краю</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <h2 class="h-sec">Почему «Девелоперы»</h2>
+    <p class="sub-sec">Полный цикл строительства частного дома под одной ответственностью — от первого эскиза до передачи ключей.</p>
+    <div class="adv-grid">
+      <div class="adv"><div class="ai">🔑</div><h3>Работаем под ключ</h3><p>Проект, фундамент, коробка, кровля, инженерные сети и отделка силами одной компании.</p></div>
+      <div class="adv"><div class="ai">🗺️</div><h3>Поможем с участком</h3><p>Подберём подходящий земельный участок под ваш дом и бюджет, проверим грунт и коммуникации.</p></div>
+      <div class="adv"><div class="ai">📄</div><h3>Оформим документы</h3><p>Возьмём на себя разрешения, согласования и оформление — от уведомления о строительстве до ввода в эксплуатацию.</p></div>
+      <div class="adv"><div class="ai">👷</div><h3>Собственные бригады</h3><p>Постоянный состав специалистов без случайных субподрядчиков и простоев.</p></div>
+      <div class="adv"><div class="ai">💰</div><h3>Фиксированная смета</h3><p>Стоимость закреплена в договоре. Итоговая цена дома известна заранее, до рубля.</p></div>
+      <div class="adv"><div class="ai">🛡️</div><h3>Гарантия 10 лет</h3><p>Официальная гарантия на несущие конструкции и сопровождение после новоселья.</p></div>
+      <div class="adv"><div class="ai">📅</div><h3>Соблюдение сроков</h3><p>Сроки прописаны по этапам. За просрочку по нашей вине — штрафные обязательства.</p></div>
+      <div class="adv"><div class="ai">🏆</div><h3>Опыт 15+ лет</h3><p>Более 300 сданных объектов в Краснодарском крае — от дач до домов для большой семьи.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" style="background:var(--bg-soft)">
+  <div class="wrap">
+    <h2 class="h-sec">Проекты для строительства</h2>
+    <p class="sub-sec">Готовые проекты домов, которые мы строим под ключ на вашем участке. Любой проект адаптируем под ваш бюджет, грунт и пожелания.</p>
+    <div class="proj-grid" id="projGrid"></div>
+    <div style="text-align:center;margin-top:36px"><a href="/proekty" class="btn btn-dark btn-lg">Все проекты →</a></div>
+  </div>
+</section>
+
+<section id="estimates">
+  <div class="wrap">
+    <h2 class="h-sec">Публичные сметы</h2>
+    <p class="sub-sec">Показываем открыто, из чего складывается цена строительства. Это примеры — точную смету готовим под ваш проект и участок бесплатно.</p>
+    <div class="est-grid">
+      <div class="est">
+        <div class="est-top">
+          <span class="et-cls bg-green">Эконом</span>
+          <h3>Дом «Старт»</h3>
+          <div class="et-meta">газобетон · 78 м² · 1 этаж</div>
+        </div>
+        <div class="est-rows">
+          <div class="est-row"><span>Проектирование</span><b>входит</b></div>
+          <div class="est-row"><span>Фундамент (лента)</span><b>410 000 ₽</b></div>
+          <div class="est-row"><span>Стены, перекрытия</span><b>1 280 000 ₽</b></div>
+          <div class="est-row"><span>Кровля</span><b>540 000 ₽</b></div>
+          <div class="est-row"><span>Инженерные сети</span><b>470 000 ₽</b></div>
+          <div class="est-row"><span>Работы и материалы</span><b>включено</b></div>
+        </div>
+        <div class="est-total"><span class="et-lbl">Дом под ключ от</span><span class="et-sum">2 900 000 ₽</span></div>
+        <div class="est-foot"><a href="#lead" class="btn btn-green">Смета под мой участок</a></div>
+      </div>
+      <div class="est">
+        <div class="est-top">
+          <span class="et-cls bg-blue">Комфорт</span>
+          <h3>Дом «Семья»</h3>
+          <div class="et-meta">газобетон · 145 м² · 2 этажа</div>
+        </div>
+        <div class="est-rows">
+          <div class="est-row"><span>Проектирование</span><b>входит</b></div>
+          <div class="est-row"><span>Фундамент (плита)</span><b>720 000 ₽</b></div>
+          <div class="est-row"><span>Стены, перекрытия</span><b>2 450 000 ₽</b></div>
+          <div class="est-row"><span>Кровля</span><b>910 000 ₽</b></div>
+          <div class="est-row"><span>Инженерные сети</span><b>760 000 ₽</b></div>
+          <div class="est-row"><span>Черновая отделка</span><b>включено</b></div>
+        </div>
+        <div class="est-total"><span class="et-lbl">Дом под ключ от</span><span class="et-sum">6 100 000 ₽</span></div>
+        <div class="est-foot"><a href="#lead" class="btn btn-green">Смета под мой участок</a></div>
+      </div>
+      <div class="est">
+        <div class="est-top">
+          <span class="et-cls bg-blue">Комфорт</span>
+          <h3>Дом «Резиденция»</h3>
+          <div class="et-meta">кирпич · 195 м² · 2 этажа + гараж</div>
+        </div>
+        <div class="est-rows">
+          <div class="est-row"><span>Проектирование</span><b>входит</b></div>
+          <div class="est-row"><span>Фундамент (плита)</span><b>980 000 ₽</b></div>
+          <div class="est-row"><span>Стены, перекрытия</span><b>3 780 000 ₽</b></div>
+          <div class="est-row"><span>Кровля</span><b>1 320 000 ₽</b></div>
+          <div class="est-row"><span>Инженерные сети</span><b>1 050 000 ₽</b></div>
+          <div class="est-row"><span>Гараж, отделка</span><b>включено</b></div>
+        </div>
+        <div class="est-total"><span class="et-lbl">Дом под ключ от</span><span class="et-sum">9 300 000 ₽</span></div>
+        <div class="est-foot"><a href="#lead" class="btn btn-green">Смета под мой участок</a></div>
+      </div>
+    </div>
+    <p style="margin-top:24px;color:var(--gray);font-size:14px">Цены ориентировочные и зависят от участка, грунта, удалённости и комплектации. Итоговая смета фиксируется в договоре и не меняется в процессе строительства.</p>
+  </div>
+</section>
+
+<section id="calc">
+  <div class="wrap">
+    <div class="calc">
+      <div class="calc-head">
+        <h2>Калькулятор стоимости дома</h2>
+        <p>Выберите параметры дома и получите предварительный расчёт. Точную смету подготовим после выезда на участок — бесплатно.</p>
+        <div class="ch-tabs"><button class="active">Эконом</button><button>Комфорт</button></div>
+      </div>
+      <div class="calc-body">
+        <div class="calc-params">
+          <h3>Параметры дома</h3>
+          <div class="cp"><div class="cp-label"><span>Площадь дома</span><b id="cArea">120 м²</b></div><input type="range" id="rArea" min="50" max="300" step="5" value="120"></div>
+          <div class="cp"><div class="cp-label"><span>Материал стен</span></div><div class="opt-row" data-g="mat"><div class="opt active" data-v="38000">Газобетон</div><div class="opt" data-v="36000">Керамзитоблок</div><div class="opt" data-v="40000">Бетонный блок</div><div class="opt" data-v="44000">Кирпич</div><div class="opt" data-v="50000">Монолит</div></div></div>
+          <div class="cp"><div class="cp-label"><span>Фасад</span></div><div class="opt-row" data-g="fac"><div class="opt active" data-v="0">Без отделки</div><div class="opt" data-v="3500">Декоративная отделка</div><div class="opt" data-v="5500">Кирпич</div><div class="opt" data-v="4500">Гибкая керамика</div></div></div>
+          <div class="cp"><div class="cp-label"><span>Этажность</span></div><div class="opt-row" data-g="fl"><div class="opt active" data-v="1">1 этаж</div><div class="opt" data-v="1.05">2 этажа</div><div class="opt" data-v="0.95">Мансарда</div></div></div>
+          <div class="cp"><div class="cp-label"><span>Комплектация</span></div><div class="opt-row" data-g="fin"><div class="opt active" data-v="1">Эконом</div><div class="opt" data-v="1.25">Комфорт</div></div></div>
+          <div class="cp"><div class="cp-label"><span>Фундамент</span></div><div class="opt-row" data-g="fnd"><div class="opt active" data-v="0">Лента</div><div class="opt" data-v="350000">Плита</div><div class="opt" data-v="220000">Сваи</div></div></div>
+          <div class="calc-sum"><div class="cs-lbl">Предварительная стоимость</div><div class="cs-val" id="cPrice">5 472 000 ₽</div></div>
+          <a href="#lead" class="btn btn-green btn-lg">Получить точную смету</a>
+        </div>
+        <div class="calc-table">
+          <h3>Что входит в стоимость</h3>
+          <div class="bank-row head"><span>Этап работ</span><span class="hide-m">Материалы</span><span>Статус</span></div>
+          <div class="bank-row" style="grid-template-columns:1.6fr 1fr 1fr"><span class="bank-name">Проект и смета</span><span class="hide-m">—</span><b style="color:var(--green)">включено</b></div>
+          <div class="bank-row" style="grid-template-columns:1.6fr 1fr 1fr"><span class="bank-name">Фундамент</span><span class="hide-m">бетон, арматура</span><b style="color:var(--green)">включено</b></div>
+          <div class="bank-row" style="grid-template-columns:1.6fr 1fr 1fr"><span class="bank-name">Стены и перекрытия</span><span class="hide-m">газобетон/кирпич</span><b style="color:var(--green)">включено</b></div>
+          <div class="bank-row" style="grid-template-columns:1.6fr 1fr 1fr"><span class="bank-name">Кровля</span><span class="hide-m">стропила, покрытие</span><b style="color:var(--green)">включено</b></div>
+          <div class="bank-row" style="grid-template-columns:1.6fr 1fr 1fr"><span class="bank-name">Инженерные сети</span><span class="hide-m">эл-ка, вода, отопление</span><b style="color:var(--green)">включено</b></div>
+          <div class="bank-row" style="grid-template-columns:1.6fr 1fr 1fr"><span class="bank-name">Гарантия 10 лет</span><span class="hide-m">на конструктив</span><b style="color:var(--green)">включено</b></div>
+          <p style="margin-top:22px;color:var(--gray);font-size:14px">Цена в смете фиксируется в договоре. Доплат «по ходу» нет — вы платите ровно столько, сколько согласовали.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="split">
+      <div class="fcard f-green">
+        <div class="f-timer">15 мин</div>
+        <h3>Получите смету за 15 минут</h3>
+        <p>Оставьте заявку — инженер уточнит параметры и подготовит детальный расчёт в течение 15 минут в рабочее время.</p>
+        <ul><li><span class="ck">✓</span> Разбивка по материалам и работам</li><li><span class="ck">✓</span> Сроки по каждому этапу</li><li><span class="ck">✓</span> Бесплатно и без обязательств</li></ul>
+        <a href="#lead" class="btn btn-light btn-lg">Запросить смету</a>
+      </div>
+      <div class="fcard f-dark">
+        <h3>Строительство без скрытых платежей</h3>
+        <p>Всё, что входит в стоимость, прописано в договоре. Цена в смете — финальная. Никаких «доплат по ходу».</p>
+        <ul><li><span class="ck">✓</span> Фиксированная смета в договоре</li><li><span class="ck">✓</span> Поэтапная оплата по факту работ</li><li><span class="ck">✓</span> Закупка материалов по чекам</li><li><span class="ck">✓</span> Без доплат за «непредвиденное»</li></ul>
+        <a href="#lead" class="btn btn-green btn-lg">Узнать условия</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stages" style="background:var(--bg-soft)">
+  <div class="wrap">
+    <h2 class="h-sec">Этапы строительства</h2>
+    <p class="sub-sec">Прозрачный процесс с понятными контрольными точками — вы видите результат на каждом шаге.</p>
+    <div class="stages">
+      <div class="stage"><div class="sn">01</div><h3>Заявка и встреча</h3><p>Обсуждаем задачу, выезжаем на участок, подбираем проект.</p></div>
+      <div class="stage"><div class="sn">02</div><h3>Проект и смета</h3><p>Готовим проект, фиксируем цену и сроки в договоре.</p></div>
+      <div class="stage"><div class="sn">03</div><h3>Фундамент</h3><p>Геология, разметка, устройство фундамента под грунт.</p></div>
+      <div class="stage"><div class="sn">04</div><h3>Коробка и кровля</h3><p>Стены, перекрытия, монтаж кровельной системы.</p></div>
+      <div class="stage"><div class="sn">05</div><h3>Инженерные сети</h3><p>Электрика, вода, канализация, отопление.</p></div>
+      <div class="stage"><div class="sn">06</div><h3>Отделка</h3><p>Черновая или чистовая по комплектации.</p></div>
+      <div class="stage"><div class="sn">07</div><h3>Сдача объекта</h3><p>Проверка по чек-листу и передача ключей.</p></div>
+      <div class="stage"><div class="sn">08</div><h3>Гарантия</h3><p>10 лет на конструктив и сопровождение.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <h2 class="h-sec">Наши объекты</h2>
+    <p class="sub-sec">Дома, построенные нашими бригадами в Краснодарском крае. Нажмите на фото, чтобы посмотреть галерею объекта.</p>
+    <div class="obj-grid" id="objGrid"></div>
+    <div style="text-align:center;margin-top:36px"><a href="/obekty" class="btn btn-dark btn-lg">Все объекты →</a></div>
+  </div>
+</section>
+
+<!-- ЛАЙТБОКС галереи объекта -->
+<div class="lb" id="lightbox">
+  <button class="lb-close" id="lbClose">&times;</button>
+  <button class="lb-nav lb-prev" id="lbPrev">‹</button>
+  <button class="lb-nav lb-next" id="lbNext">›</button>
+  <img id="lbImg" src="" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+  <div class="lb-thumbs" id="lbThumbs"></div>
+</div>
+
+<section id="promos" style="background:var(--bg-soft)">
+  <div class="wrap">
+    <h2 class="h-sec">Акции и условия</h2>
+    <p class="sub-sec">Действующие предложения для тех, кто планирует строительство в этом сезоне.</p>
+    <div class="promo-grid">
+      <div class="promo">
+        <div class="promo-top dark"><div class="pt-mark">Скидка сезона</div><h3>До 380 000 ₽</h3><div class="pt-note">на дома комфорт-класса под ключ</div></div>
+        <div class="promo-img"><img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=700&auto=format&fit=crop" alt="Скидка на дом"><span class="pi-date">до конца сезона</span></div>
+      </div>
+      <div class="promo">
+        <div class="promo-top green"><div class="pt-mark">Удобная оплата</div><h3>Оплата по этапам</h3><div class="pt-note">платите по факту выполненных работ · без предоплаты за всё</div></div>
+        <div class="promo-img"><img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?q=80&w=700&auto=format&fit=crop" alt="Поэтапная оплата"><span class="pi-date">по договору</span></div>
+      </div>
+      <div class="promo">
+        <div class="promo-top dark"><div class="pt-mark">При заказе под ключ</div><h3>Проект бесплатно</h3><div class="pt-note">индивидуальный или типовой проект дома</div></div>
+        <div class="promo-img"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=700&auto=format&fit=crop" alt="Проект в подарок"><span class="pi-date">входит в стоимость</span></div>
+      </div>
+    </div>
+    <div style="margin-top:34px"><a href="#lead" class="btn btn-dark btn-lg">Узнать подробнее</a></div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="wrap">
+    <h2 class="h-sec">Сертификаты и гарантии</h2>
+    <p class="sub-sec">Работаем официально по договору. Все разрешительные документы предоставляем по запросу.</p>
+    <div class="cert-grid">
+      <div class="cert"><div class="ci">📜</div><b>Договор подряда</b><span>С фиксированной сметой и сроками</span></div>
+      <div class="cert"><div class="ci">🏛️</div><b>Допуск СРО</b><span>Членство в саморегулируемой организации</span></div>
+      <div class="cert"><div class="ci">✅</div><b>Сертификаты на материалы</b><span>На бетон, кирпич, газобетон</span></div>
+      <div class="cert"><div class="ci">🛡️</div><b>Гарантийный паспорт</b><span>10 лет на несущие конструкции</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" style="background:var(--bg-soft)">
+  <div class="wrap">
+    <h2 class="h-sec">Отзывы клиентов</h2>
+    <div class="rev-grid">
+      <div class="rev"><div class="stars">★★★★★</div><p>Переезжали из Сибири, дом строили дистанционно. Каждую неделю фото и отчёты. Смета не выросла ни на рубль, въехали в срок.</p><div class="rev-who"><div class="rev-ava">ИП</div><div><b>Игорь и Полина</b><span>дом 145 м², Геленджик</span></div></div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>Подкупила прозрачность: всё по договору, оплата по этапам. Газобетонный дом получился тёплый и аккуратный.</p><div class="rev-who"><div class="rev-ava">СМ</div><div><b>Светлана М.</b><span>дом 110 м², Анапа</span></div></div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>Удобно, что платили по этапам — по факту выполненных работ. Бригады свои, работали без простоев, всё по договору. Спасибо за честную работу и нормальное общение.</p><div class="rev-who"><div class="rev-ava">АК</div><div><b>Алексей К.</b><span>дом 168 м², Краснодар</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2 class="h-sec">Частые вопросы</h2>
+    <div class="faq" id="faqList">
+      <div class="fi"><div class="fq">Может ли измениться цена в процессе строительства?<span class="pl">+</span></div><div class="fa"><p>Нет. Мы работаем по фиксированной смете, закреплённой в договоре. Стоимость не меняется, если вы сами не вносите изменения в проект.</p></div></div>
+      <div class="fi"><div class="fq">Из какого материала лучше строить дом для юга?<span class="pl">+</span></div><div class="fa"><p>Для постоянного проживания подойдут газобетон (оптимально по цене и теплу), кирпич (долговечность) и монолит (свобода планировок). Инженер подберёт материал под бюджет и участок.</p></div></div>
+      <div class="fi"><div class="fq">Сколько времени занимает строительство?<span class="pl">+</span></div><div class="fa"><p>Одноэтажный дом эконом-класса — от 3–4 месяцев, дом комфорт-класса под ключ — от 5–7 месяцев. Сроки фиксируются в договоре по этапам.</p></div></div>
+      <div class="fi"><div class="fq">Как происходит оплата строительства?<span class="pl">+</span></div><div class="fa"><p>Оплата поэтапная, по факту выполненных работ. Стоимость закреплена в договоре заранее — вы платите за каждый этап после его завершения, без предоплаты за весь дом сразу.</p></div></div>
+      <div class="fi"><div class="fq">Вы строите своими бригадами или нанимаете подрядчиков?<span class="pl">+</span></div><div class="fa"><p>Только собственными бригадами с постоянным составом — это контроль качества и сроков без зависимости от субподрядчиков.</p></div></div>
+      <div class="fi"><div class="fq">Работаете ли по всему Краснодарскому краю?<span class="pl">+</span></div><div class="fa"><p>Да. Строим в Геленджике, Краснодаре, Анапе, Новороссийске и других городах края. Уточните адрес участка — рассчитаем логистику.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="lead">
+  <div class="wrap">
+    <div class="lead">
+      <button class="lead-close" id="leadClose" aria-label="Закрыть">&times;</button>
+      <div>
+        <h2>Получите смету за 15 минут</h2>
+        <p>Оставьте контакты — инженер свяжется с вами, ответит на вопросы и подготовит расчёт стоимости вашего дома. Бесплатно.</p>
+        <ul><li><span class="ck">✓</span> Бесплатный выезд на участок</li><li><span class="ck">✓</span> Подбор проекта под бюджет</li><li><span class="ck">✓</span> Оплата по этапам работ</li><li><span class="ck">✓</span> Фиксированная цена в договоре</li></ul>
+      </div>
+      <div class="form">
+        <form id="leadForm">
+          <h3>Заявка на расчёт</h3>
+          <div class="fld"><input id="lf_name" type="text" name="name" placeholder="Ваше имя" required></div>
+          <div class="fld"><input id="lf_phone" type="tel" name="phone" placeholder="+7 (___) ___-__-__" required></div>
+          <div class="fld"><select id="lf_service" name="service"><option>Дом под ключ</option><option>Газобетонный дом</option><option>Кирпичный дом</option><option>Монолитный дом</option><option>Проектирование</option><option>Расчёт сметы</option></select></div>
+          <div class="fld"><input id="lf_area" type="text" name="area" placeholder="Примерная площадь, м² (если знаете)"></div>
+          <label class="lf-agree"><input id="lf_agree" type="checkbox"><span>Согласие на обработку персональных данных</span></label>
+          <button type="submit" class="btn btn-green btn-lg">Получить смету за 15 минут</button>
+          <p class="note" id="lf_err"></p>
+        </form>
+        <div class="form-ok" id="formOk"><div class="oi">✓</div><h3>Заявка отправлена!</h3><p>Инженер свяжется с вами в ближайшее время.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-phones">
+      <div class="fp"><b><a href="tel:+79002721001">+7 900 272-10-01</a></b><span>телефон в Краснодарском крае</span></div>
+      <div class="fp"><b><a href="mailto:dom-kkk@mail.ru">dom-kkk@mail.ru</a></b><span>почта для заявок</span></div>
+    </div>
+    <div class="foot-cols">
+      <div class="foot-col"><h4>Услуги</h4><a href="#projects">Дома под ключ</a><a href="#projects">Газобетон и керамзитоблок</a><a href="#projects">Кирпичные дома</a><a href="#projects">Монолитные дома</a><a href="#projects">Фасадная отделка</a><a href="#projects">Проектирование</a></div>
+      <div class="foot-col"><h4>Компания</h4><a href="#about">О компании</a><a href="#stages">Этапы работ</a><a href="#gallery">Портфолио</a><a href="#reviews">Отзывы</a><a href="#certs">Сертификаты</a><a href="#faq">Вопросы</a></div>
+      <div class="foot-col"><h4>Как купить</h4><a href="/ipoteka">Ипотека</a><a href="#calc">Калькулятор стоимости</a><a href="#stages">Этапы работ</a><a href="#certs">Сертификаты</a></div>
+      <div class="foot-col foot-cta"><a href="#lead" class="btn btn-green">Получить смету</a><a href="#projects" class="btn btn-light">Выбрать проект</a></div>
+    </div>
+    <p class="req">ООО ИСК «Девелоперы» · ИНН 2304085881 · КПП 230401001 · ОГРН 1252300031312<br>
+    Юридический адрес: 353460, Краснодарский край, г. Геленджик, ул. Тельмана, д. 135<br>
+    Любая информация на сайте носит информационный характер и не является публичной офертой, определяемой положениями ст. 437 ГК РФ. © 2026</p>
+    <div class="foot-bottom"><div class="lg">ДОМ-<b>КК</b> · ООО ИСК «Девелоперы»</div></div>
+  </div>
+</footer>
+<div class="lb" id="lightbox">
+  <button class="lb-close" id="lbClose">&times;</button>
+  <button class="lb-nav lb-prev" id="lbPrev">‹</button>
+  <button class="lb-nav lb-next" id="lbNext">›</button>
+  <img id="lbImg" src="" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+<script>
+document.getElementById('burger').addEventListener('click',()=>{const l=document.querySelector('.nav-links');const open=l.style.display==='flex';l.style.cssText=open?'':'display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:#fff;padding:20px 28px;gap:16px;border-bottom:1px solid var(--line);z-index:999';});
+// POPUP форма заявки
+var leadPopup=document.getElementById('lead');
+function openLead(){leadPopup.classList.add('open');document.body.style.overflow='hidden';}
+function closeLead(){leadPopup.classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('click',function(e){var a=e.target.closest('a[href="#lead"]');if(a){e.preventDefault();openLead();}});
+document.getElementById('leadClose').addEventListener('click',closeLead);
+leadPopup.addEventListener('click',function(e){if(e.target===leadPopup)closeLead();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLead();});
+const slides=[...document.querySelectorAll('#slider .slide')];let cur=0;
+function show(i){cur=(i+slides.length)%slides.length;slides.forEach((s,k)=>s.classList.toggle('active',k===cur));}
+document.querySelectorAll('.slider-nav button').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();show(cur+ +b.dataset.dir);}));
+setInterval(()=>show(cur+1),7000);
+let total=2*86400+11*3600+45*60+12;
+setInterval(()=>{total--;if(total<0)total=3*86400;const d=Math.floor(total/86400),h=Math.floor(total%86400/3600),m=Math.floor(total%3600/60),s=total%60;const p=n=>String(n).padStart(2,'0');document.getElementById('t-d').textContent=p(d);document.getElementById('t-h').textContent=p(h);document.getElementById('t-m').textContent=p(m);document.getElementById('t-s').textContent=p(s);},1000);
+const PROJECTS=[
+{n:'«Семейный»',rooms:4,wc:1,a:'110 м²',box:'5 189 532 ₽',full:'7 204 311 ₽',p:'5,2 млн ₽',cls:'Комфорт',mat:'Газобетон',city:'Краснодар',q:'',pills:['Под ключ'],
+ photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B8%CC%86%D0%BD%D1%8B%D0%B8%CC%86%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B8%CC%86%D0%BD%D1%8B%D0%B8%CC%86%202.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B8%CC%86%D0%BD%D1%8B%D0%B8%CC%86%203.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B8%CC%86%D0%BD%D1%8B%D0%B8%CC%86%204.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B8%CC%86%D0%BD%D1%8B%D0%B8%CC%86%205.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B8%CC%86%D0%BD%D1%8B%D0%B8%CC%86%206.JPG']},
+{n:'«Симфония»',rooms:4,wc:2,a:'109.8 м²',box:'6 450 000 ₽',full:'7 551 000 ₽',p:'6,5 млн ₽',cls:'Комфорт',mat:'Кирпич',city:'Краснодар',q:'',pills:['Под ключ'],
+ photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D1%81%D0%B8%D0%BC%D1%84%D0%BE%D0%BD%D0%B8%D1%8F.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D1%81%D0%B8%D0%BC%D1%84%D0%BE%D0%BD%D0%B8%D1%8F%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D1%81%D0%B8%D0%BC%D1%84%D0%BE%D0%BD%D0%B8%D1%8F%202.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D1%81%D0%B8%D0%BC%D1%84%D0%BE%D0%BD%D0%B8%D1%8F%203.JPG']},
+{n:'«Тольятти»',rooms:4,wc:2,a:'123 м²',box:'4 581 336 ₽',full:'6 862 145 ₽',p:'4,6 млн ₽',cls:'Комфорт',mat:'Кирпич',city:'Краснодар',q:'',pills:['Под ключ'],
+ photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D0%A2%D0%BE%D0%BB%D1%8C%D1%8F%D1%82%D0%B8.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D1%82%D0%BE%D0%BB%D1%8C%D1%8F%D1%82%D0%B8%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D1%82%D0%BE%D0%BB%D1%8C%D1%8F%D1%82%D0%B8%202.JPG']},
+{n:'«Ильский»',rooms:7,wc:2,a:'181 м²',box:'6 650 000 ₽',full:'9 100 000 ₽',p:'6,7 млн ₽',cls:'Комфорт',mat:'Кирпич',city:'Краснодар',q:'',pills:['Под ключ'],
+ photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%98%D0%BB%D1%8C%D1%81%D0%BA%D0%B8%D0%B8%CC%86%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%98%D0%BB%D1%8C%D1%81%D0%BA%D0%B8%D0%B8%CC%86%202.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%98%D0%BB%D1%8C%D1%81%D0%BA%D0%B8%D0%B8%CC%86%203.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%98%D0%BB%D1%8C%D1%81%D0%BA%D0%B8%D0%B8%CC%86%204.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%98%D0%BB%D1%8C%D1%81%D0%BA%D0%B8%D0%B8%CC%86%20.JPG']}
+];
+function bc(c){return c==='Эконом'?'bg-green':'bg-blue';}
+function renderProj(f){const grid=document.getElementById('projGrid');if(!grid)return;var isHome=!/proekty\.html/.test(location.pathname);var list=PROJECTS.filter(p=>!f||f==='Все'||p.cls===f);if(isHome)list=list.slice(0,3);grid.innerHTML=list.map((p,i)=>`<div class="proj"><div class="proj-img" data-proj="${i}"><img src="${p.photos[0]}" alt="${p.n}" onerror="this.style.opacity=0;this.parentNode.style.background='#e7e9ee'"><div class="proj-badges"><span class="badge ${bc(p.cls)}">${p.cls}</span><span class="badge bg-dark">${p.mat}</span></div><span class="obj-zoom">📷 ${p.photos.length} фото</span></div><h3>Проект ${p.n}</h3><div class="proj-type" style="color:var(--green);font-family:var(--h);font-weight:800;font-size:20px;margin:2px 0 8px">${p.a}</div><div class="proj-rooms">Комнат: ${p.rooms}, санузлов: ${p.wc}</div><div class="proj-est"><div class="pe-row"><span>Коробка дома, включая террасу</span><b>${p.box}</b></div><div class="pe-row"><span>Полная стоимость, под ключ</span><b>${p.full}</b></div></div><a href="#lead" class="btn btn-green" style="width:100%">Узнать о проекте</a></div>`).join('');}
+renderProj('Все');
+
+/* ===== НАШИ ОБЪЕКТЫ =====
+   Чтобы добавить объект: скопируйте блок {...}, впишите адрес, площадь,
+   категорию и ссылки на фото (photos: первая — обложка). Фото должны быть
+   по прямым ссылкам (заканчиваются на .jpg / .png / .webp). */
+const OBJECTS=[
+  {addr:'пос. Южный', area:'160 м²', cat:'Строительство домов',
+   photos:['https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=1200&auto=format&fit=crop','https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?q=80&w=1200&auto=format&fit=crop','https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?q=80&w=1200&auto=format&fit=crop']},
+  {addr:'Краснодар, ул. Гаражная', area:'110 м²', cat:'Строительство домов',
+   photos:['https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=1200&auto=format&fit=crop','https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=1200&auto=format&fit=crop']},
+  {addr:'пос. Индустриальный', area:'200 м²', cat:'Строительные работы',
+   photos:['https://images.unsplash.com/photo-1592595896551-12b371d546d5?q=80&w=1200&auto=format&fit=crop','https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop']},
+  {addr:'пос. Пригородный', area:'180 м²', cat:'Строительные работы',
+   photos:['https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop','https://images.unsplash.com/photo-1592595896551-12b371d546d5?q=80&w=1200&auto=format&fit=crop']},
+  {addr:'пос. Агроном', area:'180 м²', cat:'Строительные работы',
+   photos:['https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1200&auto=format&fit=crop','https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop']},
+  {addr:'Краснодарский край, Елизаветинское шоссе', area:'84 м²', cat:'Строительство домов',
+   photos:['https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200&auto=format&fit=crop','https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1200&auto=format&fit=crop']}
+];
+function renderObjects(){
+  var grid=document.getElementById('objGrid');if(!grid)return;
+  var isHome=!/obekty\.html/.test(location.pathname);
+  var list=isHome?OBJECTS.slice(0,3):OBJECTS;
+  grid.innerHTML=list.map(function(o,i){return '<div class="obj">'+
+    '<div class="obj-img" data-obj="'+i+'"><img src="'+o.photos[0]+'" alt="'+o.addr+'">'+
+      '<span class="obj-cat">'+o.cat+'</span>'+
+      '<span class="obj-zoom">📷 '+o.photos.length+' фото</span></div>'+
+    '<div class="obj-body"><h3>Адрес: '+o.addr+'</h3>'+
+      '<div class="ob-area">Площадь: '+o.area+'</div>'+
+      '<button class="btn btn-green" data-obj="'+i+'">Смотреть галерею</button></div></div>';}).join('');
+}
+renderObjects();
+
+/* ЛАЙТБОКС (универсальный — объекты и проекты) */
+var lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg'),lbCap=document.getElementById('lbCap'),lbThumbs=document.getElementById('lbThumbs');
+var curGallery=[],curPic=0,curTitle='';
+function openGallery(photos,title){curGallery=photos;curPic=0;curTitle=title;showPic();lb.classList.add('open');document.body.style.overflow='hidden';}
+function openLb(objIndex){var o=OBJECTS[objIndex];openGallery(o.photos,'Адрес: '+o.addr+' · '+o.area);}
+function openProj(projIndex){var p=PROJECTS[projIndex];openGallery(p.photos,'Проект '+p.n+' · '+p.a);}
+function showPic(){lbImg.src=curGallery[curPic];lbCap.innerHTML=curTitle+'<span>фото '+(curPic+1)+' из '+curGallery.length+'</span>';
+  lbThumbs.innerHTML=curGallery.map(function(p,k){return '<img src="'+p+'" data-pic="'+k+'" class="'+(k===curPic?'active':'')+'">';}).join('');}
+function lbNav(d){var n=curGallery.length;curPic=(curPic+d+n)%n;showPic();}
+document.addEventListener('click',function(e){
+  var trigger=e.target.closest('[data-obj]');if(trigger){openLb(+trigger.dataset.obj);return;}
+  var pj=e.target.closest('[data-proj]');if(pj){openProj(+pj.dataset.proj);return;}
+  var th=e.target.closest('.lb-thumbs img');if(th){curPic=+th.dataset.pic;showPic();}
+});
+document.getElementById('lbClose').addEventListener('click',function(){lb.classList.remove('open');document.body.style.overflow='';});
+document.getElementById('lbPrev').addEventListener('click',function(){lbNav(-1);});
+document.getElementById('lbNext').addEventListener('click',function(){lbNav(1);});
+lb.addEventListener('click',function(e){if(e.target===lb){lb.classList.remove('open');document.body.style.overflow='';}});
+document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape'){lb.classList.remove('open');document.body.style.overflow='';}if(e.key==='ArrowLeft')lbNav(-1);if(e.key==='ArrowRight')lbNav(1);});
+const fmt=n=>new Intl.NumberFormat('ru-RU').format(Math.round(n));
+const st={area:120,mat:38000,fac:0,fl:1,fin:1,fnd:0};
+function calc(){let total=st.area*(st.mat+st.fac)*st.fl*st.fin+st.fnd;document.getElementById('cPrice').textContent=fmt(total)+' ₽';document.getElementById('cArea').textContent=st.area+' м²';}
+document.getElementById('rArea').addEventListener('input',e=>{st.area=+e.target.value;calc();});
+document.querySelectorAll('.opt-row').forEach(r=>{const g=r.dataset.g;r.querySelectorAll('.opt').forEach(o=>o.addEventListener('click',()=>{r.querySelectorAll('.opt').forEach(x=>x.classList.remove('active'));o.classList.add('active');st[g]=+o.dataset.v;calc();}));});
+document.querySelectorAll('.ch-tabs,.price-tabs,.rooms').forEach(t=>t.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{t.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');})));
+// город в заголовке блока
+var citySel=document.getElementById('citySel');
+if(citySel)citySel.addEventListener('change',function(){var v=this.value;var lbl=document.getElementById('cityLabel');lbl.textContent=(v==='Весь Краснодарский край'?'в Краснодарском крае':'в г. '+v)+' ▾';});
+calc();
+document.querySelectorAll('#faqList .fi').forEach(i=>i.querySelector('.fq').addEventListener('click',()=>{const open=i.classList.contains('open');document.querySelectorAll('#faqList .fi').forEach(x=>{x.classList.remove('open');x.querySelector('.fa').style.maxHeight=null;});if(!open){i.classList.add('open');const a=i.querySelector('.fa');a.style.maxHeight=a.scrollHeight+'px';}}));
+// ===== ОТПРАВКА ЗАЯВКИ В TELEGRAM =====
+// ВАЖНО: впишите ваш chat_id вместо ВАШ_CHAT_ID (как узнать — спросите менеджера/в инструкции).
+var BOT_TOKEN="8550556751:AAF9LssjvB-5NkCu4yeOO2-eN2zuqqCKP1o";
+var CHAT_ID="523060537";
+document.getElementById('leadForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var err=document.getElementById('lf_err');err.style.color='#d92d2d';err.textContent='';
+  var name=document.getElementById('lf_name').value.trim();
+  var phone=document.getElementById('lf_phone').value.trim();
+  var service=document.getElementById('lf_service').value;
+  var area=document.getElementById('lf_area').value.trim();
+  var agree=document.getElementById('lf_agree').checked;
+  if(!name){err.textContent='Укажите ваше имя';return;}
+  if(!phone){err.textContent='Укажите телефон';return;}
+  if(!agree){err.textContent='Поставьте согласие на обработку данных';return;}
+  var L=[];
+  L.push('🏠 <b>Заявка на расчёт дома (ДОМ-КК)</b>');
+  L.push('<b>Имя:</b> '+name);
+  L.push('<b>Телефон:</b> '+phone);
+  L.push('<b>Услуга:</b> '+service);
+  if(area)L.push('<b>Площадь:</b> '+area+' м²');
+  L.push('');
+  L.push('🌐 '+(location.host||'сайт'));
+  var btn=e.target.querySelector('button[type=submit]');
+  btn.disabled=true;btn.textContent='Отправка…';
+  fetch('https://api.telegram.org/bot'+BOT_TOKEN+'/sendMessage',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({chat_id:CHAT_ID,text:L.join('\n'),parse_mode:'HTML',disable_web_page_preview:true})
+  }).then(function(r){return r.json();}).then(function(d){
+    if(d&&d.ok){document.getElementById('leadForm').style.display='none';document.getElementById('formOk').style.display='block';}
+    else{btn.disabled=false;btn.textContent='Получить смету за 15 минут';err.textContent='Не удалось отправить. Позвоните нам: +7 900 272-10-01';}
+  }).catch(function(){btn.disabled=false;btn.textContent='Получить смету за 15 минут';err.textContent='Ошибка соединения. Попробуйте снова или позвоните нам.';});
+});
+</script>
