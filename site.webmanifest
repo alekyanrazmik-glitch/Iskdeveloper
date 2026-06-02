@@ -1,0 +1,14 @@
+{
+  "name": "ДОМ-КК · ИСК «Девелоперы»",
+  "short_name": "ДОМ-КК",
+  "description": "Строительство домов под ключ в Краснодарском крае",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#00b956",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
