@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dom-kk.ru/sitemap.xml
