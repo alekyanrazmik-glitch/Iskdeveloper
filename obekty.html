@@ -523,8 +523,8 @@ lb.addEventListener('click',function(e){if(e.target===lb){lb.classList.remove('o
 document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape'){lb.classList.remove('open');document.body.classList.remove('lb-open');document.body.style.overflow='';}if(e.key==='ArrowLeft')lbNav(-1);if(e.key==='ArrowRight')lbNav(1);});
 const fmt=n=>new Intl.NumberFormat('ru-RU').format(Math.round(n));
 const st={area:120,mat:38000,fac:0,fl:1,fin:1,fnd:0};
-function calc(){let total=st.area*(st.mat+st.fac)*st.fl*st.fin+st.fnd;document.getElementById('cPrice').textContent=fmt(total)+' ₽';document.getElementById('cArea').textContent=st.area+' м²';}
-document.getElementById('rArea').addEventListener('input',e=>{st.area=+e.target.value;calc();});
+function calc(){var cp=document.getElementById('cPrice');if(!cp)return;let total=st.area*(st.mat+st.fac)*st.fl*st.fin+st.fnd;cp.textContent=fmt(total)+' ₽';var ca=document.getElementById('cArea');if(ca)ca.textContent=st.area+' м²';}
+var _rArea=document.getElementById('rArea');if(_rArea)_rArea.addEventListener('input',e=>{st.area=+e.target.value;calc();});
 document.querySelectorAll('.opt-row').forEach(r=>{const g=r.dataset.g;r.querySelectorAll('.opt').forEach(o=>o.addEventListener('click',()=>{r.querySelectorAll('.opt').forEach(x=>x.classList.remove('active'));o.classList.add('active');st[g]=+o.dataset.v;calc();}));});
 document.querySelectorAll('.ch-tabs,.price-tabs,.rooms').forEach(t=>t.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{t.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');})));
 // город в заголовке блока
