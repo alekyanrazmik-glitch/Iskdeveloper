@@ -400,6 +400,7 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
   <button class="lb-nav lb-next" id="lbNext">›</button>
   <img id="lbImg" src="" alt="">
   <div class="lb-cap" id="lbCap"></div>
+  <div class="lb-thumbs" id="lbThumbs"></div>
 <section id="lead">
   <div class="wrap">
     <div class="lead">
@@ -444,11 +445,6 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
   </div>
 </footer>
 <script>
-
-// ВРЕМЕННАЯ ДИАГНОСТИКА — показывает ошибки прямо на экране
-window.addEventListener('error',function(ev){
-  alert('ОШИБКА JS: '+ev.message+'\nфайл: '+(ev.filename||'').split('/').pop()+'\nстрока: '+ev.lineno);
-});
 
 document.getElementById('burger').addEventListener('click',()=>{const l=document.querySelector('.nav-links');const open=l.style.display==='flex';l.style.cssText=open?'':'display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:#fff;padding:20px 28px;gap:16px;border-bottom:1px solid var(--line);z-index:999';});
 // POPUP форма заявки
