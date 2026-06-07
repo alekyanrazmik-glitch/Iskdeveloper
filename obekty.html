@@ -196,11 +196,11 @@ header{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px soli
 .obj-body .ob-area{color:var(--gray);font-size:15px;margin-bottom:14px}
 .obj-body .btn{margin-top:auto;width:100%}
 /* ЛАЙТБОКС */
-.lb{position:fixed;inset:0;z-index:2147483647;isolation:isolate;background:rgba(8,11,16,.94);display:none;flex-direction:column;align-items:center;justify-content:center;padding:30px}
+.lb{position:fixed;inset:0;height:100vh;height:100dvh;z-index:2147483647;isolation:isolate;background:rgba(8,11,16,.94);display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px;overflow-y:auto;-webkit-overflow-scrolling:touch}
 body.lb-open header,body.lb-open section,body.lb-open footer{visibility:hidden!important}
 body.lb-open #lightbox{visibility:visible!important}
 .lb.open{display:flex}
-.lb img{max-width:90vw;max-height:78vh;border-radius:12px;object-fit:contain}
+.lb img{max-width:92vw;max-height:62vh;max-height:62dvh;border-radius:12px;object-fit:contain}
 .lb-cap{color:#fff;margin-top:18px;font-family:var(--h);font-weight:700;font-size:18px;text-align:center}
 .lb-cap span{display:block;color:#9aa0aa;font-size:14px;font-weight:400;font-family:var(--b);margin-top:4px}
 .lb-close{position:absolute;top:24px;right:28px;background:rgba(255,255,255,.12);border:none;color:#fff;width:46px;height:46px;border-radius:11px;font-size:26px;cursor:pointer}
@@ -369,6 +369,16 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
   .slide-body,.calc-head,.calc-params,.calc-table,.lead,.fcard{padding:28px}
   .foot-cols{grid-template-columns:1fr 1fr}
   .bank-row{grid-template-columns:1.4fr 1fr 1fr;font-size:13px}.bank-row .hide-m{display:none}
+}
+
+@media (max-width:820px){
+  .lb{padding:14px;justify-content:flex-start}
+  .lb img{max-height:52vh;max-height:52dvh;margin-top:8px}
+  .lb-cap{margin-top:12px;font-size:16px}
+  .lb-thumbs{margin-top:12px;gap:7px}
+  .lb-thumbs img{width:50px;height:38px}
+  .lb-nav{width:44px;height:44px;font-size:24px}
+  .lb-close{top:14px;right:14px;width:40px;height:40px;font-size:22px}
 }
 </style>
 </head>
