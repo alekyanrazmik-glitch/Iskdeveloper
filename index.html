@@ -88,7 +88,6 @@ header{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px soli
 .nav-links a{font-size:15px;font-weight:600;color:var(--ink);transition:.15s;position:relative}
 .nav-links a:hover{color:var(--green)}
 .nav-links a.nav-soon::after{content:"скоро";position:absolute;top:-9px;right:-30px;font-size:9px;font-weight:700;color:#fff;background:var(--blue);padding:1px 5px;border-radius:6px;letter-spacing:.02em}
-.nav-links span.nav-soon{cursor:default;opacity:.55}
 .nav-links a.dot::after{content:"";position:absolute;top:-2px;right:-8px;width:5px;height:5px;border-radius:50%;background:var(--blue)}
 .nav-right{margin-left:auto;display:flex;align-items:center;gap:22px}
 .nav-phone{font-family:var(--h);font-weight:800;font-size:18px;white-space:nowrap;color:var(--ink)}
@@ -359,7 +358,6 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
 .foot-col a,.foot-col p{display:block;color:#c2c6cf;font-size:15px;margin-bottom:13px;transition:.15s}
 .foot-col h4{font-family:var(--h);font-weight:800;font-size:16px;margin-bottom:20px}
 .foot-col a:hover{color:var(--green)}
-.foot-col span.foot-soon{display:block;color:#7e838d;font-size:15px;margin-bottom:13px;cursor:default}
 .foot-cta{display:flex;flex-direction:column;gap:12px}
 .req{color:#7e838d;font-size:13px;line-height:1.7;margin-top:30px}
 .foot-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:24px;flex-wrap:wrap;gap:14px}
@@ -442,10 +440,10 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
 
 <header>
   <div class="wrap nav">
-    <a href="index.html" class="logo">ДОМ-<b>КК</b><small>ООО ИСК «Девелоперы»</small></a>
+    <a href="#" class="logo">ДОМ-<b>КК</b><small>ООО ИСК «Девелоперы»</small></a>
     <nav class="nav-links">
       <a href="proekty.html">Проекты</a><a href="obekty.html">Объекты</a><a href="#estimates">Сметы</a><a href="#calc">Калькулятор</a>
-      <a href="#promos" class="dot">Акции</a><span class="nav-soon">Ипотека</span><a href="#faq">Вопросы</a>
+      <a href="#promos" class="dot">Акции</a><a href="/ipoteka" class="nav-soon">Ипотека</a><a href="#faq">Вопросы</a>
     </nav>
     <div class="nav-right">
       <a href="tel:+79002721001" class="nav-phone">+7 900 272-10-01<small>звонок по краю</small></a>
@@ -464,7 +462,7 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
     <div class="hero-grid">
       <div class="slider" id="slider">
         <div class="slide active">
-          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop" alt="Газобетонный дом под ключ">
+          <img src="https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80%201.JPG" alt="Газобетонный дом под ключ">
           <div class="slide-tag"><div class="st-mark">ДОМ «СЕМЬЯ»</div><div class="st-sub">газобетон · комфорт</div></div>
           <div class="slide-body">
             <h2>Дом под ключ<br>со скидкой</h2>
@@ -480,7 +478,7 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
           <div class="slider-nav"><button data-dir="-1">‹</button><button data-dir="1">›</button></div>
         </div>
         <div class="slide">
-          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=1600&auto=format&fit=crop" alt="Кирпичный дом с участком">
+          <img src="https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%BB%D0%B0%D0%B2%D1%8F%D0%BD%D1%81%D0%BA%201.JPG" alt="Кирпичный дом с участком">
           <div class="slide-tag"><div class="st-mark">ДОМ «УЮТ»</div><div class="st-sub">кирпич · комфорт</div></div>
           <div class="slide-body">
             <h2>Проект дома<br>бесплатно</h2>
@@ -507,7 +505,7 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
           <a href="#lead" class="btn btn-light">Получить смету</a>
         </div>
         <div class="side-photo">
-          <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=900&auto=format&fit=crop" alt="Монолитный дом">
+          <img src="https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9D%D0%BE%D0%B2%D0%BE%D1%80%D0%BE%D1%81%D1%81%D0%B8%D0%B8%CC%86%D1%81%D0%BA%201.JPG" alt="Монолитный дом">
           <div class="sp-body"><h3>Поэтапная оплата по факту выполненных работ</h3><a href="#promos" class="btn btn-green">Подробнее</a></div>
         </div>
       </div>
@@ -749,15 +747,15 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
     <div class="promo-grid">
       <div class="promo">
         <div class="promo-top dark"><div class="pt-mark">Скидка сезона</div><h3>До 380 000 ₽</h3><div class="pt-note">на дома комфорт-класса под ключ</div></div>
-        <div class="promo-img"><img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=700&auto=format&fit=crop" alt="Скидка на дом"><span class="pi-date">до конца сезона</span></div>
+        <div class="promo-img"><img src="https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80%202.JPG" alt="Скидка на дом"><span class="pi-date">до конца сезона</span></div>
       </div>
       <div class="promo">
         <div class="promo-top green"><div class="pt-mark">Удобная оплата</div><h3>Оплата по этапам</h3><div class="pt-note">платите по факту выполненных работ · без предоплаты за всё</div></div>
-        <div class="promo-img"><img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?q=80&w=700&auto=format&fit=crop" alt="Поэтапная оплата"><span class="pi-date">по договору</span></div>
+        <div class="promo-img"><img src="https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A2%D0%B1%D0%B8%D0%BB%D0%B8%D1%81%D0%BA%D0%B0%D1%8F%201.JPG" alt="Поэтапная оплата"><span class="pi-date">по договору</span></div>
       </div>
       <div class="promo">
         <div class="promo-top dark"><div class="pt-mark">При заказе под ключ</div><h3>Проект бесплатно</h3><div class="pt-note">индивидуальный или типовой проект дома</div></div>
-        <div class="promo-img"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=700&auto=format&fit=crop" alt="Проект в подарок"><span class="pi-date">входит в стоимость</span></div>
+        <div class="promo-img"><img src="https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%93%D0%B5%D0%BB%D0%B5%D0%BD%D0%B4%D0%B6%D0%B8%D0%BA%203.jpg" alt="Проект в подарок"><span class="pi-date">входит в стоимость</span></div>
       </div>
     </div>
     <div style="margin-top:34px"><a href="#lead" class="btn btn-dark btn-lg">Узнать подробнее</a></div>
@@ -837,7 +835,7 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
     <div class="foot-cols">
       <div class="foot-col"><h4>Услуги</h4><a href="#projects">Дома под ключ</a><a href="#projects">Газобетон и керамзитоблок</a><a href="#projects">Кирпичные дома</a><a href="#projects">Монолитные дома</a><a href="#projects">Фасадная отделка</a><a href="#projects">Проектирование</a></div>
       <div class="foot-col"><h4>Компания</h4><a href="#about">О компании</a><a href="#stages">Этапы работ</a><a href="#gallery">Портфолио</a><a href="#reviews">Отзывы</a><a href="#certs">Сертификаты</a><a href="#faq">Вопросы</a></div>
-      <div class="foot-col"><h4>Как купить</h4><span class="foot-soon">Ипотека (скоро)</span><a href="#calc">Калькулятор стоимости</a><a href="#stages">Этапы работ</a><a href="#certs">Сертификаты</a></div>
+      <div class="foot-col"><h4>Как купить</h4><a href="/ipoteka">Ипотека</a><a href="#calc">Калькулятор стоимости</a><a href="#stages">Этапы работ</a><a href="#certs">Сертификаты</a></div>
       <div class="foot-col foot-cta"><a href="#lead" class="btn btn-green">Получить смету</a><a href="#projects" class="btn btn-light">Выбрать проект</a></div>
     </div>
     <p class="req">ООО ИСК «Девелоперы» · ИНН 2304085881 · КПП 230401001 · ОГРН 1252300031312<br>
@@ -876,7 +874,10 @@ function bc(c){return c==='Эконом'?'bg-green':'bg-blue';}
 function renderProj(f){const grid=document.getElementById('projGrid');if(!grid)return;var isHome=!/proekty\.html/.test(location.pathname);var list=PROJECTS.filter(p=>!f||f==='Все'||p.cls===f);if(isHome)list=list.slice(0,3);grid.innerHTML=list.map((p,i)=>`<div class="proj"><div class="proj-img" data-proj="${i}"><img src="${p.photos[0]}" alt="${p.n}" onerror="this.style.opacity=0;this.parentNode.style.background='#e7e9ee'"><div class="proj-badges"><span class="badge ${bc(p.cls)}">${p.cls}</span><span class="badge bg-dark">${p.mat}</span></div><span class="obj-zoom">📷 ${p.photos.length} фото</span></div><h3>Проект ${p.n}</h3><div class="proj-type" style="color:var(--green);font-family:var(--h);font-weight:800;font-size:20px;margin:2px 0 8px">${p.a}</div><div class="proj-rooms">Комнат: ${p.rooms}, санузлов: ${p.wc}</div><div class="proj-est"><div class="pe-row"><span>Коробка дома, включая террасу</span><b>${p.box}</b></div><div class="pe-row"><span>Полная стоимость, под ключ</span><b>${p.full}</b></div></div><a href="#lead" class="btn btn-green" style="width:100%">Узнать о проекте</a></div>`).join('');}
 renderProj('Все');
 
-/* ===== НАШИ ОБЪЕКТЫ ===== */
+/* ===== НАШИ ОБЪЕКТЫ =====
+   Чтобы добавить объект: скопируйте блок {...}, впишите адрес, площадь,
+   категорию и ссылки на фото (photos: первая — обложка). Фото должны быть
+   по прямым ссылкам (заканчиваются на .jpg / .png / .webp). */
 const OBJECTS=[
   {addr:'Геленджик', area:'', cat:'Строительство домов', photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%93%D0%B5%D0%BB%D0%B5%D0%BD%D0%B4%D0%B6%D0%B8%D0%BA%202.jpg','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%93%D0%B5%D0%BB%D0%B5%D0%BD%D0%B4%D0%B6%D0%B8%D0%BA%201.jpg','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%93%D0%B5%D0%BB%D0%B5%D0%BD%D0%B4%D0%B6%D0%B8%D0%BA%203.jpg','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%93%D0%B5%D0%BB%D0%B5%D0%BD%D0%B4%D0%B6%D0%B8%D0%BA%204.jpg','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%93%D0%B5%D0%BB%D0%B5%D0%BD%D0%B4%D0%B6%D0%B8%D0%BA.jpg']},
   {addr:'Славянск-на-Кубани', area:'', cat:'Строительство домов', photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%BB%D0%B0%D0%B2%D1%8F%D0%BD%D1%81%D0%BA%20%D0%BD%D0%B0%20%D0%9A%D1%83%D0%B1%D0%B0%D0%BD%D0%B8%20.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%BB%D0%B0%D0%B2%D1%8F%D0%BD%D1%81%D0%BA%20%D0%BD%D0%B0%20%D0%9A%D1%83%D0%B1%D0%B0%D0%BD%D0%B8%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%BB%D0%B0%D0%B2%D1%8F%D0%BD%D1%81%D0%BA%20%D0%BD%D0%B0%20%D0%9A%D1%83%D0%B1%D0%B0%D0%BD%D0%B8%202.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%BB%D0%B0%D0%B2%D1%8F%D0%BD%D1%81%D0%BA%20%D0%BD%D0%B0%20%D0%9A%D1%83%D0%B1%D0%B0%D0%BD%D0%B8%204.JPG']},
@@ -933,10 +934,10 @@ var citySel=document.getElementById('citySel');
 if(citySel)citySel.addEventListener('change',function(){var v=this.value;var lbl=document.getElementById('cityLabel');lbl.textContent=(v==='Весь Краснодарский край'?'в Краснодарском крае':'в г. '+v)+' ▾';});
 calc();
 document.querySelectorAll('#faqList .fi').forEach(i=>i.querySelector('.fq').addEventListener('click',()=>{const open=i.classList.contains('open');document.querySelectorAll('#faqList .fi').forEach(x=>{x.classList.remove('open');x.querySelector('.fa').style.maxHeight=null;});if(!open){i.classList.add('open');const a=i.querySelector('.fa');a.style.maxHeight=a.scrollHeight+'px';}}));
-// ===== ОТПРАВКА ЗАЯВКИ НА ПОЧТУ (FormSubmit) =====
-// Заявки приходят на FORM_EMAIL. После первой отправки на почту придёт письмо
-// от FormSubmit с кнопкой активации — её нужно нажать один раз.
-var FORM_EMAIL="dom-kkk@mail.ru";
+// ===== ОТПРАВКА ЗАЯВКИ В TELEGRAM =====
+// ВАЖНО: впишите ваш chat_id вместо ВАШ_CHAT_ID (как узнать — спросите менеджера/в инструкции).
+var BOT_TOKEN="8550556751:AAF9LssjvB-5NkCu4yeOO2-eN2zuqqCKP1o";
+var CHAT_ID="523060537";
 document.getElementById('leadForm').addEventListener('submit',function(e){
   e.preventDefault();
   var err=document.getElementById('lf_err');err.style.color='#d92d2d';err.textContent='';
@@ -948,33 +949,23 @@ document.getElementById('leadForm').addEventListener('submit',function(e){
   if(!name){err.textContent='Укажите ваше имя';return;}
   if(!phone){err.textContent='Укажите телефон';return;}
   if(!agree){err.textContent='Поставьте согласие на обработку данных';return;}
+  var L=[];
+  L.push('🏠 <b>Заявка на расчёт дома (ДОМ-КК)</b>');
+  L.push('<b>Имя:</b> '+name);
+  L.push('<b>Телефон:</b> '+phone);
+  L.push('<b>Услуга:</b> '+service);
+  if(area)L.push('<b>Площадь:</b> '+area+' м²');
+  L.push('');
+  L.push('🌐 '+(location.host||'сайт'));
   var btn=e.target.querySelector('button[type=submit]');
   btn.disabled=true;btn.textContent='Отправка…';
-  var data={
-    name:name,
-    phone:phone,
-    service:service,
-    area:area||'не указана',
-    _subject:'🏠 Заявка с сайта ДОМ-КК',
-    _template:'table',
-    _captcha:'false'
-  };
-  fetch('https://formsubmit.co/ajax/'+FORM_EMAIL,{
-    method:'POST',
-    headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify(data)
+  fetch('https://api.telegram.org/bot'+BOT_TOKEN+'/sendMessage',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({chat_id:CHAT_ID,text:L.join('\n'),parse_mode:'HTML',disable_web_page_preview:true})
   }).then(function(r){return r.json();}).then(function(d){
-    if(d&&(d.success===true||d.success==='true')){
-      document.getElementById('leadForm').style.display='none';
-      document.getElementById('formOk').style.display='block';
-    }else{
-      btn.disabled=false;btn.textContent='Получить смету за 15 минут';
-      err.textContent='Не удалось отправить. Позвоните нам: +7 900 272-10-01';
-    }
-  }).catch(function(){
-    btn.disabled=false;btn.textContent='Получить смету за 15 минут';
-    err.textContent='Ошибка соединения. Попробуйте снова или позвоните нам.';
-  });
+    if(d&&d.ok){document.getElementById('leadForm').style.display='none';document.getElementById('formOk').style.display='block';}
+    else{btn.disabled=false;btn.textContent='Получить смету за 15 минут';err.textContent='Не удалось отправить. Позвоните нам: +7 900 272-10-01';}
+  }).catch(function(){btn.disabled=false;btn.textContent='Получить смету за 15 минут';err.textContent='Ошибка соединения. Попробуйте снова или позвоните нам.';});
 });
 </script>
 </body>
