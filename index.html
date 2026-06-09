@@ -81,7 +81,8 @@ section{padding:80px 0}
 .bg-blue{background:var(--blue);color:#fff}.bg-green{background:var(--green);color:#fff}.bg-dark{background:var(--ink);color:#fff}
 header{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;gap:34px;height:78px}
-.logo{font-family:'Unbounded',sans-serif;font-weight:900;font-size:30px;letter-spacing:-.04em;line-height:1;color:var(--ink)}
+.logo{font-family:'Unbounded',sans-serif;font-weight:900;font-size:30px;letter-spacing:-.04em;line-height:1;color:var(--ink);white-space:nowrap}
+.logo small{white-space:nowrap}
 .logo b{color:var(--green)}
 .logo small{display:block;font-family:var(--b);font-size:11px;font-weight:600;color:var(--gray);margin-top:5px;letter-spacing:0}
 .nav-links{display:flex;gap:26px;align-items:center}
@@ -128,6 +129,8 @@ header{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px soli
 .strip-cell.box{background:#fff;color:var(--ink)}
 .strip-cell .old{text-decoration:line-through;opacity:.5;font-size:14px;font-family:var(--b);font-weight:600}
 .slide-actions{position:relative;z-index:2;margin:26px 0}
+.slide-actions .btn-light{box-shadow:0 6px 20px rgba(0,0,0,.35);border:2px solid #fff;font-weight:800}
+.slide-actions .btn-light:hover{background:var(--green);color:#fff!important;border-color:var(--green)}
 .slider-nav{position:absolute;bottom:24px;left:52px;z-index:5;display:flex;gap:8px}
 .slider-nav button{width:46px;height:46px;border-radius:8px;background:#fff;border:none;cursor:pointer;font-size:20px;display:grid;place-items:center;transition:.15s}
 .slider-nav button:hover{background:var(--bg-soft)}
@@ -600,7 +603,7 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
 
 <section id="about">
   <div class="wrap">
-    <h2 class="h-sec">Почему «Девелоперы»</h2>
+    <h2 class="h-sec">Почему ДОМ-КК</h2>
     <p class="sub-sec">Полный цикл строительства частного дома под одной ответственностью — от первого эскиза до передачи ключей.</p>
     <div class="adv-grid">
       <div class="adv"><div class="ai">🔑</div><h3>Работаем под ключ</h3><p>Проект, фундамент, коробка, кровля, инженерные сети и отделка силами одной компании.</p></div>
