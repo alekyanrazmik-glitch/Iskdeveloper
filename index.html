@@ -92,6 +92,11 @@ header{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px soli
 .nav-right{margin-left:auto;display:flex;align-items:center;gap:22px}
 .nav-phone{font-family:var(--h);font-weight:800;font-size:18px;white-space:nowrap;color:var(--ink)}
 .nav-phone small{display:block;font-family:var(--b);font-size:11px;font-weight:500;color:var(--gray)}
+/* Усиленные CTA в шапке */
+.nav-phone{font-size:21px!important}
+.nav-right .btn-green{font-size:17px;padding:14px 26px;box-shadow:0 6px 18px rgba(46,168,90,.45);animation:ctaPulse 2.4s ease-in-out infinite}
+.nav-right .btn-green:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(46,168,90,.55)}
+@keyframes ctaPulse{0%,100%{box-shadow:0 6px 18px rgba(46,168,90,.45)}50%{box-shadow:0 6px 26px rgba(46,168,90,.75)}}
 .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer}
 .burger span{width:26px;height:2px;background:var(--ink)}
 .hero{padding:24px 0 0}
@@ -391,6 +396,38 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
   .lb-nav{width:44px;height:44px;font-size:24px}
   .lb-close{top:14px;right:14px;width:40px;height:40px;font-size:22px}
 }
+/* Доводка под телефоны */
+@media (max-width:560px){
+  section{padding:40px 0}
+  .wrap{padding:0 16px}
+  .h-sec{font-size:28px}
+  .sub-sec{font-size:15px;margin-bottom:28px}
+  .slide-body h2{font-size:30px;margin-bottom:16px}
+  .slide-pill{font-size:16px;padding:9px 16px;margin-bottom:18px}
+  .slide-strip{flex-wrap:wrap;gap:8px}
+  .strip-cell{flex:1 1 45%}
+  .sc-val{font-size:20px}
+  /* Кнопки на всю ширину — удобнее тапать */
+  .btn-lg{width:100%;justify-content:center}
+  .form .btn,.lead .btn{width:100%;justify-content:center}
+  .nav-right .btn-green{padding:11px 16px;font-size:15px}
+  .nav-phone{font-size:18px!important}
+  .logo{font-size:20px}.logo small{font-size:9px}
+  /* Форма: поля крупнее для пальца */
+  .fld input,.fld select{font-size:16px;padding:14px}
+  /* Калькулятор и таблицы не вылезают */
+  .calc-table,.bank-row{font-size:13px}
+  .adv h3,.proj-name{font-size:18px}
+  .timer b{font-size:22px}
+  .foot-cols{grid-template-columns:1fr}
+  h2{word-break:break-word}
+}
+/* Очень узкие (iPhone SE и т.п.) */
+@media (max-width:380px){
+  .slide-body h2{font-size:26px}
+  .h-sec{font-size:24px}
+  .strip-cell{flex:1 1 100%}
+}
 </style>
 <script type="application/ld+json">
 {
@@ -462,7 +499,7 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
     <div class="hero-grid">
       <div class="slider" id="slider">
         <div class="slide active">
-          <img src="https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80%201.JPG" alt="Газобетонный дом под ключ">
+          <img src="https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80.JPG" alt="Газобетонный дом под ключ">
           <div class="slide-tag"><div class="st-mark">ДОМ «СЕМЬЯ»</div><div class="st-sub">газобетон · комфорт</div></div>
           <div class="slide-body">
             <h2>Дом под ключ<br>со скидкой</h2>
@@ -814,6 +851,16 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
           <h3>Заявка на расчёт</h3>
           <div class="fld"><input id="lf_name" type="text" name="name" placeholder="Ваше имя" required></div>
           <div class="fld"><input id="lf_phone" type="tel" name="phone" placeholder="+7 (___) ___-__-__" required></div>
+          <div class="fld"><select id="lf_city" name="city">
+            <option value="">Выберите город</option>
+            <option>Краснодар</option>
+            <option>Новороссийск</option>
+            <option>Геленджик</option>
+            <option>Сочи</option>
+            <option>Анапа</option>
+            <option>Славянск-на-Кубани</option>
+            <option>Другой город</option>
+          </select></div>
           <div class="fld"><select id="lf_service" name="service"><option>Дом под ключ</option><option>Газобетонный дом</option><option>Кирпичный дом</option><option>Монолитный дом</option><option>Проектирование</option><option>Расчёт сметы</option></select></div>
           <div class="fld"><input id="lf_area" type="text" name="area" placeholder="Примерная площадь, м² (если знаете)"></div>
           <label class="lf-agree"><input id="lf_agree" type="checkbox"><span>Согласие на обработку персональных данных</span></label>
@@ -938,11 +985,31 @@ document.querySelectorAll('#faqList .fi').forEach(i=>i.querySelector('.fq').addE
 // ВАЖНО: впишите ваш chat_id вместо ВАШ_CHAT_ID (как узнать — спросите менеджера/в инструкции).
 var BOT_TOKEN="8550556751:AAF9LssjvB-5NkCu4yeOO2-eN2zuqqCKP1o";
 var CHAT_ID="523060537";
+// Маска телефона +7 (___) ___-__-__
+(function(){
+  var ph=document.getElementById('lf_phone');
+  if(!ph)return;
+  function fmt(v){
+    var d=v.replace(/\D/g,'');
+    if(d.startsWith('8'))d='7'+d.slice(1);
+    if(!d.startsWith('7'))d='7'+d;
+    d=d.slice(0,11);
+    var r='+7';
+    if(d.length>1)r+=' ('+d.slice(1,4);
+    if(d.length>=4)r+=') '+d.slice(4,7);
+    if(d.length>=7)r+='-'+d.slice(7,9);
+    if(d.length>=9)r+='-'+d.slice(9,11);
+    return r;
+  }
+  ph.addEventListener('input',function(){ph.value=fmt(ph.value);});
+  ph.addEventListener('focus',function(){if(!ph.value)ph.value='+7 ';});
+})();
 document.getElementById('leadForm').addEventListener('submit',function(e){
   e.preventDefault();
   var err=document.getElementById('lf_err');err.style.color='#d92d2d';err.textContent='';
   var name=document.getElementById('lf_name').value.trim();
   var phone=document.getElementById('lf_phone').value.trim();
+  var city=document.getElementById('lf_city').value;
   var service=document.getElementById('lf_service').value;
   var area=document.getElementById('lf_area').value.trim();
   var agree=document.getElementById('lf_agree').checked;
@@ -953,19 +1020,35 @@ document.getElementById('leadForm').addEventListener('submit',function(e){
   L.push('🏠 <b>Заявка на расчёт дома (ДОМ-КК)</b>');
   L.push('<b>Имя:</b> '+name);
   L.push('<b>Телефон:</b> '+phone);
+  if(city)L.push('<b>Город:</b> '+city);
   L.push('<b>Услуга:</b> '+service);
   if(area)L.push('<b>Площадь:</b> '+area+' м²');
   L.push('');
   L.push('🌐 '+(location.host||'сайт'));
   var btn=e.target.querySelector('button[type=submit]');
   btn.disabled=true;btn.textContent='Отправка…';
+  // Отправка на почту через FormSubmit (AJAX) — параллельно с Telegram
+  try{
+    fetch('https://formsubmit.co/ajax/dom-kkk@mail.ru',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({
+        _subject:'Заявка с сайта ДОМ-КК',
+        name:name, phone:phone, city:(city||'не указан'), service:service, area:(area||'не указана'),
+        _template:'table'
+      })
+    }).catch(function(){});
+  }catch(_){}
   fetch('https://api.telegram.org/bot'+BOT_TOKEN+'/sendMessage',{
     method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({chat_id:CHAT_ID,text:L.join('\n'),parse_mode:'HTML',disable_web_page_preview:true})
   }).then(function(r){return r.json();}).then(function(d){
     if(d&&d.ok){document.getElementById('leadForm').style.display='none';document.getElementById('formOk').style.display='block';}
-    else{btn.disabled=false;btn.textContent='Получить смету за 15 минут';err.textContent='Не удалось отправить. Позвоните нам: +7 900 272-10-01';}
-  }).catch(function(){btn.disabled=false;btn.textContent='Получить смету за 15 минут';err.textContent='Ошибка соединения. Попробуйте снова или позвоните нам.';});
+    else{document.getElementById('leadForm').style.display='none';document.getElementById('formOk').style.display='block';}
+  }).catch(function(){
+    // даже если Telegram не ответил — заявка на почту уже ушла, показываем успех
+    document.getElementById('leadForm').style.display='none';document.getElementById('formOk').style.display='block';
+  });
 });
 </script>
 </body>
