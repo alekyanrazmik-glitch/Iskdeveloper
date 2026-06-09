@@ -433,6 +433,39 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
   .h-sec{font-size:24px}
   .strip-cell{flex:1 1 100%}
 }
+/* Окно проекта */
+.pm{position:fixed;inset:0;background:rgba(15,20,30,.75);z-index:2147483646;display:none;overflow-y:auto;padding:max(20px,env(safe-area-inset-top)) 14px max(20px,env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
+body.pm-open{overflow:hidden}
+body.pm-open .pm{display:block}
+.pm-box{position:relative;max-width:920px;margin:0 auto;background:#fff;border-radius:18px;overflow:hidden}
+.pm-close{position:sticky;top:10px;float:right;margin:10px 10px 0 0;width:42px;height:42px;border:none;border-radius:50%;background:#0f141e;color:#fff;font-size:24px;cursor:pointer;z-index:5}
+.pm-inner{padding:0 0 30px}
+.pm-hero{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#e7e9ee}
+.pm-thumbs{display:flex;gap:8px;padding:12px 22px 0;flex-wrap:wrap}
+.pm-thumbs img{width:84px;height:60px;object-fit:cover;border-radius:8px;cursor:pointer;opacity:.65;border:2px solid transparent}
+.pm-thumbs img.active{opacity:1;border-color:var(--green)}
+.pm-body{padding:18px 22px 0}
+.pm-body h2{font-family:var(--h);font-size:26px;font-weight:800;margin-bottom:6px}
+.pm-price{background:var(--green);color:#fff;border-radius:12px;padding:16px 18px;margin:14px 0}
+.pm-price .pp-row{display:flex;justify-content:space-between;gap:14px;font-size:15px;margin:4px 0}
+.pm-price .pp-row b{font-size:18px;white-space:nowrap}
+.pm-spec{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.pm-spec div{background:#f4f6f8;border-radius:8px;padding:10px 12px;font-size:14px}
+.pm-lead{font-size:15px;line-height:1.55;color:#333;margin:14px 0}
+.pm-h{font-family:var(--h);font-weight:800;font-size:18px;margin:20px 0 8px}
+.pm-list{list-style:none;padding:0;margin:0}
+.pm-list li{position:relative;padding:6px 0 6px 24px;font-size:14px;line-height:1.45;border-bottom:1px solid #eef0f3}
+.pm-list li:before{content:'';position:absolute;left:4px;top:13px;width:7px;height:7px;border-radius:50%;background:var(--green)}
+.pm-smeta{margin:10px 0}
+.pm-smeta .sm-row{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid #eef0f3;font-size:14px}
+.pm-smeta .sm-row b{white-space:nowrap}
+.pm-smeta .sm-total{display:flex;justify-content:space-between;gap:14px;padding:12px 0 0;font-family:var(--h);font-weight:800;font-size:20px}
+.pm-from{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.pm-from span{background:#eef7f0;color:var(--green-d,#1c7a3f);border-radius:20px;padding:6px 14px;font-size:13px;font-weight:600}
+.pm-cta{margin:22px 0 0}
+.pm-cta .btn{width:100%}
+.pm-note{font-size:12px;color:#8a909a;margin-top:12px;line-height:1.4}
+@media(max-width:560px){.pm-spec{grid-template-columns:1fr}.pm-body h2{font-size:22px}.pm-price .pp-row{flex-direction:column;gap:2px}
 </style>
 <script type="application/ld+json">
 {
@@ -781,6 +814,13 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
   <div class="lb-cap" id="lbCap"></div>
   <div class="lb-thumbs" id="lbThumbs"></div>
 </div>
+<!-- Окно проекта с полным описанием -->
+<div class="pm" id="projModal">
+  <div class="pm-box">
+    <button class="pm-close" id="pmClose" aria-label="Закрыть">&times;</button>
+    <div class="pm-inner" id="pmInner"></div>
+  </div>
+</div>
 
 <section id="promos" style="background:var(--bg-soft)">
   <div class="wrap">
@@ -903,7 +943,7 @@ document.getElementById('burger').addEventListener('click',()=>{const l=document
 var leadPopup=document.getElementById('lead');
 function openLead(){leadPopup.classList.add('open');document.body.style.overflow='hidden';}
 function closeLead(){leadPopup.classList.remove('open');document.body.style.overflow='';}
-document.addEventListener('click',function(e){var a=e.target.closest('a[href="#lead"]');if(a){e.preventDefault();openLead();}});
+document.addEventListener('click',function(e){var a=e.target.closest('a[href="#lead"]');if(a){e.preventDefault();if(document.body.classList.contains('pm-open'))closeProj();openLead();}});
 document.getElementById('leadClose').addEventListener('click',closeLead);
 leadPopup.addEventListener('click',function(e){if(e.target===leadPopup)closeLead();});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLead();});
@@ -912,6 +952,7 @@ function show(i){cur=(i+slides.length)%slides.length;slides.forEach((s,k)=>s.cla
 document.querySelectorAll('.slider-nav button').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();show(cur+ +b.dataset.dir);}));
 setInterval(()=>show(cur+1),7000);
 (function(){var td=document.getElementById('t-d');if(!td)return;let total=2*86400+11*3600+45*60+12;setInterval(()=>{total--;if(total<0)total=3*86400;const d=Math.floor(total/86400),h=Math.floor(total%86400/3600),m=Math.floor(total%3600/60),s=total%60;const p=n=>String(n).padStart(2,'0');td.textContent=p(d);document.getElementById('t-h').textContent=p(h);document.getElementById('t-m').textContent=p(m);document.getElementById('t-s').textContent=p(s);},1000);})();
+var PROJ_INFO={"«Тольятти»": {"lead": "Одноэтажный кирпичный дом 123 м² с террасой и продуманной планировкой на 4 комнаты и 2 санузла. Удобен в эксплуатации, рассчитан на комфортную жизнь большой семьи.", "from": ["Кирпича", "Газоблока"], "params": ["Общая площадь застройки без террасы — 123,5 м²", "Общая площадь застройки с террасой (доп. услуга) — 141,5 м²", "Общая площадь дома — 100,1 м²", "Жилая площадь — 73,4 м²"], "box": ["Ленточный фундамент 80×40 см", "Монолитный цоколь — 30 см высотой, 40 см шириной", "Плита этажа — монолитная в одну сетку из арматуры д10, толщиной 15 см", "Внешние стены: керамический кирпич и газоблок 250 мм", "Несущие стены из блока 250 мм, остальные 150 мм", "Монолитные сердечники и армопояс", "Монолитные перемычки над окнами и дверьми", "Кровля из металлочерепицы", "Утепление кровли в 3 слоя минватой толщиной 150 мм", "Подшивной элемент стандартный 50 см (можно уменьшить до 30/40)", "Вытяжные каналы из кровли"], "smeta": [["Строительство коробки дома", "4 581 336 ₽"], ["Доп. терраса", "363 059 ₽"], ["Монтаж септиков (бетонные кольца, 8,5 м³)", "142 342 ₽"], ["Оконные проёмы и входная дверь", "288 740 ₽"], ["Электромонтажные работы", "340 000 ₽"], ["Сантехнические работы / отопление", "464 542 ₽"], ["Предчистовая отделка", "453 730 ₽"], ["Бетонные работы 100 м² (отмостка, парковка, дорожки)", "228 395 ₽"]], "total": "6 862 145 ₽", "incl": ["Фундамент и цокольное перекрытие", "Устройство закладных каналов под ввод и вывод инженерных коммуникаций", "Наружные стены", "Внутренние стены (перегородки)", "Межэтажное перекрытие", "Крыша", "Дверные и арочные проёмы в соответствии с проектом", "Оконные проёмы в соответствии с проектом"]}, "«Семейный»": {"lead": "Одноэтажный дом 110 м² с террасой для семьи, которая хочет жить в собственном доме, не переплачивая за лишние метры. Продуманная планировка и эксклюзивный фасад, качество — на то, чтобы передать дом по наследству.", "from": ["Кирпича", "Газоблока"], "params": ["Общая площадь застройки без террасы — 110,0 м²", "Общая площадь застройки с террасой — 126,5 м²", "Общая площадь дома — 89 м²", "Жилая площадь — 61,7 м²"], "box": ["Ленточный фундамент 80×40 см", "Монолитный цоколь — 40 см высотой, 40 см шириной", "Плита этажа — монолитная в одну сетку из арматуры д10, толщиной 15 см", "Внешние стены: керамический кирпич и газоблок 250 мм", "Несущие стены из блока 250 мм, остальные 150 мм", "Монолитный армопояс и сердечники", "Монолитные перемычки над окнами и дверьми", "Кровля из металлочерепицы толщиной 0,5 мм", "Утепление кровли в 3 слоя минватой толщиной 150 мм", "Подшивной элемент стандартный 50 см (можно уменьшить до 30/40)", "Вытяжные каналы из кровли"], "smeta": [["Строительство коробки дома, включая террасу", "5 189 532 ₽"], ["Монтаж септика (бетонные кольца, 11,3 м³)", "150 400 ₽"], ["Оконные проёмы и входная дверь", "408 312 ₽"], ["Электромонтажные работы", "288 932 ₽"], ["Сантехнические работы / отопление", "613 997 ₽"], ["Предчистовая отделка", "553 135 ₽"]], "total": "7 204 311 ₽", "incl": ["Фундамент и цокольное перекрытие", "Устройство закладных каналов под ввод и вывод инженерных коммуникаций", "Наружные стены", "Внутренние стены (перегородки)", "Межэтажное перекрытие", "Крыша", "Дверные и арочные проёмы в соответствии с проектом", "Оконные проёмы в соответствии с проектом"]}, "«Симфония»": {"lead": "Новинка. Одноэтажный дом 109,8 м² с террасой, 4 комнаты и 2 санузла. Газоблок с облицовочным кирпичом и воздушной прослойкой — тёплый и долговечный дом с выразительным фасадом.", "from": ["Кирпича", "Газоблока"], "params": ["Общая площадь застройки с террасой — 121,7 м²", "Жилая площадь — 109,8 м²", "Комнат — 4, санузлов — 2"], "box": ["Свайно-ростверковый фундамент", "Монолитный цоколь — 450 мм высотой, 400 мм шириной", "Плита этажа — монолитная в одну сетку из арматуры д10, толщиной 15 см", "Внешние стены: газоблок 250 мм + облицовочный кирпич и воздушная прослойка", "Несущие стены из блока 250 мм, остальные 150 мм", "Монолитный армопояс и сердечники", "Монолитные перемычки над окнами и дверьми", "Кровля из металлочерепицы", "Утепление кровли в 3 слоя минватой толщиной 150 мм", "Подшивной элемент стандартный 50 см (можно уменьшить до 30/40)", "Вытяжные каналы из кровли"], "smeta": [["Строительство коробки дома", "6 450 000 ₽"], ["Монтаж септиков (бетонные кольца, 8,5 м³)", "192 000 ₽"], ["Оконные проёмы и входная дверь", "680 000 ₽"], ["Бетонные работы (отмостка, парковка, дорожки)", "229 000 ₽"]], "total": "7 551 000 ₽", "incl": ["Фундамент и цокольное перекрытие", "Устройство закладных каналов под ввод и вывод инженерных коммуникаций", "Наружные стены", "Внутренние стены (перегородки)", "Межэтажное перекрытие", "Крыша", "Дверные и арочные проёмы в соответствии с проектом", "Оконные проёмы в соответствии с проектом"]}, "«Ильский»": {"lead": "Просторный кирпичный дом 181 м² на 7 комнат и 2 санузла — для большой семьи. Подробное описание и смета — по запросу, звоните или оставьте заявку.", "from": ["Кирпича", "Газоблока"], "params": ["Общая площадь — 181 м²", "Комнат — 7, санузлов — 2", "Класс — Комфорт"], "box": [], "smeta": [["Коробка дома", "6 650 000 ₽"]], "total": "9 100 000 ₽", "incl": ["Фундамент и цокольное перекрытие", "Наружные и внутренние стены", "Межэтажное перекрытие", "Крыша", "Дверные и оконные проёмы в соответствии с проектом"]}};
 const PROJECTS=[
 {n:'«Семейный»',rooms:4,wc:1,a:'110 м²',box:'5 189 532 ₽',full:'7 204 311 ₽',p:'5,2 млн ₽',cls:'Комфорт',mat:'Газобетон',city:'Краснодар',q:'',pills:['Под ключ'],
  photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B8%CC%86%D0%BD%D1%8B%D0%B8%CC%86%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B8%CC%86%D0%BD%D1%8B%D0%B8%CC%86%202.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B8%CC%86%D0%BD%D1%8B%D0%B8%CC%86%203.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B8%CC%86%D0%BD%D1%8B%D0%B8%CC%86%204.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B8%CC%86%D0%BD%D1%8B%D0%B8%CC%86%205.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B8%CC%86%D0%BD%D1%8B%D0%B8%CC%86%206.JPG']},
@@ -923,7 +964,7 @@ const PROJECTS=[
  photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%98%D0%BB%D1%8C%D1%81%D0%BA%D0%B8%D0%B8%CC%86%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%98%D0%BB%D1%8C%D1%81%D0%BA%D0%B8%D0%B8%CC%86%202.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%98%D0%BB%D1%8C%D1%81%D0%BA%D0%B8%D0%B8%CC%86%203.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%98%D0%BB%D1%8C%D1%81%D0%BA%D0%B8%D0%B8%CC%86%204.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%98%D0%BB%D1%8C%D1%81%D0%BA%D0%B8%D0%B8%CC%86%20.JPG']}
 ];
 function bc(c){return c==='Эконом'?'bg-green':'bg-blue';}
-function renderProj(f){const grid=document.getElementById('projGrid');if(!grid)return;var isHome=!/proekty\.html/.test(location.pathname);var list=PROJECTS.filter(p=>!f||f==='Все'||p.cls===f);if(isHome)list=list.slice(0,3);grid.innerHTML=list.map((p,i)=>`<div class="proj"><div class="proj-img" data-proj="${i}"><img src="${p.photos[0]}" alt="${p.n}" onerror="this.style.opacity=0;this.parentNode.style.background='#e7e9ee'"><div class="proj-badges"><span class="badge ${bc(p.cls)}">${p.cls}</span><span class="badge bg-dark">${p.mat}</span></div><span class="obj-zoom">📷 ${p.photos.length} фото</span></div><h3>Проект ${p.n}</h3><div class="proj-type" style="color:var(--green);font-family:var(--h);font-weight:800;font-size:20px;margin:2px 0 8px">${p.a}</div><div class="proj-rooms">Комнат: ${p.rooms}, санузлов: ${p.wc}</div><div class="proj-est"><div class="pe-row"><span>Коробка дома, включая террасу</span><b>${p.box}</b></div><div class="pe-row"><span>Полная стоимость, под ключ</span><b>${p.full}</b></div></div><a href="#lead" class="btn btn-green" style="width:100%">Узнать о проекте</a></div>`).join('');}
+function renderProj(f){const grid=document.getElementById('projGrid');if(!grid)return;var isHome=!/proekty\.html/.test(location.pathname);var list=PROJECTS.filter(p=>!f||f==='Все'||p.cls===f);if(isHome)list=list.slice(0,3);grid.innerHTML=list.map((p,i)=>`<div class="proj"><div class="proj-img" data-proj="${i}"><img src="${p.photos[0]}" alt="${p.n}" onerror="this.style.opacity=0;this.parentNode.style.background='#e7e9ee'"><div class="proj-badges"><span class="badge ${bc(p.cls)}">${p.cls}</span><span class="badge bg-dark">${p.mat}</span></div><span class="obj-zoom">📷 ${p.photos.length} фото</span></div><h3>Проект ${p.n}</h3><div class="proj-type" style="color:var(--green);font-family:var(--h);font-weight:800;font-size:20px;margin:2px 0 8px">${p.a}</div><div class="proj-rooms">Комнат: ${p.rooms}, санузлов: ${p.wc}</div><div class="proj-est"><div class="pe-row"><span>Коробка дома, включая террасу</span><b>${p.box}</b></div><div class="pe-row"><span>Полная стоимость, под ключ</span><b>${p.full}</b></div></div><a href="#" class="btn btn-green" style="width:100%" data-proj="${i}" onclick="event.preventDefault()">Подробнее о проекте</a></div>`).join('');}
 renderProj('Все');
 
 /* ===== НАШИ ОБЪЕКТЫ =====
@@ -961,7 +1002,48 @@ var lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg'
 var curGallery=[],curPic=0,curTitle='';
 function openGallery(photos,title){curGallery=photos;curPic=0;curTitle=title;showPic();lb.classList.add('open');document.body.classList.add('lb-open');document.body.style.overflow='hidden';}
 function openLb(objIndex){var o=OBJECTS[objIndex];openGallery(o.photos,'Адрес: '+o.addr);}
-function openProj(projIndex){var p=PROJECTS[projIndex];openGallery(p.photos,'Проект '+p.n+' · '+p.a);}
+var PROJECTS_CUR=null;
+function openProj(projIndex){
+  var p=PROJECTS[projIndex];
+  var info=(typeof PROJ_INFO!=='undefined')?PROJ_INFO[p.n]:null;
+  var inner=document.getElementById('pmInner');
+  if(!info||!inner){ openGallery(p.photos,'Проект '+p.n+' · '+p.a); return; }
+  var thumbs=p.photos.map(function(src,i){return '<img src="'+src+'" data-pm="'+i+'" class="'+(i===0?'active':'')+'" onerror="this.style.display=\'none\'">';}).join('');
+  var spec='<div><b>Площадь:</b> '+p.a+'</div><div><b>Комнат:</b> '+p.rooms+'</div><div><b>Санузлов:</b> '+p.wc+'</div><div><b>Этажность:</b> 1</div><div><b>Материал:</b> '+p.mat+'</div><div><b>Класс:</b> '+p.cls+'</div>';
+  var from=(info.from||[]).map(function(x){return '<span>'+x+'</span>';}).join('');
+  var params=(info.params||[]).map(function(x){return '<li>'+x+'</li>';}).join('');
+  var box=(info.box||[]).map(function(x){return '<li>'+x+'</li>';}).join('');
+  var smeta=(info.smeta||[]).map(function(r){return '<div class="sm-row"><span>'+r[0]+'</span><b>'+r[1]+'</b></div>';}).join('');
+  var incl=(info.incl||[]).map(function(x){return '<li>'+x+'</li>';}).join('');
+  var html='<img class="pm-hero" id="pmHero" src="'+p.photos[0]+'" alt="Проект '+p.n+'" onerror="this.style.background=\'#e7e9ee\'">';
+  if(p.photos.length>1) html+='<div class="pm-thumbs">'+thumbs+'</div>';
+  html+='<div class="pm-body">';
+  html+='<h2>Проект дома '+p.n+'</h2>';
+  html+='<div class="pm-price"><div class="pp-row"><span>Стоимость коробки дома, включая террасу</span><b>'+p.box+'</b></div><div class="pp-row"><span>Полная стоимость с доп. услугами</span><b>'+info.total+'</b></div></div>';
+  html+='<div class="pm-spec">'+spec+'</div>';
+  if(info.lead) html+='<p class="pm-lead">'+info.lead+'</p>';
+  if(from){ html+='<div class="pm-h">Дом можно построить из:</div><div class="pm-from">'+from+'</div>'; }
+  if(params){ html+='<div class="pm-h">Параметры дома</div><ul class="pm-list">'+params+'</ul>'; }
+  if(box){ html+='<div class="pm-h">Коробка дома</div><ul class="pm-list">'+box+'</ul>'; }
+  if(smeta){ html+='<div class="pm-h">Состав стоимости</div><div class="pm-smeta">'+smeta+'<div class="sm-total"><span>Всего по смете</span><span>'+info.total+'</span></div></div>'; }
+  if(incl){ html+='<div class="pm-h">В стоимость входит</div><ul class="pm-list">'+incl+'</ul>'; }
+  html+='<div class="pm-cta"><a href="#lead" class="btn btn-green">Получить смету по этому проекту</a></div>';
+  html+='<p class="pm-note">Стоимость указана в базовом варианте за наличный расчёт, носит информационный характер и не является публичной офертой. Точную смету подготовим бесплатно под ваш участок.</p>';
+  html+='</div>';
+  inner.innerHTML=html;
+  PROJECTS_CUR=p;
+  document.getElementById('projModal').scrollTop=0;
+  document.body.classList.add('pm-open');
+}
+function closeProj(){document.body.classList.remove('pm-open');}
+(function(){
+  var pmc=document.getElementById('pmClose');if(pmc)pmc.addEventListener('click',closeProj);
+  var pmm=document.getElementById('projModal');if(pmm)pmm.addEventListener('click',function(e){if(e.target===this)closeProj();});
+  var pmi=document.getElementById('pmInner');if(pmi)pmi.addEventListener('click',function(e){
+    var t=e.target.closest('[data-pm]');if(t){var i=+t.dataset.pm;document.getElementById('pmHero').src=PROJECTS_CUR.photos[i];this.querySelectorAll('.pm-thumbs img').forEach(function(x){x.classList.remove('active');});t.classList.add('active');}
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('pm-open'))closeProj();});
+})();
 function showPic(){lbImg.src=curGallery[curPic];lbCap.innerHTML=curTitle+'<span>фото '+(curPic+1)+' из '+curGallery.length+'</span>';
   lbThumbs.innerHTML=curGallery.map(function(p,k){return '<img src="'+p+'" data-pic="'+k+'" class="'+(k===curPic?'active':'')+'">';}).join('');}
 function lbNav(d){var n=curGallery.length;curPic=(curPic+d+n)%n;showPic();}
