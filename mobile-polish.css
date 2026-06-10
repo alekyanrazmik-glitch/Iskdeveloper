@@ -1,11 +1,13 @@
 @import url('hero-overlap-fix.css?v=1');
-/* Mobile emergency fix: make request form usable */
-#lead:target{opacity:1!important;visibility:visible!important;display:flex!important;pointer-events:auto!important}
-#lead:target .lead{transform:none!important}
+/* Mobile lead popup fix */
+#lead:target,#lead.open{opacity:1!important;visibility:visible!important;display:flex!important;pointer-events:auto!important}
+#lead:target .lead,#lead.open .lead{transform:none!important}
 @media(max-width:768px){
-  #lead{position:relative!important;inset:auto!important;z-index:1!important;opacity:1!important;visibility:visible!important;display:block!important;pointer-events:auto!important;padding:42px 0!important;background:#11151d!important;scroll-margin-top:80px!important}
-  #lead .wrap{width:100%!important;max-width:100%!important;padding:0 16px!important}
-  #lead .lead{display:block!important;width:100%!important;max-height:none!important;overflow:visible!important;transform:none!important;border-radius:24px!important;padding:22px 16px!important;background:#11151d!important;color:#fff!important;box-shadow:none!important}
+  #lead{position:fixed!important;inset:0!important;z-index:9999!important;opacity:0!important;visibility:hidden!important;display:flex!important;align-items:flex-end!important;pointer-events:none!important;padding:0!important;background:rgba(8,11,16,.72)!important;scroll-margin-top:0!important}
+  #lead.open,#lead:target{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+  #lead .wrap{width:100%!important;max-width:100%!important;padding:0!important}
+  #lead .lead{display:block!important;width:100%!important;max-height:92dvh!important;overflow-y:auto!important;transform:translateY(100%)!important;border-radius:28px 28px 0 0!important;padding:22px 16px!important;background:#11151d!important;color:#fff!important;box-shadow:0 -24px 80px -40px rgba(0,0,0,.8)!important}
+  #lead.open .lead,#lead:target .lead{transform:translateY(0)!important}
   #lead .lead h2{font-size:25px!important;line-height:1.12!important;color:#fff!important;margin-bottom:10px!important}
   #lead .lead p{font-size:14px!important;line-height:1.45!important;color:#b6bdc8!important;margin-bottom:14px!important}
   #lead .lead ul{display:grid!important;gap:8px!important;margin:0 0 16px!important;padding:0!important}
@@ -15,5 +17,5 @@
   #lead .fld{margin-bottom:12px!important}
   #lead .fld input,#lead .fld select{width:100%!important;min-height:52px!important;border-radius:14px!important;border:1px solid #dde2ea!important;background:#f8fafc!important;font-size:16px!important;padding:14px!important;color:#101216!important}
   #lead .form .btn{width:100%!important;min-height:54px!important;border-radius:16px!important;background:#00b956!important;color:#fff!important}
-  .lead-close{display:none!important}
+  .lead-close{display:flex!important;position:absolute!important;top:12px!important;right:12px!important;width:38px!important;height:38px!important;align-items:center!important;justify-content:center!important;border-radius:13px!important;background:rgba(255,255,255,.12)!important;color:#fff!important;border:0!important;font-size:24px!important}
 }
