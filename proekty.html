@@ -403,6 +403,49 @@ body.pm-open .pm{display:block}
 .pm-cta .btn{width:100%}
 .pm-note{font-size:12px;color:#8a909a;margin-top:12px;line-height:1.4}
 @media(max-width:560px){.pm-spec{grid-template-columns:1fr}.pm-body h2{font-size:22px}.pm-price .pp-row{flex-direction:column;gap:2px}.pm-price .pp-row b{font-size:20px}}
+/* ============================================
+   МОБИЛЬНАЯ АДАПТАЦИЯ — комфортный вид на телефоне
+   ============================================ */
+@media (max-width:768px){
+  html,body{overflow-x:hidden!important;max-width:100%!important}
+  *{max-width:100%}
+  img,video,iframe{max-width:100%!important;height:auto}
+  .wrap{padding:0 16px!important}
+  section{padding:36px 0!important}
+  .h-sec{font-size:25px!important;line-height:1.15!important;margin-bottom:8px!important}
+  .sub-sec{font-size:15px!important;margin-bottom:22px!important}
+  h1{font-size:26px!important;line-height:1.15!important}
+  h2{font-size:22px!important}h3{font-size:18px!important}
+  .hero-grid,.calc-body,.search-row,.adv-grid,.proj-grid,.obj-grid,
+  .est-grid,.steps-grid,.cert-grid,.rev-grid,.foot-cols,.lead-grid,
+  .features,.promo-grid,.faq-grid,.projs,.pm-spec{grid-template-columns:1fr!important;gap:14px!important}
+  .bank-row{grid-template-columns:1fr auto!important;gap:8px!important;font-size:14px!important;padding:12px 0!important}
+  .hide-m{display:none!important}
+  .btn{width:100%!important;justify-content:center!important;padding:15px 20px!important;font-size:16px!important}
+  .btn-lg{padding:16px 20px!important}
+  .hero-cta,.slide-actions,.cta-row,.foot-cta{flex-direction:column!important;gap:10px!important}
+  .hero-cta>*,.foot-cta>*{width:100%!important}
+  .nav{height:60px!important;gap:10px!important}
+  .logo{font-size:20px!important}.logo small{font-size:9px!important;margin-top:2px!important}
+  .nav-links{display:none!important}.burger{display:flex!important}
+  .nav-phone{font-size:15px!important}.nav-phone small{display:none!important}
+  .nav-right{gap:10px!important}
+  .nav-right .btn-green{font-size:13px!important;padding:9px 12px!important;animation:none!important}
+  .fld input,.fld select,input,select,textarea{font-size:16px!important;padding:14px!important;width:100%!important}
+  .lead-form,.lead,.pm-box,.pm-body{padding:18px!important}
+  .pm-inner{padding:0 0 24px!important}
+  .card,.pcard,.est-card,.proj-card,.obj-card,.rev-card,.pcard .pc-body{padding:16px!important}
+  .proj-card img,.pcard img,.obj-card img{aspect-ratio:16/11!important;object-fit:cover!important}
+  .pm-hero{aspect-ratio:16/10!important}
+  .pm-thumbs img{width:64px!important;height:46px!important}
+  .pm-price .pp-row{flex-direction:column!important;gap:2px!important}
+  p,span,div,h1,h2,h3,a{word-wrap:break-word!important;overflow-wrap:break-word!important}
+}
+@media (max-width:400px){
+  .h-sec{font-size:22px!important}
+  .wrap{padding:0 14px!important}
+}
+
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
