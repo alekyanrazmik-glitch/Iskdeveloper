@@ -1,0 +1,116 @@
+/* Mobile polish: typography, spacing, form and no-overlap fixes */
+@media (max-width:768px){
+  *,*::before,*::after{box-sizing:border-box!important}
+  html,body{overflow-x:hidden!important}
+  body{background:#fff!important}
+
+  /* Общая типографика: тексты не налезают друг на друга */
+  h1,h2,h3,h4,p,li,a,span,div,b,strong{max-width:100%!important;word-break:normal!important;overflow-wrap:anywhere!important;hyphens:none!important}
+  h1,h2,h3{letter-spacing:-.035em!important;text-wrap:balance!important}
+  p,li{line-height:1.52!important}
+  section{position:relative!important;z-index:1!important;clear:both!important}
+  .wrap{display:block!important}
+
+  /* Шапка: компактная и без наложения */
+  header{overflow:visible!important}
+  .nav{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;width:100%!important}
+  .logo{flex:0 0 104px!important;min-width:104px!important;max-width:104px!important}
+  .logo small{max-width:104px!important;display:block!important}
+  .nav-right{flex:0 1 auto!important;min-width:0!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:7px!important}
+  .nav-right .btn-green{max-width:150px!important;min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+  .burger{flex-shrink:0!important}
+
+  /* HERO: меньше ощущения десктопа, больше мобильной карточки */
+  .hero{padding-top:20px!important}
+  .hero-lead{margin-bottom:16px!important}
+  .hero-lead h1{font-size:29px!important;line-height:1.08!important;margin-bottom:14px!important;max-width:100%!important}
+  .hero-lead .hl-badge{max-width:100%!important;white-space:normal!important;align-items:center!important;gap:9px!important}
+  .slider{border-radius:24px!important;overflow:hidden!important;margin-top:4px!important}
+  .slide-body{min-height:590px!important;padding:88px 16px 78px!important;justify-content:flex-end!important;gap:0!important}
+  .slide-tag{top:16px!important;left:16px!important;right:16px!important;display:grid!important;grid-template-columns:1fr auto!important;gap:8px!important;align-items:start!important}
+  .slide-tag .st-mark,.slide-tag .st-sub{max-width:100%!important;min-width:0!important;white-space:normal!important;line-height:1.15!important}
+  .slide-body h2{font-size:32px!important;line-height:1!important;margin:0 0 12px!important;max-width:280px!important}
+  .slide-pill{margin-bottom:16px!important;line-height:1.25!important;white-space:normal!important;max-width:100%!important}
+
+  /* Цена и характеристики: отдельные аккуратные плитки, без вертикального разрыва букв */
+  .slide-strip{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;width:100%!important;margin:0!important;align-items:stretch!important}
+  .strip-cell{min-width:0!important;overflow:hidden!important;padding:13px 12px!important;display:flex!important;flex-direction:column!important;justify-content:center!important;gap:4px!important}
+  .strip-cell:first-child{grid-column:1 / -1!important;min-height:88px!important}
+  .strip-cell .sc-lbl{font-size:10.5px!important;line-height:1.15!important;letter-spacing:.06em!important;margin:0!important;white-space:normal!important;overflow-wrap:normal!important}
+  .strip-cell .sc-val{font-size:21px!important;line-height:1.12!important;white-space:normal!important;overflow-wrap:normal!important;word-break:normal!important}
+  .strip-cell:first-child .sc-val{font-size:27px!important;line-height:1.08!important}
+  .strip-cell .old{font-size:14px!important;line-height:1.1!important;white-space:nowrap!important;display:block!important;margin-bottom:2px!important}
+  .slide-actions{margin-top:12px!important}
+  .slide-actions .btn{min-height:52px!important}
+  .slider-nav{bottom:14px!important;right:14px!important}
+
+  /* Боковые hero-карточки */
+  .hero-side{margin-top:14px!important;gap:12px!important}
+  .side-card,.side-photo{border-radius:22px!important;overflow:hidden!important}
+  .side-green{padding:20px!important}
+  .side-green h3{font-size:23px!important;line-height:1.08!important;margin-bottom:8px!important}
+  .side-green p{font-size:14px!important;line-height:1.4!important;margin-bottom:14px!important}
+  .timer{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:7px!important}
+  .timer div{min-width:0!important}
+  .timer b{font-size:21px!important;line-height:1!important}
+  .timer span{font-size:10px!important;line-height:1.1!important}
+
+  /* Все карточки: нормальные отступы и отсутствие наложений */
+  .adv,.proj,.obj,.est,.rev,.promo,.cert,.fcard,.calc,.lead,.form{overflow:hidden!important}
+  .adv h3,.proj h3,.obj h3,.est h3,.promo h3,.fcard h3{line-height:1.15!important;margin-bottom:8px!important}
+  .proj-foot,.est-total,.est-row,.proj-est .pe-row{gap:10px!important;align-items:flex-start!important}
+  .proj-foot{flex-direction:column!important;align-items:flex-start!important}
+  .proj-foot .pf-price{font-size:22px!important;line-height:1.1!important}
+  .proj-est .pe-row,.est-row{display:grid!important;grid-template-columns:1fr auto!important}
+  .proj-est .pe-row span,.est-row span{min-width:0!important}
+  .proj-est .pe-row b,.est-row b{white-space:normal!important;text-align:right!important;line-height:1.25!important}
+
+  /* Калькулятор: строки банков не давят друг друга */
+  .bank-row{grid-template-columns:1fr!important;background:#fff!important;border:1px solid #eef0f3!important;border-radius:16px!important;padding:14px!important;margin-bottom:10px!important}
+  .bank-row.head{display:none!important}
+  .bank-row > *{min-width:0!important;line-height:1.25!important}
+  .bank-name{font-size:15px!important;line-height:1.2!important}
+
+  /* ФОРМА ЗАЯВКИ: отдельная мобильная карточка */
+  #lead{align-items:flex-end!important;padding:0!important;background:rgba(8,11,16,.72)!important;backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important}
+  #lead .wrap{padding:0!important;width:100%!important;max-width:100%!important}
+  #lead .lead{width:100%!important;max-height:92dvh!important;overflow-y:auto!important;border-radius:28px 28px 0 0!important;padding:22px 16px calc(20px + env(safe-area-inset-bottom))!important;background:#11151d!important;display:block!important;box-shadow:0 -24px 80px -40px rgba(0,0,0,.8)!important}
+  #lead .lead > div:first-child{padding:0 4px!important;margin-bottom:16px!important}
+  #lead .lead h2{font-size:24px!important;line-height:1.12!important;letter-spacing:-.04em!important;margin:0 0 10px!important;color:#fff!important}
+  #lead .lead p{font-size:14.5px!important;line-height:1.45!important;margin:0 0 14px!important;color:#b6bdc8!important}
+  #lead .lead ul{display:grid!important;gap:8px!important;margin:0 0 16px!important;padding:0!important}
+  #lead .lead li{font-size:13.5px!important;line-height:1.35!important;align-items:flex-start!important;color:#eef2f7!important}
+  #lead .lead li .ck{width:20px!important;height:20px!important;flex:0 0 20px!important;font-size:10px!important;margin-top:0!important}
+  .lead-close{top:12px!important;right:12px!important;width:38px!important;height:38px!important;border-radius:13px!important;background:rgba(255,255,255,.12)!important;color:#fff!important}
+  #lead .form{background:#fff!important;border-radius:22px!important;padding:18px!important;box-shadow:none!important}
+  #lead .form h3{font-size:20px!important;line-height:1.15!important;margin:0 0 14px!important;color:#101216!important}
+  #lead .fld{margin-bottom:12px!important}
+  #lead .fld input,#lead .fld select{width:100%!important;min-height:52px!important;border-radius:15px!important;border:1px solid #dde2ea!important;background:#f8fafc!important;font-size:16px!important;line-height:1.2!important;padding:14px 15px!important;color:#101216!important;box-shadow:none!important}
+  #lead .fld input:focus,#lead .fld select:focus{background:#fff!important;border-color:#00b956!important;box-shadow:0 0 0 3px rgba(0,185,86,.12)!important}
+  #lead .lf-agree{gap:9px!important;margin:2px 0 14px!important}
+  #lead .lf-agree input{width:18px!important;height:18px!important;flex:0 0 18px!important;margin-top:2px!important}
+  #lead .lf-agree span{font-size:11.5px!important;line-height:1.35!important;color:#687282!important}
+  #lead .form .btn{width:100%!important;min-height:54px!important;border-radius:16px!important;font-size:16px!important;background:#00b956!important;color:#fff!important}
+  #lead .form .note{font-size:11.5px!important;line-height:1.35!important;margin-top:10px!important;color:#7a8492!important}
+
+  /* Нижняя обычная форма, если она отображается на странице */
+  section .lead:not(#lead .lead){display:block!important;border-radius:26px!important;padding:24px 18px!important;background:#11151d!important}
+  section .lead:not(#lead .lead) h2{font-size:25px!important;line-height:1.12!important}
+  section .lead:not(#lead .lead) .form{margin-top:18px!important;border-radius:22px!important;padding:18px!important}
+}
+
+@media (max-width:420px){
+  :root{--mp:14px}
+  .nav-right .btn-green{max-width:138px!important;font-size:12.5px!important;padding-left:10px!important;padding-right:10px!important}
+  .logo{flex-basis:100px!important;min-width:100px!important;max-width:100px!important;font-size:18px!important}
+  .logo small{font-size:7.8px!important;max-width:100px!important}
+  .burger{width:38px!important;height:38px!important;flex-basis:38px!important}
+  .hero-lead h1{font-size:27px!important}
+  .slide-body{min-height:575px!important;padding-left:15px!important;padding-right:15px!important}
+  .slide-body h2{font-size:30px!important;max-width:250px!important}
+  .slide-tag{grid-template-columns:1fr!important}
+  .slide-tag .st-mark,.slide-tag .st-sub{width:max-content!important;max-width:100%!important}
+  .strip-cell .sc-val{font-size:19px!important}
+  .strip-cell:first-child .sc-val{font-size:25px!important}
+  #lead .lead h2{font-size:23px!important}
+}
