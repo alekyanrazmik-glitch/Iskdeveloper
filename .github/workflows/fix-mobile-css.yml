@@ -1,0 +1,40 @@
+name: Fix mobile CSS
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-mobile-css.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Fix broken mobile media query
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          old = "@media(max-width:560px){.pm-spec{grid-template-columns:1fr}.pm-body h2{font-size:22px}.pm-price .pp-row{flex-direction:column;gap:2px}\n/* ============================================"
+          new = "@media(max-width:560px){\n  .pm-spec{grid-template-columns:1fr}\n  .pm-body h2{font-size:22px}\n  .pm-price .pp-row{flex-direction:column;gap:2px}\n}\n/* ============================================"
+          if old not in s:
+              raise SystemExit('Target CSS fragment not found')
+          s = s.replace(old, new, 1)
+          p.write_text(s, encoding='utf-8')
+          workflow = Path('.github/workflows/fix-mobile-css.yml')
+          if workflow.exists():
+              workflow.unlink()
+          PY
+      - name: Commit fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/fix-mobile-css.yml
+          git commit -m "Fix mobile CSS media query"
+          git push
