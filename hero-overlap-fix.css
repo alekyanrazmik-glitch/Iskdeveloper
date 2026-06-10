@@ -1,0 +1,11 @@
+@media(max-width:768px){
+.slide-body{padding-top:130px!important;min-height:560px!important;justify-content:flex-end!important}
+.slide-tag{top:18px!important;left:16px!important;right:16px!important;text-align:left!important;display:block!important}
+.slide-tag .st-mark{display:inline-flex!important;font-size:14px!important;line-height:1.1!important;padding:8px 12px!important;border-radius:999px!important;background:rgba(255,255,255,.20)!important;color:#fff!important;max-width:100%!important}
+.slide-tag .st-sub{display:none!important}
+.slide-body h2{font-size:30px!important;line-height:1.03!important;max-width:285px!important;margin:0 0 14px!important;text-transform:none!important}
+.slide-strip{display:grid!important;grid-template-columns:1fr!important;background:transparent!important;overflow:visible!important}
+.slide-strip .strip-cell:not(:first-child){display:none!important}
+.strip-cell{border-radius:18px!important;background:#00b956!important;color:#fff!important}
+.strip-cell .old{display:none!important}
+}
