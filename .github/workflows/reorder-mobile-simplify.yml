@@ -1,3 +1,4 @@
+# trigger reorder simplify
 name: Reorder and simplify mobile
 
 on:
@@ -45,24 +46,19 @@ jobs:
               text = text[:start] + '\n' + text[end:]
               return text, block
 
-          # If already reordered, skip section movement safely.
-          hero_end = s.find('</section>\n\n<section id="projects"')
           about_pos = s.find('<section id="about">')
           projects_pos = s.find('<section id="projects"')
           gallery_pos = s.find('<section id="gallery"')
 
-          if not (projects_pos != -1 and gallery_pos != -1 and projects_pos < gallery_pos < about_pos):
+          if not (projects_pos != -1 and gallery_pos != -1 and about_pos != -1 and projects_pos < gallery_pos < about_pos):
               s, about = take_section(s, 'about')
               s, projects = take_section(s, 'projects')
               s, gallery = take_gallery_with_modals(s)
-              hero_close = s.find('\n</section>\n\n<section id="estimates"')
-              # After removing projects/about/gallery, the first remaining section after hero may be estimates.
-              if hero_close == -1:
-                  hero_close = s.find('\n</section>\n\n<section id="calc"')
-              if hero_close == -1:
+              insert_marker = '\n<section id="estimates"'
+              insert_at = s.find(insert_marker)
+              if insert_at == -1:
                   raise SystemExit('Could not locate insertion point after hero')
-              insert_at = hero_close + len('\n</section>')
-              ordered = '\n\n' + projects.strip() + '\n\n' + gallery.strip() + '\n\n' + about.strip() + '\n'
+              ordered = '\n' + projects.strip() + '\n\n' + gallery.strip() + '\n\n' + about.strip() + '\n'
               s = s[:insert_at] + ordered + s[insert_at:]
 
           html_path.write_text(s, encoding='utf-8')
@@ -77,14 +73,9 @@ jobs:
           simplify = r'''
 /* MOBILE SIMPLIFY CHATGPT START */
 @media (max-width:768px){
-  /* Первая мобильная подача: меньше цифр, больше ясности */
   .hero-lead h1{font-size:28px!important;line-height:1.08!important;max-width:330px!important}
   .hero-lead .hl-badge{font-size:13.5px!important;padding:10px 13px!important}
-
-  /* Скрываем перегруженный подборщик на первом экране: он занимает слишком много места на телефоне */
   .hero .search{display:none!important}
-
-  /* В слайдере оставляем только главное: оффер + одна цена + кнопка */
   .slide-body{min-height:540px!important;padding-top:86px!important;padding-bottom:76px!important}
   .slide-body h2{font-size:31px!important;line-height:1.02!important;max-width:285px!important;margin-bottom:10px!important}
   .slide-pill{font-size:13.5px!important;margin-bottom:14px!important;padding:9px 12px!important}
@@ -96,14 +87,10 @@ jobs:
   .strip-cell .old{display:none!important}
   .slide-actions{margin-top:12px!important}
   .slide-actions .btn{min-height:52px!important;font-size:15px!important}
-
-  /* Таймер создаёт ощущение суеты и много меняющихся цифр — на мобильном убираем */
   .side-green .icn,.side-green .timer{display:none!important}
   .side-green{padding:22px 20px!important;background:#00bf63!important}
   .side-green h3{font-size:25px!important;line-height:1.08!important;margin-bottom:8px!important}
   .side-green p{font-size:15px!important;line-height:1.38!important;margin-bottom:16px!important}
-
-  /* Проекты должны быть сразу понятными: фото, площадь, кнопка. Подробные суммы скрываем на мобиле */
   #projects{padding-top:44px!important;background:#fff!important}
   #projects .sub-sec{font-size:14.5px!important;margin-bottom:18px!important}
   .proj-grid{gap:16px!important}
@@ -113,8 +100,6 @@ jobs:
   .proj-type{font-size:18px!important;margin:0 0 12px!important}
   .proj-rooms,.proj-est,.proj-pills{display:none!important}
   .proj .btn{min-height:50px!important;border-radius:16px!important}
-
-  /* Сразу после проектов — реальные объекты, визуально как портфолио */
   #gallery{padding-top:34px!important;background:#f7f9fb!important}
   #gallery .sub-sec{font-size:14.5px!important;margin-bottom:18px!important}
   .obj-grid{gap:16px!important}
@@ -123,16 +108,12 @@ jobs:
   .obj-body{padding:16px!important}
   .obj-body h3{font-size:20px!important;line-height:1.12!important}
   .obj-body .ob-area{display:none!important}
-
-  /* Почему ДОМ-КК теперь ниже, как блок доверия, а не первый экран */
   #about{padding-top:42px!important;background:#fff!important}
   #about .adv-grid{gap:12px!important}
   #about .adv{padding:18px!important;border-radius:20px!important;background:#f7f9fb!important;box-shadow:none!important}
   #about .adv .ai{width:40px!important;height:40px!important;font-size:22px!important;margin-bottom:10px!important}
   #about .adv h3{font-size:18px!important;margin-bottom:6px!important}
   #about .adv p{font-size:14px!important;line-height:1.42!important}
-
-  /* Сметы и калькулятор ниже — тоже меньше визуального шума */
   #estimates .est-rows{display:none!important}
   #estimates .est-total{border-radius:0 0 18px 18px!important}
   #calc .calc-table{display:none!important}
