@@ -1,0 +1,106 @@
+name: Mobile layout hotfix
+
+on:
+  push:
+    paths:
+      - '.github/workflows/mobile-layout-hotfix.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Add mobile layout override
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          start = '/* MOBILE HOTFIX CHATGPT START */'
+          end = '/* MOBILE HOTFIX CHATGPT END */'
+          css = r'''
+/* MOBILE HOTFIX CHATGPT START */
+@media (max-width: 768px){
+  html,body{width:100%!important;max-width:100%!important;overflow-x:hidden!important}
+  body{position:relative!important}
+  .wrap{width:100%!important;max-width:100%!important;padding-left:16px!important;padding-right:16px!important}
+  header{overflow:hidden!important}
+  .nav{height:auto!important;min-height:64px!important;gap:8px!important;padding-top:9px!important;padding-bottom:9px!important;flex-wrap:nowrap!important}
+  .logo{font-size:20px!important;line-height:.92!important;flex:0 0 auto!important;max-width:116px!important;white-space:nowrap!important}
+  .logo small{font-size:9px!important;line-height:1.05!important;white-space:normal!important;max-width:116px!important}
+  .nav-right{margin-left:auto!important;gap:8px!important;min-width:0!important;flex:0 1 auto!important}
+  .nav-phone{display:none!important}
+  .nav-right .btn-green{width:auto!important;flex:0 0 auto!important;font-size:14px!important;line-height:1!important;padding:13px 14px!important;border-radius:12px!important;white-space:nowrap!important;animation:none!important}
+  .burger{display:flex!important;flex:0 0 34px!important;width:34px!important;height:34px!important;margin-left:0!important;align-items:center!important;justify-content:center!important;max-width:34px!important}
+  .burger span{width:24px!important;flex:0 0 auto!important}
+  .hero{padding-top:28px!important}
+  .hero-lead{display:block!important;margin-bottom:18px!important}
+  .hero-lead h1{font-size:28px!important;line-height:1.12!important;letter-spacing:-.04em!important;margin-bottom:16px!important}
+  .hero-lead .hl-badge{display:flex!important;width:100%!important;max-width:100%!important;justify-content:flex-start!important;font-size:16px!important;line-height:1.25!important;padding:14px 16px!important;white-space:normal!important;border-radius:999px!important}
+  .hero-grid{display:block!important}
+  .slider{min-height:0!important;height:auto!important;border-radius:16px!important;overflow:hidden!important}
+  .slide{min-height:0!important;height:auto!important;display:block!important;position:absolute!important}
+  .slide.active{position:relative!important;display:block!important}
+  .slide img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important}
+  .slide::after{background:linear-gradient(180deg,rgba(15,17,21,.70),rgba(15,17,21,.35) 45%,rgba(15,17,21,.78))!important}
+  .slide-body{min-height:620px!important;padding:26px 18px 92px!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;align-items:stretch!important;text-align:left!important}
+  .slide-tag{position:relative!important;top:auto!important;right:auto!important;text-align:left!important;margin:0 0 18px!important;z-index:3!important;max-width:100%!important}
+  .slide-tag .st-mark{font-size:23px!important;line-height:.92!important;max-width:145px!important;word-break:normal!important;overflow-wrap:normal!important}
+  .slide-tag .st-sub{font-size:16px!important;line-height:1.45!important;max-width:145px!important;word-break:normal!important;overflow-wrap:normal!important}
+  .slide-body h2{font-size:34px!important;line-height:.98!important;margin:0 0 22px!important;text-align:center!important;word-break:normal!important;overflow-wrap:normal!important}
+  .slide-pill{width:auto!important;align-self:center!important;max-width:100%!important;font-size:18px!important;line-height:1.45!important;padding:16px 22px!important;margin:0 0 26px!important;border-radius:14px!important;word-break:normal!important;overflow-wrap:normal!important;white-space:normal!important;text-align:left!important}
+  .slide-actions{width:100%!important;margin:0 0 26px!important;display:block!important}
+  .slide-actions .btn{width:100%!important;max-width:340px!important;margin:0 auto!important;font-size:20px!important;padding:22px 18px!important;border-radius:16px!important;white-space:nowrap!important}
+  .slide-strip{display:grid!important;grid-template-columns:1fr 1fr!important;gap:0!important;width:100%!important;margin-top:0!important;border-radius:14px!important;overflow:hidden!important;align-self:stretch!important}
+  .strip-cell{min-width:0!important;width:auto!important;flex:none!important;padding:18px 16px!important;word-break:normal!important;overflow-wrap:normal!important}
+  .strip-cell:first-child{grid-column:1 / -1!important}
+  .strip-cell,.strip-cell *,.sc-lbl,.sc-val,.old{word-break:normal!important;overflow-wrap:normal!important;hyphens:none!important}
+  .strip-cell .sc-lbl{font-size:14px!important;line-height:1.2!important;white-space:normal!important}
+  .strip-cell .sc-val{font-size:28px!important;line-height:1.15!important;white-space:normal!important}
+  .strip-cell .old{font-size:18px!important;line-height:1.2!important;white-space:nowrap!important}
+  .slider-nav{position:absolute!important;left:16px!important;right:auto!important;top:auto!important;bottom:16px!important;z-index:10!important;display:flex!important;gap:8px!important;width:auto!important;max-width:none!important}
+  .slider-nav button{width:44px!important;height:44px!important;border-radius:12px!important;max-width:44px!important;flex:0 0 44px!important;background:#fff!important;color:#111!important}
+  .hero-side{display:block!important;margin-top:16px!important}
+  .side-card{padding:22px!important;margin-bottom:16px!important}
+  .side-photo{padding:0!important;min-height:230px!important}
+  .side-photo img{height:100%!important;object-fit:cover!important}
+  .timer{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:8px!important}
+  .timer b{font-size:24px!important}
+}
+@media (max-width: 420px){
+  .wrap{padding-left:15px!important;padding-right:15px!important}
+  .logo{font-size:18px!important;max-width:104px!important}
+  .logo small{font-size:8px!important;max-width:104px!important}
+  .nav-right .btn-green{font-size:13px!important;padding:12px 12px!important}
+  .burger{flex-basis:30px!important;width:30px!important;max-width:30px!important}
+  .hero-lead h1{font-size:27px!important}
+  .slide-body{min-height:640px!important;padding-left:16px!important;padding-right:16px!important}
+  .slide-body h2{font-size:31px!important}
+  .slide-pill{font-size:17px!important;padding:14px 18px!important}
+  .strip-cell .sc-val{font-size:25px!important}
+}
+/* MOBILE HOTFIX CHATGPT END */
+'''
+          if start in s and end in s:
+              before = s.split(start)[0]
+              after = s.split(end, 1)[1]
+              s = before + css + after
+          else:
+              s = s.replace('</style>', css + '\n</style>', 1)
+          p.write_text(s, encoding='utf-8')
+          workflow = Path('.github/workflows/mobile-layout-hotfix.yml')
+          if workflow.exists():
+              workflow.unlink()
+          PY
+      - name: Commit mobile hotfix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/mobile-layout-hotfix.yml
+          git commit -m "Improve mobile layout"
+          git push
