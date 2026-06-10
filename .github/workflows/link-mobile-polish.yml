@@ -1,0 +1,36 @@
+name: Link mobile polish CSS
+
+on:
+  push:
+    paths:
+      - '.github/workflows/link-mobile-polish.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  link:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Insert stylesheet link
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          link = '<link rel="stylesheet" href="mobile-polish.css?v=20260610">'
+          if 'mobile-polish.css' not in s:
+              s = s.replace('</head>', link + '\n</head>', 1)
+              p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit link
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Link mobile polish CSS"
+          git push
