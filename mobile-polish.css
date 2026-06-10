@@ -1,3 +1,4 @@
+@import url('hero-overlap-fix.css?v=1');
 /* Mobile emergency fix: make request form usable */
 #lead:target{opacity:1!important;visibility:visible!important;display:flex!important;pointer-events:auto!important}
 #lead:target .lead{transform:none!important}
