@@ -1144,13 +1144,17 @@ document.getElementById('leadForm').addEventListener('submit',function(e){
     method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({chat_id:CHAT_ID,text:L.join('\n'),parse_mode:'HTML',disable_web_page_preview:true})
   }).then(function(r){return r.json();}).then(function(d){
-    if(d&&d.ok){document.getElementById('leadForm').style.display='none';document.getElementById('formOk').style.display='block';}
-    else{document.getElementById('leadForm').style.display='none';document.getElementById('formOk').style.display='block';}
+    leadSuccess();
   }).catch(function(){
     // даже если Telegram не ответил — заявка на почту уже ушла, показываем успех
-    document.getElementById('leadForm').style.display='none';document.getElementById('formOk').style.display='block';
+    leadSuccess();
   });
 });
+function leadSuccess(){
+  document.getElementById('leadForm').style.display='none';
+  document.getElementById('formOk').style.display='block';
+  try{ if(typeof ym==='function') ym(109746794,'reachGoal','zayavka_form'); }catch(_){}
+}
 </script>
 </body>
 </html>

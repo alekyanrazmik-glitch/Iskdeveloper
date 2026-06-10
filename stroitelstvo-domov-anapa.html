@@ -92,6 +92,20 @@ footer{background:var(--bg-dark);color:#fff;padding:40px 0 30px}
 .crumbs a{color:var(--green)}
 @media(max-width:880px){.adv,.projs{grid-template-columns:1fr}.lead-grid{grid-template-columns:1fr}.hero h1{font-size:30px}.nav-phone,.foot-links{display:none}.h-sec{font-size:24px}}
 </style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=109746794', 'ym');
+
+    ym(109746794, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/109746794" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
 </head>
 <body>
 <header><div class="wrap"><div class="nav">
@@ -156,7 +170,7 @@ if(!agree){err.textContent='Поставьте согласие на обраб�
 var L=[];L.push('🏠 <b>Заявка с SEO-страницы (ДОМ-КК)</b>');L.push('<b>Страница:</b> '+document.title);L.push('<b>Имя:</b> '+name);L.push('<b>Телефон:</b> '+phone);if(city)L.push('<b>Город:</b> '+city);if(area)L.push('<b>Площадь:</b> '+area+' м²');L.push('');L.push('🌐 '+location.href);
 var btn=e.target.querySelector('button[type=submit]');btn.disabled=true;btn.textContent='Отправка…';
 try{fetch('https://formsubmit.co/ajax/dom-kkk@mail.ru',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Заявка с сайта ДОМ-КК (SEO)',name:name,phone:phone,city:(city||'не указан'),area:(area||'не указана'),page:document.title,_template:'table'})}).catch(function(){});}catch(_){}
-fetch('https://api.telegram.org/bot'+BOT_TOKEN+'/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:CHAT_ID,text:L.join('\n'),parse_mode:'HTML',disable_web_page_preview:true})}).then(function(r){return r.json();}).then(function(){document.getElementById('leadForm').style.display='none';document.getElementById('formOk').style.display='block';}).catch(function(){document.getElementById('leadForm').style.display='none';document.getElementById('formOk').style.display='block';});
+fetch('https://api.telegram.org/bot'+BOT_TOKEN+'/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:CHAT_ID,text:L.join('\n'),parse_mode:'HTML',disable_web_page_preview:true})}).then(function(r){return r.json();}).then(function(){document.getElementById('leadForm').style.display='none';document.getElementById('formOk').style.display='block';try{if(typeof ym==='function')ym(109746794,'reachGoal','zayavka_form');}catch(_){}}).catch(function(){document.getElementById('leadForm').style.display='none';document.getElementById('formOk').style.display='block';try{if(typeof ym==='function')ym(109746794,'reachGoal','zayavka_form');}catch(_){}});
 });
 </script>
 </body>
