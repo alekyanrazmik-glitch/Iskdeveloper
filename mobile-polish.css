@@ -1,4 +1,7 @@
 /* Mobile polish + simplified sales flow */
+/* Lead form fallback: all href="#lead" buttons open popup even if JS is unavailable */
+#lead:target{opacity:1!important;visibility:visible!important}
+#lead:target .lead{transform:none!important}
 @media (max-width:768px){
   *,*::before,*::after{box-sizing:border-box!important}
   html,body{width:100%!important;max-width:100%!important;overflow-x:hidden!important;background:#fff!important;color:#101216!important}
@@ -117,9 +120,11 @@
   .calc-head{padding:24px 20px!important;border-radius:24px 24px 0 0!important}
   .calc-head h2{font-size:26px!important}.calc-head p{font-size:15px!important}.calc-body{display:block!important}.calc-params,.calc-table{padding:22px 18px!important;border:0!important}.opt{border-radius:14px!important;min-height:44px!important}.calc-sum .cs-val{font-size:32px!important}
 
-  #lead{align-items:flex-end!important;padding:0!important;background:rgba(8,11,16,.72)!important;backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important}
+  #lead,#lead:target{align-items:flex-end!important;padding:0!important;background:rgba(8,11,16,.72)!important;backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important}
+  #lead:target{display:flex!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important}
   #lead .wrap{padding:0!important;width:100%!important;max-width:100%!important}
   #lead .lead{width:100%!important;max-height:92dvh!important;overflow-y:auto!important;border-radius:28px 28px 0 0!important;padding:22px 16px calc(20px + env(safe-area-inset-bottom))!important;background:#11151d!important;display:block!important;box-shadow:0 -24px 80px -40px rgba(0,0,0,.8)!important}
+  #lead:target .lead{transform:none!important}
   #lead .lead>div:first-child{padding:0 4px!important;margin-bottom:16px!important}
   #lead .lead h2{font-size:24px!important;line-height:1.12!important;letter-spacing:-.04em!important;margin:0 0 10px!important;color:#fff!important}
   #lead .lead p{font-size:14.5px!important;line-height:1.45!important;margin:0 0 14px!important;color:#b6bdc8!important}
