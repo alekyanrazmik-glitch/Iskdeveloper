@@ -1,0 +1,16 @@
+name: SEO auto
+on:
+  push:
+    paths:
+      - '.github/workflows/seo-auto.yml'
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/generate_seo.py
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Generate SEO pages
