@@ -418,6 +418,21 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
   .nav-right .btn-green{padding:11px 16px;font-size:15px}
   .nav-phone{font-size:18px!important}
   .logo{font-size:20px}.logo small{font-size:9px}
+  /* Слайдер: убираем наложение надписи проекта на заголовок */
+  .slide-tag{position:static;text-align:left;margin-bottom:14px;right:auto;top:auto}
+  .slide-tag .st-mark{font-size:20px}
+  .slide-tag .st-sub{font-size:12px}
+  .slide-body{padding:24px}
+  .slide-body h2{font-size:26px;margin-bottom:14px}
+  .slide-strip .strip-cell{padding:14px 16px}
+  .sc-val{font-size:18px;white-space:normal}
+  /* Стрелки слайдера не залезают на контент */
+  .slide-arrows,.slider-nav{position:relative;z-index:5}
+  /* Шапка: кнопка не наезжает на бургер */
+  .nav-right{gap:10px}
+  .nav-right .btn-green{padding:10px 14px;font-size:14px}
+  .burger{margin-left:4px;flex:0 0 auto}
+  .nav-phone{font-size:16px!important}
   /* Форма: поля крупнее для пальца */
   .fld input,.fld select{font-size:16px;padding:14px}
   /* Калькулятор и таблицы не вылезают */
@@ -432,6 +447,8 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
   .slide-body h2{font-size:26px}
   .h-sec{font-size:24px}
   .strip-cell{flex:1 1 100%}
+  .nav-phone{display:none}
+  .slide-body h2{font-size:23px}
 }
 /* Окно проекта */
 .pm{position:fixed;inset:0;background:rgba(15,20,30,.75);z-index:2147483646;display:none;overflow-y:auto;padding:max(20px,env(safe-area-inset-top)) 14px max(20px,env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
@@ -466,6 +483,91 @@ body.pm-open .pm{display:block}
 .pm-cta .btn{width:100%}
 .pm-note{font-size:12px;color:#8a909a;margin-top:12px;line-height:1.4}
 @media(max-width:560px){.pm-spec{grid-template-columns:1fr}.pm-body h2{font-size:22px}.pm-price .pp-row{flex-direction:column;gap:2px}
+/* ============================================
+   МОБИЛЬНАЯ АДАПТАЦИЯ — комфортный вид на телефоне
+   ============================================ */
+@media (max-width:768px){
+  /* 1. Жёстко убираем горизонтальную прокрутку */
+  html,body{overflow-x:hidden!important;max-width:100%!important}
+  *{max-width:100%}
+  img,video,iframe{max-width:100%!important;height:auto}
+
+  /* 2. Отступы по краям — компактные */
+  .wrap{padding:0 16px!important}
+  section{padding:36px 0!important}
+
+  /* 3. Заголовки — комфортный размер */
+  .h-sec{font-size:25px!important;line-height:1.15!important;margin-bottom:8px!important}
+  .sub-sec{font-size:15px!important;margin-bottom:22px!important}
+  h1{font-size:26px!important;line-height:1.15!important}
+  h2{font-size:22px!important}
+  h3{font-size:18px!important}
+
+  /* 4. ВСЕ сетки — в одну колонку */
+  .hero-grid,.calc-body,.search-row,.adv-grid,.proj-grid,.obj-grid,
+  .est-grid,.steps-grid,.cert-grid,.rev-grid,.foot-cols,.lead-grid,
+  .features,.promo-grid,.faq-grid{grid-template-columns:1fr!important;gap:14px!important}
+
+  /* 5. Прайс (bank-row) и таблицы — в одну колонку, ничего не вылезает */
+  .bank-row{grid-template-columns:1fr auto!important;gap:8px!important;font-size:14px!important;padding:12px 0!important}
+  .hide-m{display:none!important}
+
+  /* 6. Кнопки — на всю ширину, удобно тапать */
+  .btn{width:100%!important;justify-content:center!important;padding:15px 20px!important;font-size:16px!important}
+  .btn-lg{padding:16px 20px!important}
+  /* кнопки в ряд (где их несколько) — столбиком */
+  .hero-cta,.slide-actions,.cta-row,.foot-cta{flex-direction:column!important;gap:10px!important}
+  .hero-cta>*,.foot-cta>*{width:100%!important}
+
+  /* 7. Шапка: компактная, телефон и кнопка помещаются */
+  .nav{height:60px!important;gap:10px!important}
+  .logo{font-size:20px!important}
+  .logo small{font-size:9px!important;margin-top:2px!important}
+  .nav-links{display:none!important}
+  .burger{display:flex!important}
+  .nav-phone{font-size:15px!important}
+  .nav-phone small{display:none!important}
+  .nav-right{gap:10px!important}
+  .nav-right .btn-green{font-size:13px!important;padding:9px 12px!important;animation:none!important}
+
+  /* 8. Форма — крупные поля под палец */
+  .fld input,.fld select,input,select,textarea{font-size:16px!important;padding:14px!important;width:100%!important}
+  .lead-form,.lead{padding:22px 18px!important}
+
+  /* 9. Карточки — компактные отступы */
+  .card,.adv .card,.pcard,.est-card,.proj-card,.obj-card,.rev-card{padding:18px!important}
+
+  /* 10. Hero-слайдер — фото и текст помещаются */
+  .slide-body{padding:24px 18px!important;max-width:100%!important}
+  .slide-body h2{font-size:24px!important}
+  .slide-pill{font-size:14px!important;padding:8px 14px!important}
+  .slide-strip{flex-wrap:wrap!important;gap:8px!important}
+  .strip-cell{flex:1 1 45%!important;min-width:0!important}
+  .side-green,.side-photo{padding:20px!important}
+
+  /* 11. Калькулятор — не вылезает */
+  .calc-body{display:block!important}
+  .calc-left,.calc-right{width:100%!important}
+  .opt-row{flex-wrap:wrap!important}
+
+  /* 12. Таймер — в ряд помещается */
+  .timer{gap:8px!important}
+  .timer b{font-size:20px!important}
+
+  /* 13. Текст не разрывает вёрстку */
+  p,span,div,h1,h2,h3,a{word-wrap:break-word!important;overflow-wrap:break-word!important}
+
+  /* 14. Картинки объектов/проектов — нормальная высота */
+  .obj-card img,.pcard img,.proj-card img{aspect-ratio:16/11!important;object-fit:cover!important}
+}
+
+/* Узкие телефоны (iPhone SE, мелкие Android) */
+@media (max-width:400px){
+  .h-sec{font-size:22px!important}
+  .slide-body h2{font-size:21px!important}
+  .strip-cell{flex:1 1 100%!important}
+  .wrap{padding:0 14px!important}
+}
 </style>
 <script type="application/ld+json">
 {
