@@ -422,6 +422,64 @@ body.pm-open .pm{display:block}
 .pm-cta{margin:22px 0 0}
 .pm-cta .btn{width:100%}
 .pm-note{font-size:12px;color:#8a909a;margin-top:12px;line-height:1.4}
+
+/* ===== Hero trust pills ===== */
+.hl-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.hl-pill{display:inline-flex;align-items:center;background:#eefaf3;color:#0a6a37;border:1px solid rgba(0,185,86,.18);border-radius:999px;padding:8px 14px;font-size:13.5px;font-weight:600;line-height:1.1;white-space:nowrap}
+
+/* ===== Quick callback strip ===== */
+.qcb{margin:24px auto 0;max-width:var(--max);padding:0 28px}
+.qcb-inner{background:linear-gradient(135deg,var(--ink) 0%,#1c1f26 100%);border-radius:20px;padding:26px 32px;display:flex;align-items:center;gap:24px;color:#fff;box-shadow:0 18px 40px -22px rgba(15,17,21,.4)}
+.qcb-text{flex:1;min-width:0}
+.qcb-text h3{font-family:var(--h);font-size:22px;font-weight:800;margin-bottom:4px;color:#fff;line-height:1.1}
+.qcb-text p{font-size:14px;color:#a9aeb8;margin:0}
+.qcb-form{display:flex;gap:10px;flex:1.2;min-width:0;max-width:520px}
+.qcb-form input{flex:1;min-width:0;background:#fff;border:none;color:var(--ink);font-size:15px;padding:14px 16px;border-radius:12px;font-family:var(--b)}
+.qcb-form input:focus{outline:2px solid var(--green)}
+.qcb-form button{background:var(--green);border:none;color:#fff;font-family:var(--b);font-weight:800;font-size:15px;padding:0 24px;border-radius:12px;cursor:pointer;white-space:nowrap;transition:.15s}
+.qcb-form button:hover{background:var(--green-d)}
+
+/* ===== Sticky mobile CTA bar ===== */
+.mcta{display:none}
+@media (max-width:768px){
+  .mcta{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:998;background:rgba(255,255,255,.98);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid #e7e9ee;padding:8px 10px calc(8px + env(safe-area-inset-bottom));gap:8px;box-shadow:0 -8px 24px -16px rgba(15,17,21,.18)}
+  .mcta a{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:48px;border-radius:12px;font-family:var(--b);font-weight:700;font-size:14px;text-decoration:none;line-height:1}
+  .mcta .mcta-call{background:#f3f5f7;color:var(--ink)}
+  .mcta .mcta-wa{background:#25d366;color:#fff}
+  .mcta .mcta-form{background:var(--green);color:#fff;flex:1.4}
+  body.lead-open .mcta,body.pm-open .mcta{display:none}
+  /* отступ под sticky-бар, чтобы footer не прятался */
+  footer{padding-bottom:80px}
+  /* мини-форма callback на моб. — вертикально */
+  .qcb{padding:0 16px}
+  .qcb-inner{flex-direction:column;align-items:stretch;padding:22px;gap:16px;border-radius:18px}
+  .qcb-text h3{font-size:20px}
+  .qcb-form{flex-direction:column;max-width:100%}
+  .qcb-form button{padding:14px;min-height:50px}
+  /* trust pills чуть мельче */
+  .hl-pill{font-size:12.5px;padding:7px 11px}
+}
+
+/* ===== Exit-intent popup ===== */
+#exit{position:fixed;inset:0;z-index:2100;background:rgba(8,11,16,.78);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .25s}
+#exit.open{opacity:1;visibility:visible}
+.exit-box{position:relative;max-width:460px;width:100%;background:#fff;border-radius:22px;padding:36px 32px;text-align:center;transform:scale(.92);transition:transform .25s cubic-bezier(.34,1.56,.64,1);box-shadow:0 30px 80px -30px rgba(0,0,0,.6)}
+#exit.open .exit-box{transform:scale(1)}
+.exit-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;border:none;background:#f3f5f7;color:var(--ink);font-size:22px;cursor:pointer;line-height:1}
+.exit-ico{font-size:48px;margin-bottom:10px;line-height:1}
+.exit-box h2{font-family:var(--h);font-size:26px;font-weight:900;line-height:1.1;margin-bottom:10px}
+.exit-box h2 b{color:var(--green)}
+.exit-box p{color:var(--gray);font-size:15px;line-height:1.45;margin-bottom:20px}
+.exit-form{display:flex;flex-direction:column;gap:10px}
+.exit-form input{width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:12px;font-family:var(--b);font-size:16px;color:var(--ink)}
+.exit-form input:focus{outline:none;border-color:var(--green)}
+.exit-form button{background:var(--green);border:none;color:#fff;font-family:var(--b);font-weight:800;font-size:16px;padding:15px;border-radius:12px;cursor:pointer;min-height:52px}
+.exit-form button:hover{background:var(--green-d)}
+.exit-note{font-size:12px;color:#8a909a;margin-top:10px}
+@media (max-width:768px){
+  .exit-box{padding:28px 22px;border-radius:20px}
+  .exit-box h2{font-size:22px}
+}
 /* ============================
    MOBILE — единый чистый слой
    ============================ */
@@ -695,8 +753,14 @@ body.pm-open .pm{display:block}
 <section class="hero">
   <div class="wrap">
     <div class="hero-lead">
-      <h1>Строительство домов под ключ · <b>Краснодарский край</b></h1>
-      <span class="hl-badge">15+ лет · 300+ построенных домов</span>
+      <h1>Дом под ключ <b>за 5 месяцев</b> в Краснодарском крае. Фиксированная цена в договоре.</h1>
+      <div class="hl-pills">
+        <span class="hl-pill">✓ Фикс. цена в договоре</span>
+        <span class="hl-pill">✓ Срок 5 мес. с пени за просрочку</span>
+        <span class="hl-pill">✓ Гарантия 10 лет</span>
+        <span class="hl-pill">✓ Оплата по этапам</span>
+        <span class="hl-pill">✓ 300+ построенных домов</span>
+      </div>
     </div>
     <div class="hero-grid">
       <div class="slider" id="slider">
@@ -704,9 +768,9 @@ body.pm-open .pm{display:block}
           <img src="https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80.JPG" alt="Газобетонный дом под ключ">
           <div class="slide-tag"><div class="st-mark">ДОМ «СЕМЬЯ»</div><div class="st-sub">газобетон · комфорт</div></div>
           <div class="slide-body">
-            <h2>Дом под ключ<br>со скидкой</h2>
+            <h2>Скидка <b>380 000 ₽</b><br>на дом 145 м²</h2>
             <div class="slide-pill">газобетон · комфорт · 145 м²</div>
-            <div class="slide-actions"><a href="#projects" class="btn btn-light btn-lg">Подробнее</a></div>
+            <div class="slide-actions"><a href="#lead" class="btn btn-light btn-lg">Получить смету →</a></div>
             <div class="slide-strip green">
               <div class="strip-cell"><div class="sc-lbl">Цена</div><div class="sc-val"><span class="old">6 480 000 ₽</span><br>6 100 000 ₽</div></div>
               <div class="strip-cell box"><div class="sc-lbl">Размер скидки</div><div class="sc-val">380 000 ₽</div></div>
@@ -720,9 +784,9 @@ body.pm-open .pm{display:block}
           <img src="https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%BB%D0%B0%D0%B2%D1%8F%D0%BD%D1%81%D0%BA%201.JPG" alt="Кирпичный дом с участком">
           <div class="slide-tag"><div class="st-mark">ДОМ «УЮТ»</div><div class="st-sub">кирпич · комфорт</div></div>
           <div class="slide-body">
-            <h2>Проект дома<br>бесплатно</h2>
+            <h2>Проект <b>бесплатно</b><br>при заказе сметы</h2>
             <div class="slide-pill lime">кирпич · комфорт · 110 м²</div>
-            <div class="slide-actions"><a href="#projects" class="btn btn-light btn-lg">Подробнее</a></div>
+            <div class="slide-actions"><a href="#lead" class="btn btn-light btn-lg">Получить смету →</a></div>
             <div class="slide-strip lime">
               <div class="strip-cell"><div class="sc-lbl">Цена</div><div class="sc-val">4 600 000 ₽</div></div>
               <div class="strip-cell box"><div class="sc-lbl">Оплата</div><div class="sc-val">по этапам</div></div>
@@ -799,6 +863,20 @@ body.pm-open .pm{display:block}
     </div>
   </div>
 </section>
+
+<!-- Quick callback strip -->
+<div class="qcb">
+  <div class="qcb-inner">
+    <div class="qcb-text">
+      <h3>Перезвоним за 1 минуту</h3>
+      <p>Ответим на вопросы, рассчитаем смету, поможем подобрать проект под бюджет</p>
+    </div>
+    <form class="qcb-form" id="qcbForm">
+      <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required>
+      <button type="submit">Перезвонить мне</button>
+    </form>
+  </div>
+</div>
 
 <section id="about">
   <div class="wrap">
@@ -1106,8 +1184,8 @@ document.getElementById('burger').addEventListener('click',()=>{document.querySe
 document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.nav-links').classList.remove('open')));
 // POPUP форма заявки
 var leadPopup=document.getElementById('lead');
-function openLead(){leadPopup.classList.add('open');document.body.style.overflow='hidden';}
-function closeLead(){leadPopup.classList.remove('open');document.body.style.overflow='';}
+function openLead(){leadPopup.classList.add('open');document.body.classList.add('lead-open');document.body.style.overflow='hidden';}
+function closeLead(){leadPopup.classList.remove('open');document.body.classList.remove('lead-open');document.body.style.overflow='';}
 document.addEventListener('click',function(e){var a=e.target.closest('a[href="#lead"]');if(a){e.preventDefault();if(document.body.classList.contains('pm-open'))closeProj();openLead();}});
 document.getElementById('leadClose').addEventListener('click',closeLead);
 leadPopup.addEventListener('click',function(e){if(e.target===leadPopup)closeLead();});
@@ -1115,7 +1193,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLead();
 const slides=[...document.querySelectorAll('#slider .slide')];let cur=0;
 function show(i){cur=(i+slides.length)%slides.length;slides.forEach((s,k)=>s.classList.toggle('active',k===cur));}
 document.querySelectorAll('.slider-nav button').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();show(cur+ +b.dataset.dir);}));
-setInterval(()=>show(cur+1),7000);
+setInterval(()=>{if(!document.hidden)show(cur+1);},12000);
 (function(){var td=document.getElementById('t-d');if(!td)return;let total=2*86400+11*3600+45*60+12;setInterval(()=>{total--;if(total<0)total=3*86400;const d=Math.floor(total/86400),h=Math.floor(total%86400/3600),m=Math.floor(total%3600/60),s=total%60;const p=n=>String(n).padStart(2,'0');td.textContent=p(d);document.getElementById('t-h').textContent=p(h);document.getElementById('t-m').textContent=p(m);document.getElementById('t-s').textContent=p(s);},1000);})();
 var PROJ_INFO={"«Тольятти»": {"lead": "Одноэтажный кирпичный дом 123 м² с террасой и продуманной планировкой на 4 комнаты и 2 санузла. Удобен в эксплуатации, рассчитан на комфортную жизнь большой семьи.", "from": ["Кирпича", "Газоблока"], "params": ["Общая площадь застройки без террасы — 123,5 м²", "Общая площадь застройки с террасой (доп. услуга) — 141,5 м²", "Общая площадь дома — 100,1 м²", "Жилая площадь — 73,4 м²"], "box": ["Ленточный фундамент 80×40 см", "Монолитный цоколь — 30 см высотой, 40 см шириной", "Плита этажа — монолитная в одну сетку из арматуры д10, толщиной 15 см", "Внешние стены: керамический кирпич и газоблок 250 мм", "Несущие стены из блока 250 мм, остальные 150 мм", "Монолитные сердечники и армопояс", "Монолитные перемычки над окнами и дверьми", "Кровля из металлочерепицы", "Утепление кровли в 3 слоя минватой толщиной 150 мм", "Подшивной элемент стандартный 50 см (можно уменьшить до 30/40)", "Вытяжные каналы из кровли"], "smeta": [["Строительство коробки дома", "4 581 336 ₽"], ["Доп. терраса", "363 059 ₽"], ["Монтаж септиков (бетонные кольца, 8,5 м³)", "142 342 ₽"], ["Оконные проёмы и входная дверь", "288 740 ₽"], ["Электромонтажные работы", "340 000 ₽"], ["Сантехнические работы / отопление", "464 542 ₽"], ["Предчистовая отделка", "453 730 ₽"], ["Бетонные работы 100 м² (отмостка, парковка, дорожки)", "228 395 ₽"]], "total": "6 862 145 ₽", "incl": ["Фундамент и цокольное перекрытие", "Устройство закладных каналов под ввод и вывод инженерных коммуникаций", "Наружные стены", "Внутренние стены (перегородки)", "Межэтажное перекрытие", "Крыша", "Дверные и арочные проёмы в соответствии с проектом", "Оконные проёмы в соответствии с проектом"]}, "«Семейный»": {"lead": "Одноэтажный дом 110 м² с террасой для семьи, которая хочет жить в собственном доме, не переплачивая за лишние метры. Продуманная планировка и эксклюзивный фасад, качество — на то, чтобы передать дом по наследству.", "from": ["Кирпича", "Газоблока"], "params": ["Общая площадь застройки без террасы — 110,0 м²", "Общая площадь застройки с террасой — 126,5 м²", "Общая площадь дома — 89 м²", "Жилая площадь — 61,7 м²"], "box": ["Ленточный фундамент 80×40 см", "Монолитный цоколь — 40 см высотой, 40 см шириной", "Плита этажа — монолитная в одну сетку из арматуры д10, толщиной 15 см", "Внешние стены: керамический кирпич и газоблок 250 мм", "Несущие стены из блока 250 мм, остальные 150 мм", "Монолитный армопояс и сердечники", "Монолитные перемычки над окнами и дверьми", "Кровля из металлочерепицы толщиной 0,5 мм", "Утепление кровли в 3 слоя минватой толщиной 150 мм", "Подшивной элемент стандартный 50 см (можно уменьшить до 30/40)", "Вытяжные каналы из кровли"], "smeta": [["Строительство коробки дома, включая террасу", "5 189 532 ₽"], ["Монтаж септика (бетонные кольца, 11,3 м³)", "150 400 ₽"], ["Оконные проёмы и входная дверь", "408 312 ₽"], ["Электромонтажные работы", "288 932 ₽"], ["Сантехнические работы / отопление", "613 997 ₽"], ["Предчистовая отделка", "553 135 ₽"]], "total": "7 204 311 ₽", "incl": ["Фундамент и цокольное перекрытие", "Устройство закладных каналов под ввод и вывод инженерных коммуникаций", "Наружные стены", "Внутренние стены (перегородки)", "Межэтажное перекрытие", "Крыша", "Дверные и арочные проёмы в соответствии с проектом", "Оконные проёмы в соответствии с проектом"]}, "«Симфония»": {"lead": "Новинка. Одноэтажный дом 109,8 м² с террасой, 4 комнаты и 2 санузла. Газоблок с облицовочным кирпичом и воздушной прослойкой — тёплый и долговечный дом с выразительным фасадом.", "from": ["Кирпича", "Газоблока"], "params": ["Общая площадь застройки с террасой — 121,7 м²", "Жилая площадь — 109,8 м²", "Комнат — 4, санузлов — 2"], "box": ["Свайно-ростверковый фундамент", "Монолитный цоколь — 450 мм высотой, 400 мм шириной", "Плита этажа — монолитная в одну сетку из арматуры д10, толщиной 15 см", "Внешние стены: газоблок 250 мм + облицовочный кирпич и воздушная прослойка", "Несущие стены из блока 250 мм, остальные 150 мм", "Монолитный армопояс и сердечники", "Монолитные перемычки над окнами и дверьми", "Кровля из металлочерепицы", "Утепление кровли в 3 слоя минватой толщиной 150 мм", "Подшивной элемент стандартный 50 см (можно уменьшить до 30/40)", "Вытяжные каналы из кровли"], "smeta": [["Строительство коробки дома", "6 450 000 ₽"], ["Монтаж септиков (бетонные кольца, 8,5 м³)", "192 000 ₽"], ["Оконные проёмы и входная дверь", "680 000 ₽"], ["Бетонные работы (отмостка, парковка, дорожки)", "229 000 ₽"]], "total": "7 551 000 ₽", "incl": ["Фундамент и цокольное перекрытие", "Устройство закладных каналов под ввод и вывод инженерных коммуникаций", "Наружные стены", "Внутренние стены (перегородки)", "Межэтажное перекрытие", "Крыша", "Дверные и арочные проёмы в соответствии с проектом", "Оконные проёмы в соответствии с проектом"]}, "«Ильский»": {"lead": "Просторный кирпичный дом 181 м² на 7 комнат и 2 санузла — для большой семьи. Подробное описание и смета — по запросу, звоните или оставьте заявку.", "from": ["Кирпича", "Газоблока"], "params": ["Общая площадь — 181 м²", "Комнат — 7, санузлов — 2", "Класс — Комфорт"], "box": [], "smeta": [["Коробка дома", "6 650 000 ₽"]], "total": "9 100 000 ₽", "incl": ["Фундамент и цокольное перекрытие", "Наружные и внутренние стены", "Межэтажное перекрытие", "Крыша", "Дверные и оконные проёмы в соответствии с проектом"]}};
 const PROJECTS=[
@@ -1306,6 +1384,88 @@ function leadSuccess(){
   document.getElementById('formOk').style.display='block';
   try{ if(typeof ym==='function') ym(109746794,'reachGoal','zayavka_form'); }catch(_){}
 }
+
+/* ===== Quick callback form — отправка в ту же воронку, что и lead ===== */
+(function(){
+  var f=document.getElementById('qcbForm');if(!f)return;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var phone=f.querySelector('input[name="phone"]').value.trim();
+    if(phone.replace(/\D/g,'').length<10){alert('Введите номер телефона');return;}
+    // прокидываем номер в основную форму и отправляем как обычную заявку
+    var lp=document.getElementById('lf_phone');if(lp)lp.value=phone;
+    var ln=document.getElementById('lf_name');if(ln&&!ln.value)ln.value='Перезвонить';
+    var la=document.getElementById('lf_agree');if(la)la.checked=true;
+    try{ if(typeof ym==='function') ym(109746794,'reachGoal','callback_quick'); }catch(_){}
+    var lf=document.getElementById('leadForm');
+    if(lf&&typeof lf.requestSubmit==='function'){lf.requestSubmit();}
+    else if(lf){lf.dispatchEvent(new Event('submit',{cancelable:true,bubbles:true}));}
+    f.reset();
+    f.innerHTML='<div style="color:#fff;font-weight:700;text-align:center;padding:14px">✓ Заявка принята. Перезвоним в течение минуты.</div>';
+  });
+})();
+
+/* ===== Exit-intent popup ===== */
+(function(){
+  var ex=document.getElementById('exit');if(!ex)return;
+  var shown=false;
+  function showExit(){
+    if(shown)return;
+    if(sessionStorage.getItem('exitShown')==='1')return;
+    if(document.body.classList.contains('lead-open'))return;
+    shown=true;sessionStorage.setItem('exitShown','1');
+    ex.classList.add('open');
+    try{ if(typeof ym==='function') ym(109746794,'reachGoal','exit_popup_show'); }catch(_){}
+  }
+  function hideExit(){ex.classList.remove('open');}
+  // Desktop: уход мыши вверх за пределы окна
+  document.addEventListener('mouseleave',function(e){
+    if(e.clientY<=0&&window.innerWidth>768)showExit();
+  });
+  // Mobile/Desktop: показать через 45с если не было заявки
+  setTimeout(function(){showExit();},45000);
+  // Закрытие
+  document.getElementById('exitClose').addEventListener('click',hideExit);
+  ex.addEventListener('click',function(e){if(e.target===ex)hideExit();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&ex.classList.contains('open'))hideExit();});
+  // Форма exit-popup
+  document.getElementById('exitForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var phone=this.querySelector('input[name="phone"]').value.trim();
+    if(phone.replace(/\D/g,'').length<10){alert('Введите номер телефона');return;}
+    var lp=document.getElementById('lf_phone');if(lp)lp.value=phone;
+    var ln=document.getElementById('lf_name');if(ln&&!ln.value)ln.value='Exit-оффер';
+    var la=document.getElementById('lf_agree');if(la)la.checked=true;
+    try{ if(typeof ym==='function') ym(109746794,'reachGoal','exit_popup_submit'); }catch(_){}
+    var lf=document.getElementById('leadForm');
+    if(lf&&typeof lf.requestSubmit==='function'){lf.requestSubmit();}
+    else if(lf){lf.dispatchEvent(new Event('submit',{cancelable:true,bubbles:true}));}
+    ex.querySelector('.exit-box').innerHTML='<div class="exit-ico">✓</div><h2>Заявка принята!</h2><p>Инженер свяжется с вами в ближайшее время и подберёт проект под ваш бюджет.</p>';
+    setTimeout(hideExit,3500);
+  });
+})();
 </script>
+
+<!-- Sticky mobile CTA bar -->
+<div class="mcta" aria-hidden="false">
+  <a href="tel:+79002721001" class="mcta-call" onclick="try{ym(109746794,'reachGoal','mcta_call')}catch(_){}">📞 Звонок</a>
+  <a href="https://wa.me/79002721001?text=Здравствуйте,%20хочу%20рассчитать%20смету%20на%20дом" target="_blank" rel="noopener" class="mcta-wa" onclick="try{ym(109746794,'reachGoal','mcta_wa')}catch(_){}">WhatsApp</a>
+  <a href="#lead" class="mcta-form" onclick="try{ym(109746794,'reachGoal','mcta_form')}catch(_){}">Смета за 15 мин</a>
+</div>
+
+<!-- Exit-intent popup -->
+<div id="exit" role="dialog" aria-modal="true" aria-labelledby="exitTitle">
+  <div class="exit-box">
+    <button class="exit-close" id="exitClose" aria-label="Закрыть">&times;</button>
+    <div class="exit-ico">🎁</div>
+    <h2 id="exitTitle">Подождите! <b>Проект дома в подарок</b></h2>
+    <p>Оставьте телефон сейчас — подготовим бесплатный проект под ваш бюджет и зафиксируем цену 2026 года в договоре.</p>
+    <form class="exit-form" id="exitForm">
+      <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required>
+      <button type="submit">Получить проект бесплатно</button>
+    </form>
+    <p class="exit-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</p>
+  </div>
+</div>
 </body>
 </html>
