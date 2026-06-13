@@ -1407,42 +1407,46 @@ function leadSuccess(){
 
 /* ===== Exit-intent popup ===== */
 (function(){
-  var ex=document.getElementById('exit');if(!ex)return;
-  var shown=false;
-  function showExit(){
-    if(shown)return;
-    if(sessionStorage.getItem('exitShown')==='1')return;
-    if(document.body.classList.contains('lead-open'))return;
-    shown=true;sessionStorage.setItem('exitShown','1');
-    ex.classList.add('open');
-    try{ if(typeof ym==='function') ym(109746794,'reachGoal','exit_popup_show'); }catch(_){}
+  function init(){
+    var ex=document.getElementById('exit');if(!ex)return;
+    var shown=false;
+    function showExit(){
+      if(shown)return;
+      if(sessionStorage.getItem('exitShown')==='1')return;
+      if(document.body.classList.contains('lead-open'))return;
+      shown=true;sessionStorage.setItem('exitShown','1');
+      ex.classList.add('open');
+      try{ if(typeof ym==='function') ym(109746794,'reachGoal','exit_popup_show'); }catch(_){}
+    }
+    function hideExit(){ex.classList.remove('open');}
+    // Desktop: уход мыши вверх за пределы окна
+    document.addEventListener('mouseleave',function(e){
+      if(e.clientY<=0&&window.innerWidth>768)showExit();
+    });
+    // Mobile/Desktop: показать через 45с если не было заявки
+    setTimeout(function(){showExit();},45000);
+    // Закрытие
+    document.getElementById('exitClose').addEventListener('click',hideExit);
+    ex.addEventListener('click',function(e){if(e.target===ex)hideExit();});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&ex.classList.contains('open'))hideExit();});
+    // Форма exit-popup
+    document.getElementById('exitForm').addEventListener('submit',function(e){
+      e.preventDefault();
+      var phone=this.querySelector('input[name="phone"]').value.trim();
+      if(phone.replace(/\D/g,'').length<10){alert('Введите номер телефона');return;}
+      var lp=document.getElementById('lf_phone');if(lp)lp.value=phone;
+      var ln=document.getElementById('lf_name');if(ln&&!ln.value)ln.value='Exit-оффер';
+      var la=document.getElementById('lf_agree');if(la)la.checked=true;
+      try{ if(typeof ym==='function') ym(109746794,'reachGoal','exit_popup_submit'); }catch(_){}
+      var lf=document.getElementById('leadForm');
+      if(lf&&typeof lf.requestSubmit==='function'){lf.requestSubmit();}
+      else if(lf){lf.dispatchEvent(new Event('submit',{cancelable:true,bubbles:true}));}
+      ex.querySelector('.exit-box').innerHTML='<div class="exit-ico">✓</div><h2>Заявка принята!</h2><p>Инженер свяжется с вами в ближайшее время и подберёт проект под ваш бюджет.</p>';
+      setTimeout(hideExit,3500);
+    });
   }
-  function hideExit(){ex.classList.remove('open');}
-  // Desktop: уход мыши вверх за пределы окна
-  document.addEventListener('mouseleave',function(e){
-    if(e.clientY<=0&&window.innerWidth>768)showExit();
-  });
-  // Mobile/Desktop: показать через 45с если не было заявки
-  setTimeout(function(){showExit();},45000);
-  // Закрытие
-  document.getElementById('exitClose').addEventListener('click',hideExit);
-  ex.addEventListener('click',function(e){if(e.target===ex)hideExit();});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&ex.classList.contains('open'))hideExit();});
-  // Форма exit-popup
-  document.getElementById('exitForm').addEventListener('submit',function(e){
-    e.preventDefault();
-    var phone=this.querySelector('input[name="phone"]').value.trim();
-    if(phone.replace(/\D/g,'').length<10){alert('Введите номер телефона');return;}
-    var lp=document.getElementById('lf_phone');if(lp)lp.value=phone;
-    var ln=document.getElementById('lf_name');if(ln&&!ln.value)ln.value='Exit-оффер';
-    var la=document.getElementById('lf_agree');if(la)la.checked=true;
-    try{ if(typeof ym==='function') ym(109746794,'reachGoal','exit_popup_submit'); }catch(_){}
-    var lf=document.getElementById('leadForm');
-    if(lf&&typeof lf.requestSubmit==='function'){lf.requestSubmit();}
-    else if(lf){lf.dispatchEvent(new Event('submit',{cancelable:true,bubbles:true}));}
-    ex.querySelector('.exit-box').innerHTML='<div class="exit-ico">✓</div><h2>Заявка принята!</h2><p>Инженер свяжется с вами в ближайшее время и подберёт проект под ваш бюджет.</p>';
-    setTimeout(hideExit,3500);
-  });
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}
+  else{init();}
 })();
 </script>
 
