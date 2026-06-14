@@ -112,6 +112,29 @@ PRICE = {
     'dacha':    ['Каркас 50 м² — от 1 800 000 ₽', 'Газобетон 80 м² — от 3 200 000 ₽', 'Керамзитоблок 100 м² — от 3 800 000 ₽'],
 }
 
+# Hero-фото под тему услуги (одно крупное фото в обложку страницы)
+HERO_PHOTO = {
+    'general':   'https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80.JPG',
+    'turnkey':   'https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D1%81%D0%B8%D0%BC%D1%84%D0%BE%D0%BD%D0%B8%D1%8F.JPG',
+    'gazobeton': 'https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B8%CC%86%D0%BD%D1%8B%D0%B8%CC%86%201.JPG',
+    'brick':     'https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D0%A2%D0%BE%D0%BB%D1%8C%D1%8F%D1%82%D0%B8.JPG',
+    'monolit':   'https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9D%D0%BE%D0%B2%D0%BE%D1%80%D0%BE%D1%81%D1%81%D0%B8%D0%B8%CC%86%D1%81%D0%BA%201.JPG',
+    'project':   'https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%98%D0%BB%D1%8C%D1%81%D0%BA%D0%B8%D0%B8%CC%86%201.JPG',
+    'one_floor': 'https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%93%D0%B5%D0%BB%D0%B5%D0%BD%D0%B4%D0%B6%D0%B8%D0%BA%202.jpg',
+    'two_floor': 'https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%9D%D0%A2%20%D0%97%D0%B0%D1%80%D1%8F.JPG',
+    'dacha':     'https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%9D%D0%A2%20%D0%9C%D0%B0%D1%8F%D0%BA%20.JPG',
+}
+
+# 6 фото для mosaic-галереи на каждой странице — наши реальные построенные дома
+GALLERY_PHOTOS = [
+    ('https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%93%D0%B5%D0%BB%D0%B5%D0%BD%D0%B4%D0%B6%D0%B8%D0%BA%201.jpg','Геленджик'),
+    ('https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80%201.JPG','Краснодар'),
+    ('https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9D%D0%BE%D0%B2%D0%BE%D1%80%D0%BE%D1%81%D1%81%D0%B8%D0%B8%CC%86%D1%81%D0%BA%202.JPG','Новороссийск'),
+    ('https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%BB%D0%B0%D0%B2%D1%8F%D0%BD%D1%81%D0%BA%201.JPG','Славянск'),
+    ('https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A2%D0%B1%D0%B8%D0%BB%D0%B8%D1%81%D0%BA%D0%B0%D1%8F%201.JPG','Тбилисская'),
+    ('https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%9D%D0%A2%20%D0%97%D0%B0%D1%80%D1%8F%201.JPG','СНТ Заря'),
+]
+
 def slug(s: str) -> str:
     """Транслит русского в латиницу для безопасных URL."""
     table = {
@@ -137,6 +160,11 @@ def page(service_title, city, theme, slug_full):
     pc = prep(city)
     title = service_title.format(prep=pc, city=city)
     intro = next(s[2] for s in SERVICES if s[3]==theme).format(prep=pc, city=city)
+    hero_img = HERO_PHOTO.get(theme, HERO_PHOTO['general'])
+    gallery_html = '\n'.join(
+        f'<div class="m-item"><img src="{src}" alt="Дом в {alt}" loading="lazy" onerror="this.style.opacity=0;this.parentNode.style.background=\'#e7e9ee\'"><div class="m-cap">{alt}</div></div>'
+        for src, alt in GALLERY_PHOTOS
+    )
     bullets = render_list(THEME[theme])
     prices = render_prices(PRICE[theme])
     desc = f"{title}: фиксированная смета, оплата по этапам, гарантия 10 лет. ИСК «Девелоперы» строит частные дома в Краснодарском крае с 2010 года."
@@ -203,17 +231,24 @@ ym(109746794,'init',{{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer"
 
 <section class="page-hero">
   <div class="wrap">
-    <h1>{title}</h1>
-    <p>{intro} Фиксированная цена в договоре, поэтапная оплата, гарантия 10 лет на конструктив.</p>
-    <div class="hl-pills" style="margin-top:14px">
-      <span class="hl-pill">✓ Фикс. цена в договоре</span>
-      <span class="hl-pill">✓ Срок 5 мес.</span>
-      <span class="hl-pill">✓ Гарантия 10 лет</span>
-      <span class="hl-pill">✓ Оплата по этапам</span>
-    </div>
-    <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
-      <a href="#lead" class="btn btn-green btn-lg">Получить смету за 15 минут</a>
-      <a href="tel:+79002721001" class="btn btn-light btn-lg">Позвонить</a>
+    <div class="seo-hero">
+      <div class="seo-hero-text">
+        <h1>{title}</h1>
+        <p>{intro} Фиксированная цена в договоре, поэтапная оплата, гарантия 10 лет на конструктив.</p>
+        <div class="hl-pills" style="margin-top:14px">
+          <span class="hl-pill">✓ Фикс. цена в договоре</span>
+          <span class="hl-pill">✓ Срок 5 мес.</span>
+          <span class="hl-pill">✓ Гарантия 10 лет</span>
+          <span class="hl-pill">✓ Оплата по этапам</span>
+        </div>
+        <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+          <a href="#lead" class="btn btn-green btn-lg">Получить смету за 15 минут</a>
+          <a href="tel:+79002721001" class="btn btn-light btn-lg">Позвонить</a>
+        </div>
+      </div>
+      <div class="seo-hero-img">
+        <img src="{hero_img}" alt="{title}" loading="eager" onerror="this.style.opacity=0;this.parentNode.style.background='#e7e9ee'">
+      </div>
     </div>
   </div>
 </section>
@@ -284,8 +319,20 @@ ym(109746794,'init',{{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer"
   </div>
 </section>
 
-<!-- Проекты домов -->
+<!-- Галерея реальных объектов -->
 <section>
+  <div class="wrap">
+    <h2 class="h-sec">Фото построенных домов</h2>
+    <p class="sub-sec">Реальные дома, которые мы сдали в Краснодарском крае. Аналогичный построим и в {pc}.</p>
+    <div class="mosaic">
+      {gallery_html}
+    </div>
+    <div style="text-align:center;margin-top:36px"><a href="/obekty.html" class="btn btn-dark btn-lg">Все наши объекты →</a></div>
+  </div>
+</section>
+
+<!-- Проекты домов -->
+<section style="background:var(--bg-soft)">
   <div class="wrap">
     <h2 class="h-sec">Проекты домов для {city}</h2>
     <p class="sub-sec">Готовые проекты, которые мы строим под ключ. Любой проект адаптируем под ваш участок в {pc} и бюджет — бесплатно.</p>

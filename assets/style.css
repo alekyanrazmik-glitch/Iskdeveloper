@@ -704,3 +704,13 @@ body.pm-open .pm{display:block}
   .fact b{font-size:30px}
   .nav-links a.active::before{display:none}
 }
+
+/* ===== SEO-страница: hero с фото ===== */
+.seo-hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.seo-hero-text{min-width:0}
+.seo-hero-img{border-radius:22px;overflow:hidden;aspect-ratio:4/3;box-shadow:var(--shadow);background:var(--bg-soft)}
+.seo-hero-img img{width:100%;height:100%;object-fit:cover;display:block}
+@media (max-width:900px){
+  .seo-hero{grid-template-columns:1fr;gap:24px}
+  .seo-hero-img{order:-1;aspect-ratio:16/10;border-radius:18px}
+}
