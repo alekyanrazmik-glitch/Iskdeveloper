@@ -335,6 +335,50 @@ for city in cities:
         Path(slug_full, 'index.html').write_text(page(title_tpl, city, theme, slug_full), encoding='utf-8')
         urls.append(slug_full)
 
+# === Редиректы со старых кириллических URL на новые латинские ===
+# Старый генератор использовал кириллические префиксы. После переименования эти URL
+# 404'ят. Создаём meta-refresh-редиректы, чтобы сохранить SEO-индекс и существующие ссылки.
+LEGACY_MAP = [
+    ('строительство-домов-в-',            'stroitelstvo-domov-v-'),
+    ('дом-под-ключ-в-',                   'dom-pod-klyuch-v-'),
+    ('строительство-домов-из-газобетона-в-','stroitelstvo-iz-gazobetona-v-'),
+    ('строительство-кирпичных-домов-в-',  'stroitelstvo-kirpichnyh-domov-v-'),
+    ('строительство-монолитных-домов-в-', 'stroitelstvo-monolitnyh-domov-v-'),
+    ('проектирование-домов-в-',           'proektirovanie-domov-v-'),
+    ('строительство-коттеджей-в-',        'dachnye-doma-v-'),  # коттеджи → дачные
+]
+LEGACY_CITIES = list(data['cities'])  # включая исключённые из новой генерации — старые ссылки могут быть и на них
+
+def redirect_html(target_url: str, h1: str) -> str:
+    return f"""<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="0; url={target_url}">
+<link rel="canonical" href="{SITE}{target_url}">
+<meta name="robots" content="noindex,follow">
+<title>{h1} — ДОМ-КК</title>
+<style>body{{font-family:Arial,sans-serif;text-align:center;padding:60px 20px;background:#fff}}a{{color:#00b956;font-weight:700}}</style>
+</head>
+<body>
+<p>Страница переехала. Перенаправляем на <a href="{target_url}">{h1}</a>…</p>
+<script>location.replace("{target_url}");</script>
+</body>
+</html>
+"""
+
+legacy_count = 0
+for old_pref, new_pref in LEGACY_MAP:
+    for city in LEGACY_CITIES:
+        old_dir = (old_pref + city.lower().replace(' ', '-'))
+        new_slug = slug(new_pref + city)
+        # Если у новой страницы есть файл — редирект ведёт прямо на неё.
+        # Если нет (город исключён) — редиректим на главную с пояснением.
+        target = f"/{new_slug}/" if Path(new_slug, 'index.html').exists() else "/"
+        Path(old_dir).mkdir(parents=True, exist_ok=True)
+        Path(old_dir, 'index.html').write_text(redirect_html(target, city), encoding='utf-8')
+        legacy_count += 1
+
 # Индекс всех SEO-страниц
 links = '\n'.join(f'<li><a href="/{u}/">{u.replace("-"," ")}</a></li>' for u in urls)
 Path('seo-pages.html').write_text(
@@ -357,4 +401,5 @@ Path('sitemap.xml').write_text('\n'.join(xml), encoding='utf-8')
 
 print(f"Сгенерировано SEO-страниц: {len(urls)}")
 print(f"Городов: {len(cities)} · Услуг на город: {len(SERVICES)}")
+print(f"Редиректов со старых кириллических URL: {legacy_count}")
 print(f"Sitemap: {len(main_pages) + len(urls)} URL")
