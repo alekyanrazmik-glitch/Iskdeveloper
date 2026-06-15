@@ -323,11 +323,114 @@ function initFaq(){
   });
 }
 
+/* ============================================================
+   12) КВИЗ-КАЛЬКУЛЯТОР В ГЕРОЕ (если есть #quiz)
+   ============================================================ */
+function initQuiz(){
+  var root=$('#quiz');if(!root)return;
+  var fmt=function(n){return new Intl.NumberFormat('ru-RU').format(Math.round(n));};
+  var CITIES=['Краснодар','Геленджик','Новороссийск','Анапа','Славянск-на-Кубани','Тбилисская','Другой город'];
+  var st={floor:'Одноэтажный',floorK:1.0,area:120,mat:'Газоблок',matV:38000,fin:'Под ключ',finK:1.75,name:'',phone:'',city:''};
+  var FND=300000;
+  function estimate(){return st.area*st.matV*st.floorK*st.finK+FND;}
+  var step=0;
+  var STEPS=[
+    {q:'Какой дом вы планируете?',sub:'Шаг 1 из 5',k:'floor',opts:[['Одноэтажный',1.0],['Двухэтажный',0.95],['С мансардой',0.93]]},
+    {q:'Площадь дома',sub:'Шаг 2 из 5',type:'area'},
+    {q:'Из чего строим?',sub:'Шаг 3 из 5',k:'mat',opts:[['Газоблок',38000],['Кирпич',46000],['Газоблок + облицовка',50000],['Монолит',55000]]},
+    {q:'Какая отделка нужна?',sub:'Шаг 4 из 5',k:'fin',opts:[['Коробка дома',1.0],['Предчистовая',1.4],['Под ключ',1.75]]},
+    {q:'Куда прислать расчёт?',sub:'Шаг 5 из 5',type:'contact'}
+  ];
+  function bar(){var p=Math.round((step)/(STEPS.length)*100);return '<div class="qz-bar"><i style="width:'+p+'%"></i></div>';}
+  function render(){
+    if(step>=STEPS.length){renderResult();return;}
+    var s=STEPS[step],h='<div class="qz-head"><span class="qz-sub">'+s.sub+'</span><div class="qz-est">≈ '+fmt(estimate())+' ₽</div></div>'+bar()+'<h3 class="qz-q">'+s.q+'</h3>';
+    if(s.opts){
+      h+='<div class="qz-opts">';
+      s.opts.forEach(function(o){
+        var active=(s.k==='floor'&&st.floor===o[0])||(s.k==='mat'&&st.mat===o[0])||(s.k==='fin'&&st.fin===o[0]);
+        h+='<button type="button" class="qz-opt'+(active?' active':'')+'" data-k="'+s.k+'" data-l="'+o[0]+'" data-v="'+o[1]+'">'+o[0]+'</button>';
+      });
+      h+='</div>';
+    } else if(s.type==='area'){
+      h+='<div class="qz-area"><div class="qz-area-val"><b id="qzAreaV">'+st.area+'</b> м²</div>'+
+         '<input id="qzArea" type="range" min="50" max="450" step="5" value="'+st.area+'">'+
+         '<div class="qz-area-row"><span>50 м²</span><span>450 м²</span></div>'+
+         '<button type="button" class="btn btn-green btn-lg qz-next" data-next="1">Далее →</button></div>';
+    } else if(s.type==='contact'){
+      h+='<form id="qzForm" class="qz-form">'+
+         '<input id="qzName" type="text" placeholder="Ваше имя" required>'+
+         '<input id="qzPhone" type="tel" placeholder="+7 (___) ___-__-__" required>'+
+         '<select id="qzCity">'+CITIES.map(function(c){return '<option>'+c+'</option>';}).join('')+'</select>'+
+         '<button type="submit" class="btn btn-green btn-lg">Узнать стоимость →</button>'+
+         '<p class="qz-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</p>'+
+         '<p class="qz-err" id="qzErr"></p></form>';
+    }
+    if(step>0)h+='<button type="button" class="qz-back" data-next="-1">‹ Назад</button>';
+    root.innerHTML='<div class="qz-card">'+h+'</div>';
+    var ar=$('#qzArea');
+    if(ar)ar.addEventListener('input',function(){st.area=+ar.value;$('#qzAreaV').textContent=st.area;$('.qz-est',root).textContent='≈ '+fmt(estimate())+' ₽';});
+    var ph=$('#qzPhone');
+    if(ph){ph.addEventListener('input',function(){ph.value=phoneMaskFmt(ph.value);});ph.addEventListener('focus',function(){if(!ph.value)ph.value='+7 ';});}
+    var fm=$('#qzForm');
+    if(fm)fm.addEventListener('submit',submit);
+  }
+  function renderResult(){
+    var e=estimate(),lo=e*0.93,hi=e*1.07;
+    root.innerHTML='<div class="qz-card qz-done">'+
+      '<div class="qz-done-ic">✓</div>'+
+      '<h3>Готово, '+(st.name||'')+'! Ваш расчёт отправлен инженеру</h3>'+
+      '<div class="qz-range">Предварительная стоимость дома<br><b>'+fmt(lo)+' — '+fmt(hi)+' ₽</b></div>'+
+      '<p>'+st.floor.toLowerCase()+' дом '+st.area+' м², '+st.mat.toLowerCase()+', отделка «'+st.fin.toLowerCase()+'». Инженер свяжется с вами и пришлёт детальную смету в PDF.</p>'+
+      '<a href="'+WA_LINK+'" target="_blank" rel="noopener" class="btn btn-green btn-lg">Обсудить в WhatsApp</a>'+
+      '</div>';
+  }
+  function submit(e){
+    e.preventDefault();
+    var err=$('#qzErr');err.textContent='';
+    st.name=$('#qzName').value.trim();st.phone=$('#qzPhone').value.trim();st.city=$('#qzCity').value;
+    if(!st.name){err.textContent='Укажите имя';return;}
+    if(st.phone.replace(/\D/g,'').length<11){err.textContent='Укажите корректный телефон';return;}
+    var btn=$('#qzForm button[type=submit]');btn.disabled=true;btn.textContent='Отправка…';
+    try{if(typeof ym==='function')ym(109746794,'reachGoal','quiz_submit');}catch(_){}
+    sendLead({name:st.name,phone:st.phone,city:st.city,service:st.floor+', '+st.mat+', '+st.fin,area:st.area,source:'Квиз-калькулятор · ≈ '+fmt(estimate())+' ₽'},function(){step++;render();});
+    setTimeout(function(){if($('#qzForm')){step++;render();}},2500);
+  }
+  root.addEventListener('click',function(e){
+    var opt=e.target.closest('.qz-opt');
+    if(opt){st[opt.dataset.k]=opt.dataset.l;if(opt.dataset.k==='floor')st.floorK=+opt.dataset.v;if(opt.dataset.k==='mat')st.matV=+opt.dataset.v;if(opt.dataset.k==='fin')st.finK=+opt.dataset.v;step++;render();return;}
+    var nx=e.target.closest('[data-next]');
+    if(nx){step+=(+nx.dataset.next);if(step<0)step=0;render();}
+  });
+  try{if(typeof ym==='function')ym(109746794,'reachGoal','quiz_view');}catch(_){}
+  render();
+}
+
+/* ============================================================
+   13) КАЛЬКУЛЯТОР ИПОТЕКИ (если есть #mortgage)
+   ============================================================ */
+function initMortgage(){
+  var root=$('#mortgage');if(!root)return;
+  var fmt=function(n){return new Intl.NumberFormat('ru-RU').format(Math.round(n));};
+  var els={price:$('#mPrice'),dp:$('#mDp'),years:$('#mYears'),rate:$('#mRate')};
+  function calc(){
+    var price=+els.price.value,dp=+els.dp.value,years=+els.years.value,rate=+els.rate.value;
+    $('#mPriceV').textContent=fmt(price);$('#mDpV').textContent=dp;$('#mYearsV').textContent=years;$('#mRateV').textContent=rate;
+    var loan=price*(1-dp/100),i=rate/100/12,n=years*12,pay;
+    pay=i>0?loan*i*Math.pow(1+i,n)/(Math.pow(1+i,n)-1):loan/n;
+    $('#mPay').textContent=fmt(pay);
+    $('#mLoan').textContent=fmt(loan)+' ₽';
+    $('#mOver').textContent=fmt(pay*n-loan)+' ₽';
+  }
+  Object.keys(els).forEach(function(k){els[k]&&els[k].addEventListener('input',calc);});
+  calc();
+}
+
 /* ---------- bootstrap ---------- */
 function boot(){
   injectWidgets();
   initNav();initLead();initLeadForm();initCallback();initExit();
-  initSlider();renderProj('Все');renderObjects();initGalleries();initCalc();initFaq();
+  initSlider();renderProj('Все');renderObjects();initGalleries();initCalc();initFaq();initQuiz();initMortgage();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 

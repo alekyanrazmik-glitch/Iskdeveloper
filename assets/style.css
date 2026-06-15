@@ -714,3 +714,122 @@ body.pm-open .pm{display:block}
   .seo-hero{grid-template-columns:1fr;gap:24px}
   .seo-hero-img{order:-1;aspect-ratio:16/10;border-radius:18px}
 }
+
+/* ============================================================
+   РЕДИЗАЙН 2026: квиз, иконки, этапы, что входит, ипотека, FAQ-кнопки, финальный CTA
+   ============================================================ */
+/* Иконки преимуществ (SVG вместо эмодзи) */
+.adv .ai{display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:14px;background:rgba(0,185,86,.10);color:var(--green);margin-bottom:16px}
+.adv .ai svg{width:30px;height:30px}
+.adv-grid-6{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+
+/* Квиз-калькулятор в герое */
+.quiz{align-self:stretch}
+.qz-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}
+.quiz-fallback{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:32px;text-align:center}
+.quiz-fallback h2{font-size:26px;margin-bottom:10px}
+.quiz-fallback p{color:var(--gray);margin-bottom:22px}
+.qz-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px}
+.qz-sub{font-size:13px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.04em}
+.qz-est{font-family:var(--h);font-weight:900;font-size:20px;color:var(--green);white-space:nowrap}
+.qz-bar{height:6px;background:var(--bg-soft);border-radius:99px;overflow:hidden;margin-bottom:22px}
+.qz-bar i{display:block;height:100%;background:var(--green);border-radius:99px;transition:width .3s}
+.qz-q{font-size:23px;font-weight:800;margin-bottom:18px;line-height:1.2}
+.qz-opts{display:flex;flex-direction:column;gap:12px}
+.qz-opt{text-align:left;padding:16px 18px;border:1.5px solid var(--line);border-radius:12px;background:#fff;font-family:var(--b);font-weight:600;font-size:16px;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:space-between}
+.qz-opt:hover{border-color:var(--green);background:rgba(0,185,86,.04)}
+.qz-opt::after{content:"→";color:var(--green);opacity:0;transition:.15s}
+.qz-opt:hover::after,.qz-opt.active::after{opacity:1}
+.qz-opt.active{border-color:var(--green);box-shadow:0 0 0 3px rgba(0,185,86,.12)}
+.qz-area{text-align:center}
+.qz-area-val{font-family:var(--h);font-size:18px;color:var(--gray);margin-bottom:14px}
+.qz-area-val b{font-size:40px;color:var(--ink);font-weight:900}
+.qz-area input[type=range]{width:100%;accent-color:var(--green);height:6px}
+.qz-area-row{display:flex;justify-content:space-between;color:var(--gray);font-size:13px;margin:8px 0 22px}
+.qz-area .qz-next{width:100%}
+.qz-form{display:flex;flex-direction:column;gap:12px}
+.qz-form input,.qz-form select{padding:15px 16px;border:1.5px solid var(--line);border-radius:11px;font-family:var(--b);font-size:16px;background:#fff;color:var(--ink)}
+.qz-form input:focus,.qz-form select:focus{outline:none;border-color:var(--green)}
+.qz-form button{width:100%}
+.qz-note{font-size:12px;color:var(--gray);text-align:center}
+.qz-err{color:#d92d2d;font-size:14px;font-weight:600;min-height:1px}
+.qz-back{background:none;border:none;color:var(--gray);font-family:var(--b);font-weight:600;font-size:14px;cursor:pointer;margin-top:16px;padding:4px}
+.qz-back:hover{color:var(--ink)}
+.qz-done{text-align:center}
+.qz-done-ic{width:64px;height:64px;border-radius:50%;background:var(--green);color:#fff;font-size:34px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.qz-done h3{font-size:22px;margin-bottom:16px}
+.qz-range{background:var(--bg-soft);border-radius:14px;padding:18px;margin-bottom:16px;color:var(--gray);font-size:14px;line-height:1.5}
+.qz-range b{display:block;font-family:var(--h);font-size:26px;color:var(--ink);margin-top:6px}
+.qz-done p{color:var(--gray);font-size:15px;margin-bottom:20px}
+
+/* Этапы (главная) */
+#stages .stages{grid-template-columns:repeat(3,1fr);gap:22px}
+#stages .stage{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;position:relative}
+.stg-n{width:42px;height:42px;border-radius:50%;background:var(--green);color:#fff;font-family:var(--h);font-weight:900;font-size:20px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.stg-pay{display:inline-block;margin-top:14px;font-size:12px;font-weight:700;color:var(--green);background:rgba(0,185,86,.10);padding:5px 11px;border-radius:7px}
+
+/* Что входит / не входит */
+.incl-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.incl-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px 30px}
+.incl-card h3{font-size:20px;margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.incl-ico{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0}
+.incl-yes .incl-ico{background:var(--green);color:#fff}
+.incl-no .incl-ico{background:#f4a93020;color:#d98a00}
+.incl-card ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.incl-card li{position:relative;padding-left:26px;color:var(--ink-2);font-size:15px}
+.incl-yes li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:900}
+.incl-no li::before{content:"—";position:absolute;left:0;color:var(--gray);font-weight:900}
+.incl-note{margin-top:16px;font-size:13px;color:var(--gray);padding-top:14px;border-top:1px solid var(--line)}
+.finew{font-size:12px;color:var(--gray);text-align:center}
+
+/* FAQ-кнопка (reset для <button class=fq>) */
+button.fq{width:100%;background:none;border:none;text-align:left;font-family:var(--h);align-items:center}
+.fi.open .pl{transform:rotate(45deg)}
+
+/* Финальный CTA */
+.final-cta{background:var(--bg-dark)}
+.fc-box{display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.fc-text{max-width:660px}
+.fc-text h2{color:#fff;font-size:clamp(26px,3.4vw,40px);font-weight:900;margin-bottom:14px}
+.fc-text p{color:#c2c6cf;font-size:17px;margin-bottom:18px}
+.fc-trust{display:flex;flex-wrap:wrap;gap:10px 22px}
+.fc-trust span{color:#fff;font-size:14px;font-weight:600;opacity:.9}
+.final-cta .btn-green{box-shadow:0 10px 30px rgba(0,185,86,.4);flex-shrink:0}
+
+@media (max-width:900px){
+  .adv-grid-6{grid-template-columns:1fr;gap:14px}
+  #stages .stages{grid-template-columns:1fr;gap:14px}
+  .incl-grid{grid-template-columns:1fr;gap:14px}
+  .qz-card,.quiz-fallback{padding:22px}
+  .qz-q{font-size:20px}
+  .qz-area-val b{font-size:34px}
+  .fc-box{flex-direction:column;align-items:flex-start;gap:22px}
+  .final-cta .btn-green{width:100%}
+}
+
+/* Геро 2 колонки: оффёр + квиз */
+.hero-grid2{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding-top:28px;padding-bottom:56px}
+.hero-lead2 h1{font-size:clamp(28px,3.4vw,46px);font-weight:900;letter-spacing:-.02em;line-height:1.06;margin-bottom:16px}
+.hero-lead2 h1 b{color:var(--green)}
+.hero-sub{color:var(--gray);font-size:18px;line-height:1.5;margin-bottom:22px;max-width:560px}
+.hero-grid2 .hl-pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+.hero-grid2 .hl-pill{background:var(--bg-soft);border-radius:30px;padding:9px 16px;font-size:14px;font-weight:600;color:var(--ink)}
+.hero-trust{font-size:15px;color:var(--gray)}
+.hero-trust b{color:var(--ink);font-weight:800}
+.hero-trust b:first-child{color:var(--green)}
+@media(max-width:900px){
+  .hero-grid2{grid-template-columns:1fr;gap:24px;padding-bottom:36px}
+  .hero-sub{font-size:16px}
+}
+
+/* Калькулятор ипотеки */
+.mort-title{font-size:22px;margin-bottom:20px}
+.mort-field{margin-bottom:18px}
+.mort-field label{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;color:var(--gray);font-weight:600;margin-bottom:8px}
+.mort-field label b{font-family:var(--h);font-size:17px;color:var(--ink);font-weight:800}
+.mort-field input[type=range]{width:100%;accent-color:var(--green);height:6px}
+.mort-result{background:var(--bg-soft);border-radius:14px;padding:18px;margin:6px 0 18px;text-align:center}
+.mort-pay{font-size:15px;color:var(--gray);font-weight:600}
+.mort-pay b{display:block;font-family:var(--h);font-size:30px;color:var(--green);font-weight:900;margin-top:4px}
+.mort-sub{display:flex;justify-content:space-between;gap:12px;margin-top:14px;font-size:13px;color:var(--gray);flex-wrap:wrap}
+.mort-sub b{color:var(--ink);font-weight:700}
