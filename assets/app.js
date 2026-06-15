@@ -11,7 +11,21 @@ var PHONE_TEL='+79002721001';
 var WA_LINK='https://wa.me/79002721001?text=Здравствуйте,%20хочу%20рассчитать%20смету%20на%20дом';
 /* Ссылка на Telegram. По умолчанию — чат по номеру телефона.
    Если есть username, замените на 'https://t.me/ваш_username' */
-var TG_LINK='https://t.me/+79002721001';
+var TG_LINK='https://t.me/Kimzar_A';
+/* CDN + WebP для изображений: проксируем через wsrv.nl (кэш, ресайз, webp).
+   Снимает зависимость от медленного raw.githubusercontent.com. */
+function IMG(u,w){
+  if(!u||typeof u!=='string'||u.indexOf('http')!==0)return u;
+  return 'https://wsrv.nl/?url='+encodeURIComponent(u)+'&w='+(w||800)+'&output=webp&q=82&we';
+}
+/* Подстраховка: если CDN недоступен — грузим оригинал с GitHub */
+document.addEventListener('error',function(e){
+  var img=e.target;
+  if(!img||img.tagName!=='IMG'||img.dataset.fb)return;
+  var s=img.currentSrc||img.src||'';
+  var m=s.match(/[?&]url=([^&]+)/);
+  if(s.indexOf('wsrv.nl')>-1&&m){img.dataset.fb='1';img.onerror=null;img.style.opacity='';img.src=decodeURIComponent(m[1]);}
+},true);
 var BOT_TOKEN='8550556751:AAF9LssjvB-5NkCu4yeOO2-eN2zuqqCKP1o';
 var CHAT_ID='523060537';
 var MAIL='dom-kkk@mail.ru';
@@ -251,35 +265,35 @@ function renderProj(f){
   if(limit)list=list.slice(0,limit);
   grid.innerHTML=list.map(function(p){
     var idx=PROJECTS.indexOf(p);
-    return '<div class="proj"><div class="proj-img" data-proj="'+idx+'"><img src="'+p.photos[0]+'" alt="'+p.n+'" onerror="this.style.opacity=0;this.parentNode.style.background=\'#e7e9ee\'"><div class="proj-badges"><span class="badge '+bc(p.cls)+'">'+p.cls+'</span><span class="badge bg-dark">'+p.mat+'</span></div><span class="obj-zoom">📷 '+p.photos.length+' фото</span></div><h3>Проект '+p.n+'</h3><div class="proj-type" style="color:var(--green);font-family:var(--h);font-weight:800;font-size:20px;margin:2px 0 8px">'+p.a+'</div><div class="proj-rooms">Комнат: '+p.rooms+', санузлов: '+p.wc+'</div><div class="proj-est"><div class="pe-row"><span>Коробка дома, включая террасу</span><b>'+p.box+'</b></div><div class="pe-row"><span>Полная стоимость, под ключ</span><b>'+p.full+'</b></div></div><a href="#" class="btn btn-green" style="width:100%" data-proj="'+idx+'" onclick="event.preventDefault()">Подробнее о проекте</a></div>';
+    return '<div class="proj"><div class="proj-img" data-proj="'+idx+'"><img src="'+IMG(p.photos[0],700)+'" loading="lazy" alt="'+p.n+'" onerror="this.style.opacity=0;this.parentNode.style.background=\'#e7e9ee\'"><div class="proj-badges"><span class="badge '+bc(p.cls)+'">'+p.cls+'</span><span class="badge bg-dark">'+p.mat+'</span></div><span class="obj-zoom">📷 '+p.photos.length+' фото</span></div><h3>Проект '+p.n+'</h3><div class="proj-type" style="color:var(--green);font-family:var(--h);font-weight:800;font-size:20px;margin:2px 0 8px">'+p.a+'</div><div class="proj-rooms">Комнат: '+p.rooms+', санузлов: '+p.wc+'</div><div class="proj-est"><div class="pe-row"><span>Коробка дома, включая террасу</span><b>'+p.box+'</b></div><div class="pe-row"><span>Полная стоимость, под ключ</span><b>'+p.full+'</b></div></div><a href="#" class="btn btn-green" style="width:100%" data-proj="'+idx+'" onclick="event.preventDefault()">Подробнее о проекте</a></div>';
   }).join('');
 }
 function renderObjects(){
   var grid=$('#objGrid');if(!grid)return;
   var limit=+grid.getAttribute('data-limit')||0;
   var list=limit?OBJECTS.slice(0,limit):OBJECTS;
-  grid.innerHTML=list.map(function(o,i){return '<div class="obj"><div class="obj-img" data-obj="'+i+'"><img src="'+o.photos[0]+'" alt="'+o.addr+'"><span class="obj-cat">'+o.cat+'</span><span class="obj-zoom">📷 '+o.photos.length+' фото</span></div><div class="obj-body"><h3>Адрес: '+o.addr+'</h3><button class="btn btn-green" data-obj="'+i+'">Смотреть галерею</button></div></div>';}).join('');
+  grid.innerHTML=list.map(function(o,i){return '<div class="obj"><div class="obj-img" data-obj="'+i+'"><img src="'+IMG(o.photos[0],700)+'" loading="lazy" alt="'+o.addr+'"><span class="obj-cat">'+o.cat+'</span><span class="obj-zoom">📷 '+o.photos.length+' фото</span></div><div class="obj-body"><h3>Адрес: '+o.addr+'</h3><button class="btn btn-green" data-obj="'+i+'">Смотреть галерею</button></div></div>';}).join('');
 }
 
 /* ============================================================
    9) ЛАЙТБОКС + ОКНО ПРОЕКТА
    ============================================================ */
 var lb,lbImg,lbCap,lbThumbs,curGallery=[],curPic=0,curTitle='',PROJECTS_CUR=null;
-function showPic(){lbImg.src=curGallery[curPic];lbCap.innerHTML=curTitle+'<span>фото '+(curPic+1)+' из '+curGallery.length+'</span>';lbThumbs.innerHTML=curGallery.map(function(p,k){return '<img src="'+p+'" data-pic="'+k+'" class="'+(k===curPic?'active':'')+'">';}).join('');}
+function showPic(){lbImg.src=IMG(curGallery[curPic],1600);lbCap.innerHTML=curTitle+'<span>фото '+(curPic+1)+' из '+curGallery.length+'</span>';lbThumbs.innerHTML=curGallery.map(function(p,k){return '<img src="'+IMG(p,140)+'" data-pic="'+k+'" class="'+(k===curPic?'active':'')+'">';}).join('');}
 function openGallery(photos,title){curGallery=photos;curPic=0;curTitle=title;showPic();lb.classList.add('open');document.body.classList.add('lb-open');document.body.style.overflow='hidden';}
 function closeLb(){lb.classList.remove('open');document.body.classList.remove('lb-open');document.body.style.overflow='';}
 function lbNav(d){var n=curGallery.length;curPic=(curPic+d+n)%n;showPic();}
 function openProj(idx){
   var p=PROJECTS[idx],info=PROJ_INFO[p.n],inner=$('#pmInner');
   if(!info||!inner){openGallery(p.photos,'Проект '+p.n+' · '+p.a);return;}
-  var thumbs=p.photos.map(function(src,i){return '<img src="'+src+'" data-pm="'+i+'" class="'+(i===0?'active':'')+'" onerror="this.style.display=\'none\'">';}).join('');
+  var thumbs=p.photos.map(function(src,i){return '<img src="'+IMG(src,140)+'" data-pm="'+i+'" class="'+(i===0?'active':'')+'" onerror="this.style.display=\'none\'">';}).join('');
   var spec='<div><b>Площадь:</b> '+p.a+'</div><div><b>Комнат:</b> '+p.rooms+'</div><div><b>Санузлов:</b> '+p.wc+'</div><div><b>Этажность:</b> 1</div><div><b>Материал:</b> '+p.mat+'</div><div><b>Класс:</b> '+p.cls+'</div>';
   var from=(info.from||[]).map(function(x){return '<span>'+x+'</span>';}).join('');
   var params=(info.params||[]).map(function(x){return '<li>'+x+'</li>';}).join('');
   var box=(info.box||[]).map(function(x){return '<li>'+x+'</li>';}).join('');
   var smeta=(info.smeta||[]).map(function(r){return '<div class="sm-row"><span>'+r[0]+'</span><b>'+r[1]+'</b></div>';}).join('');
   var incl=(info.incl||[]).map(function(x){return '<li>'+x+'</li>';}).join('');
-  var html='<img class="pm-hero" id="pmHero" src="'+p.photos[0]+'" alt="Проект '+p.n+'" onerror="this.style.background=\'#e7e9ee\'">';
+  var html='<img class="pm-hero" id="pmHero" src="'+IMG(p.photos[0],1000)+'" alt="Проект '+p.n+'" onerror="this.style.background=\'#e7e9ee\'">';
   if(p.photos.length>1)html+='<div class="pm-thumbs">'+thumbs+'</div>';
   html+='<div class="pm-body"><h2>Проект дома '+p.n+'</h2>';
   html+='<div class="pm-price"><div class="pp-row"><span>Стоимость коробки дома, включая террасу</span><b>'+p.box+'</b></div><div class="pp-row"><span>Полная стоимость с доп. услугами</span><b>'+info.total+'</b></div></div>';
@@ -310,7 +324,7 @@ function initGalleries(){
   document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')lbNav(-1);if(e.key==='ArrowRight')lbNav(1);});
   var pmc=$('#pmClose');if(pmc)pmc.addEventListener('click',window.closeProj);
   var pmm=$('#projModal');if(pmm)pmm.addEventListener('click',function(e){if(e.target===this)window.closeProj();});
-  var pmi=$('#pmInner');if(pmi)pmi.addEventListener('click',function(e){var t=e.target.closest('[data-pm]');if(t){var i=+t.dataset.pm;$('#pmHero').src=PROJECTS_CUR.photos[i];$$('.pm-thumbs img',this).forEach(function(x){x.classList.remove('active');});t.classList.add('active');}});
+  var pmi=$('#pmInner');if(pmi)pmi.addEventListener('click',function(e){var t=e.target.closest('[data-pm]');if(t){var i=+t.dataset.pm;$('#pmHero').src=IMG(PROJECTS_CUR.photos[i],1000);$$('.pm-thumbs img',this).forEach(function(x){x.classList.remove('active');});t.classList.add('active');}});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('pm-open'))window.closeProj();});
 }
 
@@ -452,7 +466,7 @@ function initObjGeo(){
   var list=$('#objGeo');if(!list)return;
   list.innerHTML=OBJECTS.map(function(o,i){
     return '<button type="button" class="geo-card" data-obj="'+i+'">'+
-      '<img src="'+o.photos[0]+'" alt="Построенный дом — '+o.addr+'" loading="lazy" onerror="this.style.opacity=0;this.parentNode.classList.add(\'no-img\')">'+
+      '<img src="'+IMG(o.photos[0],160)+'" alt="Построенный дом — '+o.addr+'" loading="lazy" onerror="this.style.opacity=0;this.parentNode.classList.add(\'no-img\')">'+
       '<span class="geo-info"><span class="geo-city">'+o.addr+'</span><span class="geo-meta">'+o.photos.length+' фото · смотреть →</span></span></button>';
   }).join('');
   list.addEventListener('click',function(e){var t=e.target.closest('[data-obj]');if(t)openGallery(OBJECTS[+t.dataset.obj].photos,'Адрес: '+OBJECTS[+t.dataset.obj].addr);});
