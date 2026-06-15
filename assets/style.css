@@ -855,3 +855,21 @@ button.fq{width:100%;background:none;border:none;text-align:left;font-family:var
 @media(max-width:560px){
   .geo-list,.geo-list-full{grid-template-columns:1fr}
 }
+
+/* Плавающие мессенджеры */
+.msg-float{position:fixed;right:18px;bottom:24px;z-index:997;display:flex;flex-direction:column;gap:12px}
+.msg-btn{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 8px 24px rgba(15,17,21,.28);transition:.2s;animation:msgPop 2.6s ease-in-out infinite}
+.msg-btn svg{width:30px;height:30px}
+.msg-btn:hover{transform:scale(1.08)}
+.msg-wa{background:#25d366}
+.msg-tg{background:#2aabee;animation-delay:.4s}
+@keyframes msgPop{0%,100%{box-shadow:0 8px 24px rgba(15,17,21,.28)}50%{box-shadow:0 8px 30px rgba(37,211,102,.55)}}
+.msg-tg{animation-name:msgPopTg}
+@keyframes msgPopTg{0%,100%{box-shadow:0 8px 24px rgba(15,17,21,.28)}50%{box-shadow:0 8px 30px rgba(42,171,238,.55)}}
+@media(max-width:760px){
+  .msg-float{display:none}
+}
+/* Иконки в мобильной sticky-панели */
+.mcta .mcta-call,.mcta .mcta-wa,.mcta .mcta-tg{flex:.7;font-size:20px}
+.mcta .mcta-tg{background:#2aabee;color:#fff}
+.mcta .mcta-wa svg,.mcta .mcta-tg svg{width:24px;height:24px}
