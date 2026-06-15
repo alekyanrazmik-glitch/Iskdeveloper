@@ -833,3 +833,25 @@ button.fq{width:100%;background:none;border:none;text-align:left;font-family:var
 .mort-pay b{display:block;font-family:var(--h);font-size:30px;color:var(--green);font-weight:900;margin-top:4px}
 .mort-sub{display:flex;justify-content:space-between;gap:12px;margin-top:14px;font-size:13px;color:var(--gray);flex-wrap:wrap}
 .mort-sub b{color:var(--ink);font-weight:700}
+
+/* География объектов + карта */
+.geo-wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:24px;align-items:stretch}
+.geo-wrap-full{grid-template-columns:1fr}
+.obj-map{min-height:460px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--bg-soft)}
+.geo-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-content:start;max-height:520px;overflow:auto}
+.geo-list-full{grid-template-columns:repeat(4,1fr);max-height:none}
+.geo-card{display:flex;align-items:center;gap:12px;padding:10px;background:#fff;border:1px solid var(--line);border-radius:14px;cursor:pointer;text-align:left;transition:.15s;font-family:var(--b)}
+.geo-card:hover{border-color:var(--green);box-shadow:0 6px 18px rgba(20,24,31,.08);transform:translateY(-2px)}
+.geo-card img{width:64px;height:64px;border-radius:10px;object-fit:cover;flex-shrink:0;background:var(--bg-soft)}
+.geo-card.no-img img{display:none}
+.geo-info{display:flex;flex-direction:column;gap:3px;min-width:0}
+.geo-city{font-family:var(--h);font-weight:800;font-size:15px;color:var(--ink)}
+.geo-meta{font-size:12.5px;color:var(--green);font-weight:600}
+@media(max-width:900px){
+  .geo-wrap{grid-template-columns:1fr;gap:16px}
+  .obj-map{min-height:300px}
+  .geo-list,.geo-list-full{grid-template-columns:1fr 1fr;max-height:none}
+}
+@media(max-width:560px){
+  .geo-list,.geo-list-full{grid-template-columns:1fr}
+}
