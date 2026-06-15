@@ -873,3 +873,9 @@ button.fq{width:100%;background:none;border:none;text-align:left;font-family:var
 .mcta .mcta-call,.mcta .mcta-wa,.mcta .mcta-tg{flex:.7;font-size:20px}
 .mcta .mcta-tg{background:#2aabee;color:#fff}
 .mcta .mcta-wa svg,.mcta .mcta-tg svg{width:24px;height:24px}
+
+/* Квиз на SEO-страницах */
+.seo-quiz{padding:64px 0}
+.seo-quiz .h-sec,.seo-quiz .sub-sec{text-align:center}
+.seo-quiz .sub-sec{margin-left:auto;margin-right:auto}
+.quiz-center{max-width:560px;margin:0 auto}
