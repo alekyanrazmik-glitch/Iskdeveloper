@@ -512,6 +512,129 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
     <div class="foot-bottom"><div class="lg">ДОМ-<b>КК</b> · ООО ИСК «Девелоперы»</div></div>
   </div>
 </footer>
-<script src="assets/app.js"></script>
+<script>
+
+document.getElementById('burger').addEventListener('click',()=>{const l=document.querySelector('.nav-links');const open=l.style.display==='flex';l.style.cssText=open?'':'display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:#fff;padding:20px 28px;gap:16px;border-bottom:1px solid var(--line);z-index:999';});
+// POPUP форма заявки
+var leadPopup=document.getElementById('lead');
+function openLead(){leadPopup.classList.add('open');document.body.style.overflow='hidden';}
+function closeLead(){leadPopup.classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('click',function(e){var a=e.target.closest('a[href="#lead"]');if(a){e.preventDefault();openLead();}});
+document.getElementById('leadClose').addEventListener('click',closeLead);
+leadPopup.addEventListener('click',function(e){if(e.target===leadPopup)closeLead();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLead();});
+const slides=[...document.querySelectorAll('#slider .slide')];let cur=0;
+function show(i){cur=(i+slides.length)%slides.length;slides.forEach((s,k)=>s.classList.toggle('active',k===cur));}
+document.querySelectorAll('.slider-nav button').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();show(cur+ +b.dataset.dir);}));
+setInterval(()=>show(cur+1),7000);
+(function(){var td=document.getElementById('t-d');if(!td)return;let total=2*86400+11*3600+45*60+12;setInterval(()=>{total--;if(total<0)total=3*86400;const d=Math.floor(total/86400),h=Math.floor(total%86400/3600),m=Math.floor(total%3600/60),s=total%60;const p=n=>String(n).padStart(2,'0');td.textContent=p(d);document.getElementById('t-h').textContent=p(h);document.getElementById('t-m').textContent=p(m);document.getElementById('t-s').textContent=p(s);},1000);})();
+const PROJECTS=[
+{n:'«Семейный»',rooms:4,wc:1,a:'110 м²',box:'5 189 532 ₽',full:'7 204 311 ₽',p:'5,2 млн ₽',cls:'Комфорт',mat:'Газобетон',city:'Краснодар',q:'',pills:['Под ключ'],
+ photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B8%CC%86%D0%BD%D1%8B%D0%B8%CC%86%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B8%CC%86%D0%BD%D1%8B%D0%B8%CC%86%202.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B8%CC%86%D0%BD%D1%8B%D0%B8%CC%86%203.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B8%CC%86%D0%BD%D1%8B%D0%B8%CC%86%204.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B8%CC%86%D0%BD%D1%8B%D0%B8%CC%86%205.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B8%CC%86%D0%BD%D1%8B%D0%B8%CC%86%206.JPG']},
+{n:'«Симфония»',rooms:4,wc:2,a:'109.8 м²',box:'6 450 000 ₽',full:'7 551 000 ₽',p:'6,5 млн ₽',cls:'Комфорт',mat:'Кирпич',city:'Краснодар',q:'',pills:['Под ключ'],
+ photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D1%81%D0%B8%D0%BC%D1%84%D0%BE%D0%BD%D0%B8%D1%8F.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D1%81%D0%B8%D0%BC%D1%84%D0%BE%D0%BD%D0%B8%D1%8F%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D1%81%D0%B8%D0%BC%D1%84%D0%BE%D0%BD%D0%B8%D1%8F%202.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D1%81%D0%B8%D0%BC%D1%84%D0%BE%D0%BD%D0%B8%D1%8F%203.JPG']},
+{n:'«Тольятти»',rooms:4,wc:2,a:'123 м²',box:'4 581 336 ₽',full:'6 862 145 ₽',p:'4,6 млн ₽',cls:'Комфорт',mat:'Кирпич',city:'Краснодар',q:'',pills:['Под ключ'],
+ photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D0%A2%D0%BE%D0%BB%D1%8C%D1%8F%D1%82%D0%B8.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D1%82%D0%BE%D0%BB%D1%8C%D1%8F%D1%82%D0%B8%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D1%82%D0%BE%D0%BB%D1%8C%D1%8F%D1%82%D0%B8%202.JPG']},
+{n:'«Ильский»',rooms:7,wc:2,a:'181 м²',box:'6 650 000 ₽',full:'9 100 000 ₽',p:'6,7 млн ₽',cls:'Комфорт',mat:'Кирпич',city:'Краснодар',q:'',pills:['Под ключ'],
+ photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%98%D0%BB%D1%8C%D1%81%D0%BA%D0%B8%D0%B8%CC%86%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%98%D0%BB%D1%8C%D1%81%D0%BA%D0%B8%D0%B8%CC%86%202.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%98%D0%BB%D1%8C%D1%81%D0%BA%D0%B8%D0%B8%CC%86%203.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%98%D0%BB%D1%8C%D1%81%D0%BA%D0%B8%D0%B8%CC%86%204.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Projekt/main/%D0%98%D0%BB%D1%8C%D1%81%D0%BA%D0%B8%D0%B8%CC%86%20.JPG']}
+];
+function bc(c){return c==='Эконом'?'bg-green':'bg-blue';}
+function renderProj(f){const grid=document.getElementById('projGrid');if(!grid)return;var isHome=!/proekty\.html/.test(location.pathname);var list=PROJECTS.filter(p=>!f||f==='Все'||p.cls===f);if(isHome)list=list.slice(0,3);grid.innerHTML=list.map((p,i)=>`<div class="proj"><div class="proj-img" data-proj="${i}"><img src="${p.photos[0]}" alt="${p.n}" onerror="this.style.opacity=0;this.parentNode.style.background='#e7e9ee'"><div class="proj-badges"><span class="badge ${bc(p.cls)}">${p.cls}</span><span class="badge bg-dark">${p.mat}</span></div><span class="obj-zoom">📷 ${p.photos.length} фото</span></div><h3>Проект ${p.n}</h3><div class="proj-type" style="color:var(--green);font-family:var(--h);font-weight:800;font-size:20px;margin:2px 0 8px">${p.a}</div><div class="proj-rooms">Комнат: ${p.rooms}, санузлов: ${p.wc}</div><div class="proj-est"><div class="pe-row"><span>Коробка дома, включая террасу</span><b>${p.box}</b></div><div class="pe-row"><span>Полная стоимость, под ключ</span><b>${p.full}</b></div></div><a href="#lead" class="btn btn-green" style="width:100%">Узнать о проекте</a></div>`).join('');}
+renderProj('Все');
+
+/* ===== НАШИ ОБЪЕКТЫ =====
+   Чтобы добавить объект: скопируйте блок {...}, впишите адрес, площадь,
+   категорию и ссылки на фото (photos: первая — обложка). Фото должны быть
+   по прямым ссылкам (заканчиваются на .jpg / .png / .webp). */
+const OBJECTS=[
+  {addr:'Геленджик', area:'', cat:'Строительство домов', photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%93%D0%B5%D0%BB%D0%B5%D0%BD%D0%B4%D0%B6%D0%B8%D0%BA%202.jpg','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%93%D0%B5%D0%BB%D0%B5%D0%BD%D0%B4%D0%B6%D0%B8%D0%BA%201.jpg','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%93%D0%B5%D0%BB%D0%B5%D0%BD%D0%B4%D0%B6%D0%B8%D0%BA%203.jpg','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%93%D0%B5%D0%BB%D0%B5%D0%BD%D0%B4%D0%B6%D0%B8%D0%BA%204.jpg','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%93%D0%B5%D0%BB%D0%B5%D0%BD%D0%B4%D0%B6%D0%B8%D0%BA.jpg']},
+  {addr:'Славянск-на-Кубани', area:'', cat:'Строительство домов', photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%BB%D0%B0%D0%B2%D1%8F%D0%BD%D1%81%D0%BA%20%D0%BD%D0%B0%20%D0%9A%D1%83%D0%B1%D0%B0%D0%BD%D0%B8%20.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%BB%D0%B0%D0%B2%D1%8F%D0%BD%D1%81%D0%BA%20%D0%BD%D0%B0%20%D0%9A%D1%83%D0%B1%D0%B0%D0%BD%D0%B8%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%BB%D0%B0%D0%B2%D1%8F%D0%BD%D1%81%D0%BA%20%D0%BD%D0%B0%20%D0%9A%D1%83%D0%B1%D0%B0%D0%BD%D0%B8%202.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%BB%D0%B0%D0%B2%D1%8F%D0%BD%D1%81%D0%BA%20%D0%BD%D0%B0%20%D0%9A%D1%83%D0%B1%D0%B0%D0%BD%D0%B8%204.JPG']},
+  {addr:'Краснодар', area:'', cat:'Строительство домов', photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80%202.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80%203.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80%204.JPG']},
+  {addr:'г. Славянск', area:'', cat:'Строительство домов', photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%BB%D0%B0%D0%B2%D1%8F%D0%BD%D1%81%D0%BA%203.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%BB%D0%B0%D0%B2%D1%8F%D0%BD%D1%81%D0%BA%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%BB%D0%B0%D0%B2%D1%8F%D0%BD%D1%81%D0%BA%202.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%BB%D0%B0%D0%B2%D1%8F%D0%BD%D1%81%D0%BA%204.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%BB%D0%B0%D0%B2%D1%8F%D0%BD%D1%81%D0%BA%20.JPG']},
+  {addr:'СНТ Маяк', area:'', cat:'Строительство домов', photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%9D%D0%A2%20%D0%9C%D0%B0%D1%8F%D0%BA%20.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%9D%D0%A2%20%D0%9C%D0%B0%D1%8F%D0%BA%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%9D%D0%A2%20%D0%9C%D0%B0%D1%8F%D0%BA%202.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%9D%D0%A2%20%D0%9C%D0%B0%D1%8F%D0%BA%203.JPG']},
+  {addr:'ст. Тбилисская', area:'', cat:'Строительные работы', photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A2%D0%B1%D0%B8%D0%BB%D0%B8%D1%81%D0%BA%D0%B0%D1%8F%203.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A2%D0%B1%D0%B8%D0%BB%D0%B8%D1%81%D0%BA%D0%B0%D1%8F%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A2%D0%B1%D0%B8%D0%BB%D0%B8%D1%81%D0%BA%D0%B0%D1%8F%202.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A2%D0%B1%D0%B8%D0%BB%D0%B8%D1%81%D0%BA%D0%B0%D1%8F%204.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A2%D0%B1%D0%B8%D0%BB%D0%B8%D1%81%D0%BA%D0%B0%D1%8F%205.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A2%D0%B1%D0%B8%D0%BB%D0%B8%D1%81%D0%BA%D0%B0%D1%8F%20.JPG']},
+  {addr:'СНТ Нептун', area:'', cat:'Строительство домов', photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%9D%D0%A2%20%D0%9D%D0%B5%D0%BF%D1%82%D1%83%D0%BD%202.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%9D%D0%A2%20%D0%9D%D0%B5%D0%BF%D1%82%D1%83%D0%BD%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%9D%D0%A2%20%D0%9D%D0%B5%D0%BF%D1%82%D1%83%D0%BD%203.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%9D%D0%A2%20%D0%9D%D0%B5%D0%BF%D1%82%D1%83%D0%BD.JPG']},
+  {addr:'СНТ Заря', area:'', cat:'Строительство домов', photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%9D%D0%A2%20%D0%97%D0%B0%D1%80%D1%8F.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%9D%D0%A2%20%D0%97%D0%B0%D1%80%D1%8F%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%9D%D0%A2%20%D0%97%D0%B0%D1%80%D1%8F%202.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%9D%D0%A2%20%D0%97%D0%B0%D1%80%D1%8F%203.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%9D%D0%A2%20%D0%97%D0%B0%D1%80%D1%8F%204.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%A1%D0%9D%D0%A2%20%D0%97%D0%B0%D1%80%D1%8F%205.JPG']},
+  {addr:'Новороссийск', area:'', cat:'Строительство домов', photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9D%D0%BE%D0%B2%D0%BE%D1%80%D0%BE%D1%81%D1%81%D0%B8%D0%B8%CC%86%D1%81%D0%BA%203.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9D%D0%BE%D0%B2%D0%BE%D1%80%D0%BE%D1%81%D1%81%D0%B8%D0%B8%CC%86%D1%81%D0%BA%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9D%D0%BE%D0%B2%D0%BE%D1%80%D0%BE%D1%81%D1%81%D0%B8%D0%B8%CC%86%D1%81%D0%BA%202.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9D%D0%BE%D0%B2%D0%BE%D1%80%D0%BE%D1%81%D1%81%D0%B8%D0%B8%CC%86%D1%81%D0%BA.JPG']},
+  {addr:'ст. Павловская', area:'', cat:'Строительные работы', photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%202.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F.JPG']},
+  {addr:'ул. Поварская', area:'', cat:'Строительные работы', photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9F%D0%BE%D0%B2%D0%B0%D1%80%D1%81%D0%BA%D0%B0%D1%8F%203.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9F%D0%BE%D0%B2%D0%B0%D1%80%D1%81%D0%BA%D0%B0%D1%8F%204.JPG']}
+];
+function renderObjects(){
+  var grid=document.getElementById('objGrid');if(!grid)return;
+  var isHome=!/obekty\.html/.test(location.pathname);
+  var list=isHome?OBJECTS.slice(0,3):OBJECTS;
+  grid.innerHTML=list.map(function(o,i){return '<div class="obj">'+
+    '<div class="obj-img" data-obj="'+i+'"><img src="'+o.photos[0]+'" alt="'+o.addr+'">'+
+      '<span class="obj-cat">'+o.cat+'</span>'+
+      '<span class="obj-zoom">📷 '+o.photos.length+' фото</span></div>'+
+    '<div class="obj-body"><h3>Адрес: '+o.addr+'</h3>'+
+            '<button class="btn btn-green" data-obj="'+i+'">Смотреть галерею</button></div></div>';}).join('');
+}
+renderObjects();
+
+/* ЛАЙТБОКС (универсальный — объекты и проекты) */
+var lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg'),lbCap=document.getElementById('lbCap'),lbThumbs=document.getElementById('lbThumbs');
+var curGallery=[],curPic=0,curTitle='';
+function openGallery(photos,title){curGallery=photos;curPic=0;curTitle=title;showPic();lb.classList.add('open');document.body.classList.add('lb-open');document.body.style.overflow='hidden';}
+function openLb(objIndex){var o=OBJECTS[objIndex];openGallery(o.photos,'Адрес: '+o.addr);}
+function openProj(projIndex){var p=PROJECTS[projIndex];openGallery(p.photos,'Проект '+p.n+' · '+p.a);}
+function showPic(){lbImg.src=curGallery[curPic];lbCap.innerHTML=curTitle+'<span>фото '+(curPic+1)+' из '+curGallery.length+'</span>';
+  lbThumbs.innerHTML=curGallery.map(function(p,k){return '<img src="'+p+'" data-pic="'+k+'" class="'+(k===curPic?'active':'')+'">';}).join('');}
+function lbNav(d){var n=curGallery.length;curPic=(curPic+d+n)%n;showPic();}
+document.addEventListener('click',function(e){
+  var trigger=e.target.closest('[data-obj]');if(trigger){openLb(+trigger.dataset.obj);return;}
+  var pj=e.target.closest('[data-proj]');if(pj){openProj(+pj.dataset.proj);return;}
+  var th=e.target.closest('.lb-thumbs img');if(th){curPic=+th.dataset.pic;showPic();}
+});
+document.getElementById('lbClose').addEventListener('click',function(){lb.classList.remove('open');document.body.classList.remove('lb-open');document.body.style.overflow='';});
+document.getElementById('lbPrev').addEventListener('click',function(){lbNav(-1);});
+document.getElementById('lbNext').addEventListener('click',function(){lbNav(1);});
+lb.addEventListener('click',function(e){if(e.target===lb){lb.classList.remove('open');document.body.classList.remove('lb-open');document.body.style.overflow='';}});
+document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape'){lb.classList.remove('open');document.body.classList.remove('lb-open');document.body.style.overflow='';}if(e.key==='ArrowLeft')lbNav(-1);if(e.key==='ArrowRight')lbNav(1);});
+const fmt=n=>new Intl.NumberFormat('ru-RU').format(Math.round(n));
+const st={area:120,mat:38000,fac:0,fl:1,fin:1,fnd:0};
+function calc(){var cp=document.getElementById('cPrice');if(!cp)return;let total=st.area*(st.mat+st.fac)*st.fl*st.fin+st.fnd;cp.textContent=fmt(total)+' ₽';var ca=document.getElementById('cArea');if(ca)ca.textContent=st.area+' м²';}
+var _rArea=document.getElementById('rArea');if(_rArea)_rArea.addEventListener('input',e=>{st.area=+e.target.value;calc();});
+document.querySelectorAll('.opt-row').forEach(r=>{const g=r.dataset.g;r.querySelectorAll('.opt').forEach(o=>o.addEventListener('click',()=>{r.querySelectorAll('.opt').forEach(x=>x.classList.remove('active'));o.classList.add('active');st[g]=+o.dataset.v;calc();}));});
+document.querySelectorAll('.ch-tabs,.price-tabs,.rooms').forEach(t=>t.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{t.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');})));
+// город в заголовке блока
+var citySel=document.getElementById('citySel');
+if(citySel)citySel.addEventListener('change',function(){var v=this.value;var lbl=document.getElementById('cityLabel');lbl.textContent=(v==='Весь Краснодарский край'?'в Краснодарском крае':'в г. '+v)+' ▾';});
+calc();
+document.querySelectorAll('#faqList .fi').forEach(i=>i.querySelector('.fq').addEventListener('click',()=>{const open=i.classList.contains('open');document.querySelectorAll('#faqList .fi').forEach(x=>{x.classList.remove('open');x.querySelector('.fa').style.maxHeight=null;});if(!open){i.classList.add('open');const a=i.querySelector('.fa');a.style.maxHeight=a.scrollHeight+'px';}}));
+// ===== ОТПРАВКА ЗАЯВКИ В TELEGRAM =====
+// ВАЖНО: впишите ваш chat_id вместо ВАШ_CHAT_ID (как узнать — спросите менеджера/в инструкции).
+var BOT_TOKEN="8550556751:AAF9LssjvB-5NkCu4yeOO2-eN2zuqqCKP1o";
+var CHAT_ID="523060537";
+document.getElementById('leadForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var err=document.getElementById('lf_err');err.style.color='#d92d2d';err.textContent='';
+  var name=document.getElementById('lf_name').value.trim();
+  var phone=document.getElementById('lf_phone').value.trim();
+  var service=document.getElementById('lf_service').value;
+  var area=document.getElementById('lf_area').value.trim();
+  var agree=document.getElementById('lf_agree').checked;
+  if(!name){err.textContent='Укажите ваше имя';return;}
+  if(!phone){err.textContent='Укажите телефон';return;}
+  if(!agree){err.textContent='Поставьте согласие на обработку данных';return;}
+  var L=[];
+  L.push('🏠 <b>Заявка на расчёт дома (ДОМ-КК)</b>');
+  L.push('<b>Имя:</b> '+name);
+  L.push('<b>Телефон:</b> '+phone);
+  L.push('<b>Услуга:</b> '+service);
+  if(area)L.push('<b>Площадь:</b> '+area+' м²');
+  L.push('');
+  L.push('🌐 '+(location.host||'сайт'));
+  var btn=e.target.querySelector('button[type=submit]');
+  btn.disabled=true;btn.textContent='Отправка…';
+  fetch('https://api.telegram.org/bot'+BOT_TOKEN+'/sendMessage',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({chat_id:CHAT_ID,text:L.join('\n'),parse_mode:'HTML',disable_web_page_preview:true})
+  }).then(function(r){return r.json();}).then(function(d){
+    if(d&&d.ok){document.getElementById('leadForm').style.display='none';document.getElementById('formOk').style.display='block';try{if(typeof ym==='function')ym(109746794,'reachGoal','zayavka_form');}catch(_){}}
+    else{btn.disabled=false;btn.textContent='Получить смету за 15 минут';err.textContent='Не удалось отправить. Позвоните нам: +7 900 272-10-01';}
+  }).catch(function(){btn.disabled=false;btn.textContent='Получить смету за 15 минут';err.textContent='Ошибка соединения. Попробуйте снова или позвоните нам.';});
+});
+</script>
 </body>
 </html>
