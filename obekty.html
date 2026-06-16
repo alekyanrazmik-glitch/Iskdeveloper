@@ -463,6 +463,12 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
   .obj-spec{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13.5px;font-weight:600;color:#16181c;margin:0 0 10px}
   .obj-spec span{white-space:nowrap}
   .obj-price{font-family:var(--h);font-weight:800;font-size:21px;color:var(--green,#00a04b);margin:0 0 14px}
+  /* широкая карточка, когда в группе один объект — заполняет ряд */
+  .obj-grid.one{grid-template-columns:1fr}
+  .obj.wide{flex-direction:row;align-items:stretch}
+  .obj.wide .obj-img{aspect-ratio:auto;width:48%;min-height:320px;flex:none}
+  .obj.wide .obj-body{justify-content:center;padding:32px}
+  @media(max-width:860px){.obj.wide{flex-direction:column}.obj.wide .obj-img{width:100%;aspect-ratio:16/11;min-height:0}.obj.wide .obj-body{padding:24px}}
 </style>
 <section id="gallery" style="padding-top:40px">
   <div class="wrap">
@@ -595,6 +601,7 @@ function renderObjects(){
   });
   function plural(n){var d=n%10,dd=n%100;if(d===1&&dd!==11)return 'объект';if(d>=2&&d<=4&&(dd<10||dd>=20))return 'объекта';return 'объектов';}
   host.innerHTML=order.map(function(c){
+    var single=groups[c].length===1;
     var cards=groups[c].map(function(i){
       var o=OBJECTS[i];var m=OBJ_META[o.addr]||{};
       var spec=(m.area||m.mat||m.term)?'<div class="obj-spec">'+
@@ -602,7 +609,7 @@ function renderObjects(){
         (m.mat?'<span>🧱 '+m.mat+'</span>':'')+
         (m.term?'<span>⏱ '+m.term+'</span>':'')+'</div>':'';
       var price=m.price?'<div class="obj-price">'+m.price+'</div>':'';
-      return '<div class="obj">'+
+      return '<div class="obj'+(single?' wide':'')+'">'+
         '<div class="obj-img" data-obj="'+i+'"><img src="'+o.photos[0]+'" alt="'+o.addr+'" loading="lazy">'+
           '<span class="obj-cat">'+o.cat+'</span>'+
           '<span class="obj-zoom">📷 '+o.photos.length+' фото</span></div>'+
@@ -613,7 +620,7 @@ function renderObjects(){
     }).join('');
     var n=groups[c].length;
     var cnt=n>1?' <span>'+n+' '+plural(n)+'</span>':'';
-    return '<div class="obj-city"><h3 class="obj-city-h">'+c+cnt+'</h3><div class="obj-grid">'+cards+'</div></div>';
+    return '<div class="obj-city"><h3 class="obj-city-h">'+c+cnt+'</h3><div class="obj-grid'+(single?' one':'')+'">'+cards+'</div></div>';
   }).join('');
 }
 renderObjects();
