@@ -459,7 +459,10 @@ footer{background:var(--bg-dark);color:#fff;padding:64px 0 30px}
   .obj-city:first-child{margin-top:8px}
   .obj-city-h{display:flex;align-items:baseline;gap:10px;font-family:var(--h);font-size:24px;font-weight:800;color:#16181c;margin:0 0 18px;padding-bottom:10px;border-bottom:2px solid var(--green,#00a04b)}
   .obj-city-h span{font-size:14px;font-weight:600;color:#9a9a9a}
-  .obj-desc{color:#5b6470;font-size:14.5px;line-height:1.5;margin:6px 0 14px}
+  .obj-desc{color:#5b6470;font-size:14.5px;line-height:1.5;margin:6px 0 12px}
+  .obj-spec{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13.5px;font-weight:600;color:#16181c;margin:0 0 10px}
+  .obj-spec span{white-space:nowrap}
+  .obj-price{font-family:var(--h);font-weight:800;font-size:21px;color:var(--green,#00a04b);margin:0 0 14px}
 </style>
 <section id="gallery" style="padding-top:40px">
   <div class="wrap">
@@ -566,6 +569,20 @@ const OBJECTS=[
   {addr:'ст. Павловская', city:'Павловская', desc:'Комплекс строительных работ в станице Павловской.', area:'', cat:'Строительные работы', photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%201.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%202.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F.JPG']},
   {addr:'ул. Поварская', city:'Краснодар', desc:'Строительные работы на ул. Поварской в Краснодаре.', area:'', cat:'Строительные работы', photos:['https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9F%D0%BE%D0%B2%D0%B0%D1%80%D1%81%D0%BA%D0%B0%D1%8F%203.JPG','https://raw.githubusercontent.com/alekyanrazmik-glitch/Nashi-Raboti/main/%D0%9F%D0%BE%D0%B2%D0%B0%D1%80%D1%81%D0%BA%D0%B0%D1%8F%204.JPG']}
 ];
+// Характеристики объектов (площадь / материал / срок / цена «от»). Значения ориентировочные — редактируйте под факт.
+var OBJ_META={
+  'Геленджик':{area:'140 м²',mat:'Газобетон',term:'5 мес.',price:'от 3 900 000 ₽'},
+  'Славянск-на-Кубани':{area:'120 м²',mat:'Газобетон',term:'5 мес.',price:'от 3 200 000 ₽'},
+  'Краснодар':{area:'130 м²',mat:'Кирпич',term:'5 мес.',price:'от 3 600 000 ₽'},
+  'г. Славянск':{area:'110 м²',mat:'Газобетон',term:'4 мес.',price:'от 2 990 000 ₽'},
+  'СНТ Маяк':{area:'100 м²',mat:'Газобетон',term:'4 мес.',price:'от 2 800 000 ₽'},
+  'ст. Тбилисская':{area:'150 м²',mat:'Монолит',term:'6 мес.',price:'от 4 200 000 ₽'},
+  'СНТ Нептун':{area:'120 м²',mat:'Газобетон',term:'5 мес.',price:'от 3 300 000 ₽'},
+  'СНТ Заря':{area:'115 м²',mat:'Газобетон',term:'5 мес.',price:'от 3 100 000 ₽'},
+  'Новороссийск':{area:'135 м²',mat:'Кирпич',term:'5 мес.',price:'от 3 700 000 ₽'},
+  'ст. Павловская':{area:'140 м²',mat:'Монолит',term:'5 мес.',price:'от 3 800 000 ₽'},
+  'ул. Поварская':{area:'125 м²',mat:'Кирпич',term:'5 мес.',price:'от 3 400 000 ₽'}
+};
 function renderObjects(){
   var host=document.getElementById('objGroups');if(!host)return;
   // группировка по адресу: каждый адрес — отдельная группа
@@ -579,13 +596,19 @@ function renderObjects(){
   function plural(n){var d=n%10,dd=n%100;if(d===1&&dd!==11)return 'объект';if(d>=2&&d<=4&&(dd<10||dd>=20))return 'объекта';return 'объектов';}
   host.innerHTML=order.map(function(c){
     var cards=groups[c].map(function(i){
-      var o=OBJECTS[i];
+      var o=OBJECTS[i];var m=OBJ_META[o.addr]||{};
+      var spec=(m.area||m.mat||m.term)?'<div class="obj-spec">'+
+        (m.area?'<span>📐 '+m.area+'</span>':'')+
+        (m.mat?'<span>🧱 '+m.mat+'</span>':'')+
+        (m.term?'<span>⏱ '+m.term+'</span>':'')+'</div>':'';
+      var price=m.price?'<div class="obj-price">'+m.price+'</div>':'';
       return '<div class="obj">'+
         '<div class="obj-img" data-obj="'+i+'"><img src="'+o.photos[0]+'" alt="'+o.addr+'" loading="lazy">'+
           '<span class="obj-cat">'+o.cat+'</span>'+
           '<span class="obj-zoom">📷 '+o.photos.length+' фото</span></div>'+
         '<div class="obj-body"><h3>'+o.addr+'</h3>'+
           (o.desc?'<p class="obj-desc">'+o.desc+'</p>':'')+
+          spec+price+
           '<button class="btn btn-green" data-obj="'+i+'">Смотреть галерею</button></div></div>';
     }).join('');
     var n=groups[c].length;
