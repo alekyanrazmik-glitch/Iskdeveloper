@@ -568,10 +568,11 @@ const OBJECTS=[
 ];
 function renderObjects(){
   var host=document.getElementById('objGroups');if(!host)return;
-  // группировка по городам (поле city; если не задано — берём addr)
+  // группировка по адресу: каждый адрес — отдельная группа
+  // (город и СНТ не объединяются; «г. Славянск» и «Славянск-на-Кубани» — разные группы)
   var order=[],groups={};
   OBJECTS.forEach(function(o,i){
-    var c=o.city||o.addr;
+    var c=o.addr;
     if(!groups[c]){groups[c]=[];order.push(c);}
     groups[c].push(i);
   });
@@ -588,7 +589,8 @@ function renderObjects(){
           '<button class="btn btn-green" data-obj="'+i+'">Смотреть галерею</button></div></div>';
     }).join('');
     var n=groups[c].length;
-    return '<div class="obj-city"><h3 class="obj-city-h">'+c+' <span>'+n+' '+plural(n)+'</span></h3><div class="obj-grid">'+cards+'</div></div>';
+    var cnt=n>1?' <span>'+n+' '+plural(n)+'</span>':'';
+    return '<div class="obj-city"><h3 class="obj-city-h">'+c+cnt+'</h3><div class="obj-grid">'+cards+'</div></div>';
   }).join('');
 }
 renderObjects();
