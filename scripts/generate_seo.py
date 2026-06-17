@@ -9,6 +9,7 @@
 import json
 from pathlib import Path
 from datetime import date
+from urllib.parse import quote
 
 SITE = 'https://dom-kk.ru'
 
@@ -280,13 +281,19 @@ def render_list(items):
 def render_prices(items):
     return '\n'.join(f'<div class="adv"><div class="ai">💰</div><p style="font-size:15px">{x}</p></div>' for x in items)
 
+def IMG(u, w=800):
+    """Проксируем фото через wsrv.nl (кэш, ресайз, webp) — как в assets/app.js."""
+    if not u or not isinstance(u, str) or not u.startswith('http'):
+        return u
+    return 'https://wsrv.nl/?url=' + quote(u, safe='') + f'&w={w}&output=webp&q=82&we'
+
 def page(service_title, city, theme, slug_full):
     pc = prep(city)
     title = service_title.format(prep=pc, city=city)
     intro = next(s[2] for s in SERVICES if s[3]==theme).format(prep=pc, city=city)
     hero_img = HERO_PHOTO.get(theme, HERO_PHOTO['general'])
     gallery_html = '\n'.join(
-        f'<div class="m-item"><img src="{src}" alt="Дом в {alt}" loading="lazy" onerror="this.style.opacity=0;this.parentNode.style.background=\'#e7e9ee\'"><div class="m-cap">{alt}</div></div>'
+        f'<div class="m-item"><img src="{IMG(src)}" alt="Дом в {alt}" loading="lazy" onerror="this.style.opacity=0;this.parentNode.style.background=\'#e7e9ee\'"><div class="m-cap">{alt}</div></div>'
         for src, alt in GALLERY_PHOTOS
     )
     bullets = render_list(THEME[theme])
@@ -341,7 +348,7 @@ ym(109746794,'init',{{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer"
   <div class="wrap nav">
     <a href="/" class="logo">ДОМ-<b>КК</b><small>ООО ИСК «Девелоперы»</small></a>
     <nav class="nav-links">
-      <a href="/">Главная</a><a href="/proekty.html">Проекты</a><a href="/obekty.html">Объекты</a><a href="/ceny.html">Цены</a><a href="/o-kompanii.html">О компании</a><a href="/kontakty.html">Контакты</a>
+      <a href="/">Главная</a><a href="/proekty.html">Проекты</a><a href="/obekty.html">Объекты</a><a href="/ceny.html">Цены</a><a href="/ipoteka.html">Ипотека</a><a href="/o-kompanii.html#stages">Этапы</a><a href="/o-kompanii.html">О компании</a><a href="/kontakty.html">Контакты</a>
     </nav>
     <div class="nav-right">
       <a href="tel:+79002721001" class="nav-phone">+7 900 272-10-01<small>звонок по краю</small></a>
@@ -371,11 +378,18 @@ ym(109746794,'init',{{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer"
         </div>
       </div>
       <div class="seo-hero-img">
-        <img src="{hero_img}" alt="{title}" loading="eager" onerror="this.style.opacity=0;this.parentNode.style.background='#e7e9ee'">
+        <img src="{IMG(hero_img)}" alt="{title}" loading="eager" onerror="this.style.opacity=0;this.parentNode.style.background='#e7e9ee'">
       </div>
     </div>
   </div>
 </section>
+
+<!-- Квиз-калькулятор -->
+<section class="seo-quiz"><div class="wrap">
+  <h2 class="h-sec">Рассчитайте стоимость вашего дома за 1 минуту</h2>
+  <p class="sub-sec">Ответьте на 5 вопросов — и мы пришлём смету под ваш бюджет. Бесплатно и без обязательств.</p>
+  <div class="quiz quiz-center" id="quiz"><div class="quiz-fallback"><p>За 1 минуту посчитаем смету под ваш проект и бюджет — бесплатно и без обязательств.</p><a href="#lead" class="btn btn-green btn-lg">Получить смету за 15 минут →</a></div></div>
+</div></section>
 
 <!-- Quick callback -->
 <div class="qcb">
@@ -548,7 +562,7 @@ ym(109746794,'init',{{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer"
     <div class="foot-cols">
       <div class="foot-col"><h4>Услуги</h4><a href="/proekty.html">Дома под ключ</a><a href="/proekty.html">Газобетон и керамзитоблок</a><a href="/proekty.html">Кирпичные дома</a><a href="/proekty.html">Монолитные дома</a><a href="/ceny.html">Цены и сметы</a></div>
       <div class="foot-col"><h4>Компания</h4><a href="/o-kompanii.html">О компании</a><a href="/o-kompanii.html#stages">Этапы работ</a><a href="/obekty.html">Портфолио</a><a href="/o-kompanii.html#reviews">Отзывы</a><a href="/o-kompanii.html#faq">Вопросы</a></div>
-      <div class="foot-col"><h4>Навигация</h4><a href="/proekty.html">Проекты</a><a href="/obekty.html">Объекты</a><a href="/ceny.html">Калькулятор</a><a href="/kontakty.html">Контакты</a></div>
+      <div class="foot-col"><h4>Навигация</h4><a href="/proekty.html">Проекты</a><a href="/obekty.html">Объекты</a><a href="/ceny.html">Калькулятор</a><a href="/ipoteka.html">Ипотека</a><a href="/kontakty.html">Контакты</a></div>
       <div class="foot-col foot-cta"><a href="#lead" class="btn btn-green">Получить смету</a><a href="/proekty.html" class="btn btn-light">Выбрать проект</a></div>
     </div>
     <p class="req">ООО ИСК «Девелоперы» · ИНН 2304085881 · КПП 230401001 · ОГРН 1252300031312<br>
